@@ -1,0 +1,91 @@
+* {
+    padding: 0;
+    margin: 0;
+    background-color: #2f3136;
+    color-scheme: dark;
+}
+
+h1, h2 {
+    text-align: center;
+    color: white;
+    text-shadow: 2px 2px black;
+    text-decoration: underline;
+    font-family: 'Noto Serif', serif;
+}
+
+#homeicon {
+    padding: 5px;
+    margin: 5px;
+    top: 0;
+    left: 0;
+    cursor: pointer;   
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    background-color: transparent;
+}
+
+#homeicon:hover {
+    background-color: rgba(128, 128, 128, 0.384);
+    border-radius: 50px;
+}
+
+
+.btn {
+    background: linear-gradient(100deg, rgb(0, 255, 234) 0%, rgb(0, 162, 255) 100%);
+    border-radius: 5px;
+    border: 1px solid white;
+    width: 60%;
+    height: 60px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+    font-family: 'Noto Serif', serif;
+    font-size: 100%;
+    text-shadow: 1px 1px black;
+}
+
+.sel {
+    width: 60%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    height: 40px;
+}
+
+.inp {
+    border: 1px solid white;
+    width: 60%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+    margin-bottom: 30px;
+    height: 50px;
+    resize: vertical;
+    font-size: 100%;
+}
+
+.label {
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+
+.rng {
+    width: 60%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
+
+#errorlabel {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: red;
+    text-align: center;
+}

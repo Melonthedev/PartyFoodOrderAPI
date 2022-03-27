@@ -1,0 +1,90 @@
+body {
+    background-color: #2f3136;
+    color: white;
+    text-shadow: 2px 2px black;
+    color-scheme: dark;
+}
+a {
+    text-decoration: none;
+    text-shadow: 0px 0px;
+    font-weight: 900;
+    color: white;
+    text-align: center;
+    display: block;
+}
+td button {
+    margin: auto;
+    cursor: pointer;
+    border-radius: 10px;
+    border-radius: 5px;
+    width: 60%;
+}
+
+
+.finishOrder, .finishBurgerOrder {
+    background-color: lime;
+}
+.deleteOrder {
+    background-color: red;
+}
+
+#reloadburgerorders[click], #reloadorders[click] {
+    transition: transform 700ms;
+    transform: rotate(-360deg);
+}
+
+
+.burgerdetails {
+    list-style: none;
+    width: 95%;
+    display: flex;
+}
+.burgerdetails li {
+    width: 100%;
+    height: 25px;
+    margin-top: 5px;
+}
+.table {
+    border-spacing: 0; 
+}
+.table td {
+    border: 1px solid darkgray;
+}
+
+#orders, #burgerorders {
+    border: 2px solid lightgrey;
+    width: 100%;
+    font-size: 200%;
+    border-radius: 10px;
+    text-align: center;
+    background-color: gray;
+    table-layout:fixed;
+}
+
+.table tr:nth-child(2n):not(.waitinglong):not(.waitingshort):not(.new):not(.finished) {
+    background-color: rgb(109, 109, 109);
+}
+.new {
+    background-color: rgba(0, 255, 0, 0.74);
+}
+.finished {
+    background-color: #2f3136;
+}
+.waitingshort {
+    background-color: rgba(255, 255, 0, 0.637);
+}
+.waitinglong {
+    background-color: rgba(255, 0, 0, 0.74);
+}
+tbody:last-child tr:last-child td:first-child {
+    border-bottom-left-radius: 8px;
+}
+tbody:last-child tr:first-child td:first-child {
+    border-top-left-radius: 8px;
+}
+tbody:last-child tr:last-child td:last-child {
+    border-bottom-right-radius: 8px;
+}
+tbody:last-child tr:first-child td:last-child {
+    border-top-right-radius: 8px;
+}

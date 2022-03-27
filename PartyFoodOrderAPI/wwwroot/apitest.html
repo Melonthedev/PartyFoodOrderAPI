@@ -1,0 +1,90 @@
+﻿<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Order</title>
+</head>
+<body>
+    
+
+    <h1>API Test:</h1>
+    <p>Method</p>
+    <select id="method">
+        <option>GET</option>
+        <option>POST</option>
+    </select><br>
+    <h2>Post:</h2>
+    <p>Name:</p>
+    <input id="name"><br>
+    <p>Product:</p>
+    <input id="product"><br>
+    <p>Count:</p>
+    <input id="count" type="range" min="1" max="4"><br>
+    <h2>Get:</h2>
+    <p>Route:</p>
+    <input id="route" value="api/FoodOrder/GetFoodOrder"><br>
+    <p>Query</p>
+    <input id="querykey"><p>=</p><input id="queryvalue">
+
+    <h2>Send:</h2>
+    <button id="send">Send</button>
+
+    <p id="out">OUTPUT</p>
+    
+    <script>
+        document.getElementById("send").addEventListener("click", function() {
+            document.getElementById("out").innerText = "OUTPUT"
+            if(document.getElementById("method").value == "POST") {
+                fetch("/api/FoodOrder/AddFoodOrder", {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        'name' : document.getElementById("name").value,
+                        'product' : document.getElementById("product").value,
+                        'count' : document.getElementById("count").value,
+                    }),  
+                }).then(response => response.json())
+                .then(data => {
+                    document.getElementById("out").innerText = "OUTPUT: " + data;
+                }).catch(error => document.getElementById("out").innerText = "OUTPUT: " + error);
+            } else {
+                fetch(document.getElementById("route").value, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    }, 
+                }).then(response => response.json())
+                .then(data => {
+                    document.getElementById("out").innerText = "OUTPUT: " + data;
+                }).catch(error => document.getElementById("out").innerText = "OUTPUT: " + error);
+            }
+            
+        });
+
+    </script>
+    <!--<script>
+        document.getElementById("send").addEventListener("click", function() {
+            let headers = new Headers();
+
+            headers.append('Content-Type', 'application/json');
+            headers.append('Accept', 'application/json');
+            //headers.append('Authorization', 'Basic ' + btoa("lol" + ":" +  "lol"));
+
+
+            fetch("https://localhost:7126/FoodOrder", {
+                    mode: 'cors',
+                    method: 'GET',
+                    headers: headers
+                })
+                .then(response => response.json())
+                .then(data => document.getElementById("out").innerHTML = data.toString())
+                .catch(err => document.getElementById("out").append = err);
+        })
+    </script>-->
+</body>
+</html>

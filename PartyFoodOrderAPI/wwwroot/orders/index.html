@@ -1,0 +1,337 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="shortcut icon" type="image/png" href="./media/burger.png"/>
+    <title>Bestellungen</title>
+</head>
+<body>
+    <div>
+        <h1 style="text-decoration: underline; text-align: center;">Bestellungen:</h1>
+        <img id="reloadorders" src="./media/refresh.png" style="width: 30px; cursor: pointer; position: relative; top: -45px; right: 20px; float: right" onclick="refreshFoodOrders(true)">
+    </div>
+    <table style="margin-bottom: 15px; place-content: center; display: grid">
+        <td><div style="width: 20px; height: 20px; background-color: lime; border: 1px solid black;"></div></td>
+        <td><p>Neu eingekommene Bestellung; </p></td> 
+        <td><div style="width: 20px; height: 20px; background-color: yellow; border: 1px solid black;"></div></td>
+        <td><p>Nicht erledigte Bestellung von vor mehr als 5 Minuten; </p></td> 
+        <td><div style="width: 20px; height: 20px; background-color: red; border: 1px solid black;"></div></td>
+        <td><p>Nicht erledigte Bestellung von vor mehr als 15 Minuten; </p></td> 
+        <td><div style="width: 20px; height: 20px; background-color: #2f3136; border: 1px solid white;"></div></td>
+        <td><p>Erledigte Bestellung; </p></td> 
+        <td></td>
+        
+    </table>
+
+    <table id="orders" class="table">
+        <tr style="text-decoration: underline;">
+            <td>Nr.</td>
+            <td>Name</td>
+            <td>Produkt</td>
+            <td>Anzahl</td>
+            <td>Kommentar</td>
+            <td>Erledigen</td>
+        </tr>
+        <!--<tr class="new">
+            <td>9</td>
+            <td>Hanni</td>
+            <td>Donut</td>
+            <td>7</td>
+            <td><button>✔</button></td>
+            <td><a href="#">...</a></td>
+        </tr>
+        <tr class="">
+            <td>8</td>
+            <td>Johanna</td>
+            <td>Kaffee</td>
+            <td>1</td>
+            <td><button>✔</button></td>
+            <td><a href="#">...</a></td>
+        </tr>
+        <tr class="">
+            <td>6</td>
+            <td>Dieter</td>
+            <td>SchokoEis</td>
+            <td>2</td>
+            <td><button>✔</button></td>
+            <td><a href="#">...</a></td>
+        </tr>
+        <tr class="waitingshort">
+            <td>5</td>
+            <td>Clara</td>
+            <td>Kuchen</td>
+            <td>3</td>
+            <td><button>✔</button></td>
+            <td><a href="#">...</a></td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Marlon</td>
+            <td>Cola</td>
+            <td>1</td>
+            <td><button>✔</button></td>
+            <td><a href="#">...</a></td>
+        </tr>
+        <tr class="waitinglong">
+            <td>2</td>
+            <td>Sarah</td>
+            <td>Pilsner Urquell</td>
+            <td>76</td>
+            <td><button>✔</button></td>
+            <td><a href="#">...</a></td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Birgit</td>
+            <td>Rotwein</td>
+            <td>1</td>
+            <td><button>✔</button></td>
+            <td><a href="#">...</a></td>
+        </tr>
+        <tr class="erledigt">
+            <td>7</td>
+            <td>Dirk</td>
+            <td>Weizen Bier</td>
+            <td>1</td>
+            <td>erledigt</td>
+            <td><a href="#">...</a></td>
+        <tr class="erledigt">
+            <td>3</td>
+            <td>Marco</td>
+            <td>Cappuccino</td>
+            <td>1</td>
+            <td>erledigt</td>
+            <td><a href="#">...</a></td>
+        </tr>-->
+    </table>
+
+    <div>
+        <h1 style="text-decoration: underline; text-align: center;">Burger Bestellungen: </h1>
+        <img id="reloadburgerorders" src="./media/refresh.png" style="width: 30px; cursor: pointer; position: relative; top: -45px; right: 20px; float: right" onclick="refreshBurgerOrders()">
+    </div>
+    
+    <table id="burgerorders" class="table">
+        <thead style="text-decoration: underline;">
+            <td>Nr.</td>
+            <td>Name</td>
+            <td><img src="./media/bread.png" style="max-width: 50px; transform: scale(1.5);" title="BurgerBrötchen"></td>
+            <td>Erledigt</td>
+        </thead>
+        <!--<tr>
+            <td><img src="./media/salad.png" style="max-width: 50px" title="Salat"></td>
+            <td><img src="./media/cheese.png" style="max-width: 50px" title="Käse"></td>
+            <td><img src="./media/onion.png" style="max-width: 50px" title="Zwiebeln"></td>
+            <td><img src="./media/cucumber.png" style="max-width: 50px" title="Gurken"></td>
+            <td><img src="./media/ketchup.png" style="max-width: 50px" title="Ketchup"></td>
+            <td><img src="./media/chilli.png" style="max-width: 50px" title="Chilli Soße"></td>
+            <td><img src="./media/burgersauce.png" style="max-width: 50px" title="Burger Soße"></td>
+            <td><img src="./media/bbq-sauce.png" style="max-width: 50px; transform: scale(2);" title="BBQ Soße"></td>
+        </tr>-->
+        <tr rowspan="2">
+            <td>1</td>
+            <td>Marlon</td>
+            <td>Chiabatta</td>
+            <td><button class="finishBurgerOrder">✔</button></td>
+        </tr>
+        <tr>
+            <td colspan="6">
+                <ul class="burgerdetails">
+                    <li><img src="./media/salad.png" style="max-width: 50px" title="Salat"></li>
+                    <li><img src="./media/cheese.png" style="max-width: 50px" title="Käse"></li>
+                    <li><img src="./media/onion.png" style="max-width: 50px" title="Zwiebeln"></li>
+                    <li><img src="./media/cucumber.png" style="max-width: 50px" title="Gurken"></li>
+                    <li><img src="./media/ketchup.png" style="max-width: 50px" title="Ketchup"></li>
+                    <li><img src="./media/chilli.png" style="max-width: 50px" title="Chilli Soße"></li>
+                    <li><img src="./media/burgersauce.png" style="max-width: 50px" title="Burger Soße"></li>
+                    <li><img src="./media/bbq-sauce.png" style="max-width: 50px; " title="BBQ Soße"></li>
+                </ul>
+            </td>
+        </tr>
+        
+    </table>
+</body>
+
+<script>
+    const table = document.getElementById("orders");
+    const burgerTable = document.getElementById("burgerorders");
+    const orders = [];
+    //window.addEventListener("load", event => {refreshFoodOrders(); refreshBurgerOrders(); setTimeout(refreshOrderStatus(), 500); runAutoRefreshTimer()});
+    window.addEventListener("load", event => { runAutoRefreshTimer() });
+
+    function runAutoRefreshTimer() {
+        refreshFoodOrders(false);
+        refreshBurgerOrders();
+        setTimeout(refreshFoodOrders(true), 500);
+        setInterval(() => {
+            refreshFoodOrders(true); 
+            refreshBurgerOrders();
+            refreshOrderStatus();
+        }, 10000);
+    }
+
+    function refreshOrderStatus() {
+        orders.forEach(order => {
+                if (order.isFinished()) {
+                    finishOrder(order);
+                    return;
+                }
+                let difference = Math.floor(new Date() / 1000) - order.getCreated();
+                if (order.getDOMElement() == null) return;
+                if (difference >= 900) {
+                    order.getDOMElement().classList.add("waitinglong");
+                    order.getDOMElement().classList.remove("waitingshort");
+                } else if (difference >= 300) order.getDOMElement().classList.add("waitingshort");
+            });
+    }
+
+    function refreshFoodOrders(refresh) {
+        if(!document.getElementById("reloadorders").hasAttribute("click")) {
+            document.getElementById("reloadorders").setAttribute("click", "");
+            setTimeout(() => document.getElementById("reloadorders").removeAttribute("click"), 600);
+        }
+        Array.from(table.children[0].children).forEach(orderelement => {
+            orderelement.classList.remove("new");
+        });
+        refreshOrders("GetFoodOrder", refresh);
+    }
+
+    function refreshBurgerOrders() {
+        if(!document.getElementById("reloadburgerorders").hasAttribute("click")) {
+            document.getElementById("reloadburgerorders").setAttribute("click", "");
+            setTimeout(() => document.getElementById("reloadburgerorders").removeAttribute("click"), 700);
+        }
+        Array.from(burgerTable.children[0].children).forEach(orderelement => {
+            orderelement.classList.remove("new");
+        });
+        //refreshOrders("BurgerOrder")
+    }
+
+    function refreshOrders(route, refresh) {
+        fetch("/api/FoodOrder/" + route + "?method=all", {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json()) //Response wird zu JSON umgewandelt
+        .then(data => {
+            for (i = 0; i < data.length; i++) { //Loop für jeden Eintrag in data                                                     
+                let order = new FoodOrder( //FoodOrder object erstellen
+                            data[i].orderId,  
+                            data[i].consumerName, 
+                            data[i].orderedProduct, 
+                            data[i].count, 
+                            data[i].created, 
+                            data[i].markedAsFinished,
+                            data[i].comment
+                        );
+                let orderAlreadyListed = false; //Ist die Order schon gelistet
+                for (y = 0; y < orders.length; y++) {   //Loop für jede gelistete order                        
+                    if (orders[y].getOrderId() == order.getOrderId()) {//Abgleichen der beiden ID's      
+                        orderAlreadyListed = true;
+                        if (order.isFinished()) finishOrder(orders[y]); //Wenn bestellungdata fertig ist, bestellung finished anzeigen lassen    
+                    }
+                }
+                if (orderAlreadyListed) 
+                    continue; //Wenn schon gelistet, zum nächsten data eintrag springen
+                addOrder(order, refresh); //Ansonsten order den gelisteten orders hinzufügen
+                if (order.isFinished()) finishOrder(order); //Wenn bestellungdata fertig ist, bestellung finished anzeigen lassen
+            }
+        })
+        .catch(error => console.log(error));
+        refreshOrderStatus();
+    }
+
+    function addOrder(order, refresh) {
+        const trElement = document.createElement('tr');
+        const nrElement = document.createElement('td');
+        const nameElement = document.createElement('td');
+        const productElement = document.createElement('td');
+        const countElement = document.createElement('td');
+        const commentElement = document.createElement('td');
+        const erledigtElement = document.createElement('td');
+        const buttonElement = document.createElement('button');
+        nrElement.innerText = order.getOrderId() !== " " ? order.getOrderId() : "?";
+        nameElement.innerText = order.getName() !== " " ? order.getName() : "Unknown";
+        nameElement.style.overflowX = "auto";
+        productElement.innerText = order.getProduct() !== " " ? order.getProduct() : "Unknown";
+        countElement.innerText = order.getCount() != 0 ? order.getCount() : "?";
+        commentElement.innerText = order.getComment() !== null && order.getComment() !== " " ? order.getComment() : "/";
+        commentElement.style.whiteSpace = "nowrap";
+        commentElement.style.overflowX = "auto";
+        buttonElement.innerText = "✔";
+        buttonElement.classList.add("finishOrder");
+        var handler = (event) => {
+            fetch("/api/FoodOrder/MarkFoodOrderAsFinished/?orderId=" + order.getOrderId(), {
+                method: 'POST'
+            });
+            refreshFoodOrders();
+            buttonElement.disabled = true;
+            buttonElement.style.backgroundColor = "gray";
+        }
+        buttonElement.addEventListener("click", handler, {once: true});
+        erledigtElement.appendChild(buttonElement);
+        if (order.isFinished()) {
+            buttonElement.disabled = true;
+            buttonElement.style.backgroundColor = "gray";
+            buttonElement.removeEventListener("click", handler);
+        }
+        if(refresh == true) 
+            trElement.classList.add("new");
+        trElement.appendChild(nrElement);
+        trElement.appendChild(nameElement);
+        trElement.appendChild(productElement);
+        trElement.appendChild(countElement);
+        trElement.appendChild(commentElement)
+        trElement.appendChild(erledigtElement);
+        order.setDOMElement(trElement);
+        order.setFinishButtonElement(buttonElement);
+        table.children[0].children[0].insertAdjacentElement("afterEnd", trElement);
+        orders.push(order);
+    }
+
+    function removeOrder(order) {
+        order.getDOMElement().remove();
+        orders.remove(order);
+    }
+
+    function finishOrder(order) {
+        var element = order.getDOMElement();
+        element.classList.add("finished");
+        element.classList.remove("waitingshort");
+        element.classList.remove("new");
+        element.classList.remove("waitinglong");
+        order.setFinished(true);
+        order.getFinishButtonElement().disabled = true;
+        order.getFinishButtonElement().style.backgroundColor = "gray";
+    }
+
+    class FoodOrder {
+        constructor(orderId, name, product, count, created, finished, comment) {
+            this.orderId = orderId;
+            this.name = name;
+            this.product = product;
+            this.count = count;
+            this.created = created;
+            this.finished = finished;
+            this.comment = comment;
+        }
+        getOrderId() { return this.orderId; }
+        getName() { return this.name; }
+        getProduct() { return this.product; }
+        getCount() { return this.count; }
+        getCreated() { return this.created; }
+        getDOMElement() { return this.DOMElement; }
+        isFinished() { return this.finished; }
+        getFinishButtonElement() { return this.finishButtonElement; }
+        getComment() { return this.comment; }
+
+        setDOMElement(DOMElement) { this.DOMElement = DOMElement; }
+        setFinished(finished) { this.finished = finished; }
+        setFinishButtonElement(finishButtonElement) { this.finishButtonElement = finishButtonElement; }
+    }
+</script>
+</html>
