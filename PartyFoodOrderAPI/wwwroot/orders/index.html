@@ -256,12 +256,10 @@
         const buttonElement = document.createElement('button');
         nrElement.innerText = order.getOrderId() !== " " ? order.getOrderId() : "?";
         nameElement.innerText = order.getName() !== " " ? order.getName() : "Unknown";
-        nameElement.style.overflowX = "auto";
         productElement.innerText = order.getProduct() !== " " ? order.getProduct() : "Unknown";
         countElement.innerText = order.getCount() != 0 ? order.getCount() : "?";
         commentElement.innerText = order.getComment() !== null && order.getComment() !== " " ? order.getComment() : "/";
         commentElement.style.whiteSpace = "nowrap";
-        commentElement.style.overflowX = "auto";
         buttonElement.innerText = "✔";
         buttonElement.classList.add("finishOrder");
         var handler = (event) => {

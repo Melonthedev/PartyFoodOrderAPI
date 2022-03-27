@@ -49,6 +49,7 @@ td button {
 }
 .table td {
     border: 1px solid darkgray;
+    overflow-x: auto;
 }
 
 #orders, #burgerorders {
