@@ -9,42 +9,25 @@
     </head>
     <body>
         <img onclick="document.location = '/orders'" src="/orders/media/orders.png" width="40px" height="40px" id="homeicon">
-        <h1 style="text-decoration: underline; text-align: center; margin-top: 70px; margin-bottom: 60px;">Produkt oder Bestellung löschen</h1>
+        <h1 style="text-decoration: underline; text-align: center; margin-top: 70px; margin-bottom: 60px;">Bestellung löschen</h1>
         <form name="orderform" action="/api/FoodStock/AddProduct" method="POST" id="orderform">
             <p class="label">Zu löschende Bestellung:</p>
-            <select class="sel" id="category" placeholder="Wähle eine Kategorie..." required>
-                <optgroup label="Getränke">
-                    <option value="1">Cola</option>
-                    <option value="1">Bier</option>
+            <select class="sel" id="category" placeholder="Wähle eine Bestellung..." required>
+                <optgroup label="Björn">
+                    <option value="1">Cola 100x</option>
+                    <option value="1">Bier 2x</option>
                 </optgroup>
-                <optgroup label="Kuchen">
-                    <option value="1">Erdbeerkuchen</option>
-                </optgroup>
-                <optgroup label="Anderes">
-                    <option value="1">Ananas</option>
+                <optgroup label="Marlon">
+                    <option value="1">Erdbeerkuchen 3x</option>
                 </optgroup>
             </select>
-            <button class="deletebtn btn" type="submit">Produkt löschen</button>
+            <button class="deletebtn btn" type="submit">Bestellung löschen</button>
+            <i style="text-align: center; display: block; margin-top: 20px;">Damit der arme Besteller das nicht bekommt, das ist schon echt gemein aber ok!</i>
         </form>
         <p id="errorlabel"></p>
         <script src="./script.js"></script>
     </body>
     <style>
-        #outofstock {
-            margin-top: 20px;
-            margin-bottom: 40px;
-            width: 40px;
-            height: 40px;
-            margin-left: 10%;
-        }
-        #outofstock:before {
-            content: 'Nicht auf Lager';
-            white-space: nowrap;
-            margin-left: 50px;
-            margin-top: 6px;
-            display: inline-block;
-            font-size: 200%;
-        }
         .deletebtn {
             margin-top: 15px;
             background: rgb(185, 0, 0);

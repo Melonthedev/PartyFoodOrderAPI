@@ -9,11 +9,12 @@
 </head>
 <body>
     <div>
-        <h1 style="text-decoration: underline; text-align: center;">Bestellungen:</h1>
-        <img id="reloadorders" src="./media/refresh.png" style="width: 30px; cursor: pointer; position: relative; top: -45px; right: 20px; float: right" onclick="refreshFoodOrders(true)">
-        <img id="addproduct" src="./media/add.png" style="width: 35px; cursor: pointer; position: relative; top: -48px; right: 40px; float: right" onclick="document.location = '/addproduct'">
-        <img id="editproducts" src="./media/edit.png" style="width: 35px; cursor: pointer; position: relative; top: -48px; right: 60px; float: right" onclick="document.location = '/editproduct'">
-        <img id="editproducts" src="./media/remove.png" style="width: 35px; cursor: pointer; position: relative; top: -48px; right: 80px; float: right" onclick="document.location = '/removeorder'"> <!--HIER WIRD MAN BESTELLUNGEN UND PRODUKTE LÖSCHEN KÖNNEN MIT AKTIONSAUSWAHLT JA DAS WARS FÜR HEUTE ABEND MORGEN IST SCHULE VOKABELTEST AH SHIT HERE WE GO AGAIN 22:42 NAJA GUTE NACHT--><!--DAS IST ALLES MÜLL MAN WIRD NATÜRLICH NUR BESTELLUNGEN LÖSCHEN KÖNNEN WEIL PRODUKTE KANN MAN JA SCHON BEIM BEARBEITEN LÖSCHEN UND DAS BEDEUTET WENIGER ARBEIT-->
+        <img id="reloadorders" src="./media/refresh.png" style="width: 30px; cursor: pointer; position: relative; top: 12px; right: 20px; float: right" onclick="refreshFoodOrders(true)">
+        <img id="addproduct" src="./media/add.png" style="width: 35px; cursor: pointer; position: relative; top: 10px; right: 40px; float: right" onclick="document.location = '/addproduct'">
+        <img id="editproducts" src="./media/edit.png" style="width: 35px; cursor: pointer; position: relative; top: 10px; right: 60px; float: right" onclick="document.location = '/editproduct'">
+        <img id="editproducts" src="./media/remove.png" style="width: 35px; cursor: pointer; position: relative; top: 10px; right: 80px; float: right" onclick="document.location = '/removeorder'"> <!--HIER WIRD MAN BESTELLUNGEN UND PRODUKTE LÖSCHEN KÖNNEN MIT AKTIONSAUSWAHLT JA DAS WARS FÜR HEUTE ABEND MORGEN IST SCHULE VOKABELTEST AH SHIT HERE WE GO AGAIN 22:42 NAJA GUTE NACHT--><!--DAS IST ALLES MÜLL MAN WIRD NATÜRLICH NUR BESTELLUNGEN LÖSCHEN KÖNNEN WEIL PRODUKTE KANN MAN JA SCHON BEIM BEARBEITEN LÖSCHEN UND DAS BEDEUTET WENIGER ARBEIT-->
+        <br>
+        <h1 style="text-decoration: underline; text-align: center; ">Bestellungen:</h1>
     </div>
     <table style="margin-bottom: 15px; place-content: center; display: grid">
         <td><div style="width: 20px; height: 20px; background-color: lime; border: 1px solid black;"></div></td>
@@ -139,7 +140,7 @@
             <td><button class="finishBurgerOrder">✔</button></td>
         </tr>
         <tr>
-            <td colspan="6">
+            <td colspan="4">
                 <ul class="burgerdetails">
                     <li><img src="./media/salad.png" style="max-width: 50px" title="Salat"></li>
                     <li><img src="./media/cheese.png" style="max-width: 50px" title="Käse"></li>
@@ -152,7 +153,6 @@
                 </ul>
             </td>
         </tr>
-        
     </table>
 </body>
 
