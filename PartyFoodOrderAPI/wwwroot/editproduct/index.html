@@ -1,0 +1,66 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/uistyle.css">
+        <link rel="shortcut icon" type="image/png" href="./media/burger.png"/>
+        <title>Produkt hinzufügen</title>
+    </head>
+    <body>
+        <h1 style="text-decoration: underline; text-align: center; margin-top: 70px; margin-bottom: 60px;">Produkt Bearbeiten:</h1>
+        <form name="orderform" action="/api/FoodStock/AddProduct" method="POST" id="orderform">
+            <p class="label">Zu bearbeitendes Produkt:</p>
+            <select class="sel" id="category" placeholder="Wähle eine Kategorie..." required>
+                <optgroup label="Getränke">
+                    <option value="1">Cola</option>
+                    <option value="1">Bier</option>
+                </optgroup>
+                <optgroup label="Kuchen">
+                    <option value="1">Erdbeerkuchen</option>
+                </optgroup>
+                <optgroup label="Anderes">
+                    <option value="1">Ananas</option>
+                </optgroup>
+            </select>
+            <button class="btn" style="margin-top: 20px; margin-bottom: 40px;">Auswählen</button>
+            <p class="label">Name:</p>
+            <input class="inp" type="text" id="name" placeholder="  Name" required>
+            <p class="label">Id:</p>
+            <input class="inp" type="text" id="id" placeholder="  Id" required>
+            <p class="label">Kategorie:</p>
+            <select class="sel" id="category" placeholder="Wähle eine Kategorie..." required>
+                <option value="1">Getränk</option>
+                <option value="2">Kuchen</option>
+                <option value="3">Anderes</option>
+            </select>
+            <input class="" type="checkbox" id="outofstock" placeholder="dd" required>
+            <button class="btn" type="submit">Produkt speichern</button>
+            <button class="deletebtn btn">Produkt löschen</button>
+        </form>
+        <p id="errorlabel"></p>
+        <script src="./script.js"></script>
+    </body>
+    <style>
+        #outofstock {
+            margin-top: 20px;
+            margin-bottom: 40px;
+            width: 40px;
+            height: 40px;
+            margin-left: 10%;
+        }
+        #outofstock:before {
+            content: 'Nicht auf Lager';
+            white-space: nowrap;
+            margin-left: 50px;
+            margin-top: 6px;
+            display: inline-block;
+            font-size: 200%;
+        }
+        .deletebtn {
+            margin-top: 15px;
+            background: rgb(185, 0, 0);
+        }
+        </style>
+    </style>
+</html>

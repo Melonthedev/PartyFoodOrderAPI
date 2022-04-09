@@ -26,24 +26,24 @@ h1, h2 {
 }
 
 #homeicon:hover {
-    background-color: rgba(128, 128, 128, 0.384);
-    border-radius: 50px;
+    background: radial-gradient(ellipse at center,rgba(92, 92, 92, 0.411) 0%,rgba(92, 92, 92, 0.411) 0%,rgba(92, 92, 92, 0.411) 67%,rgba(0,0,0,0) 70%);
 }
 
 
 .btn {
-    background: linear-gradient(100deg, rgb(0, 255, 234) 0%, rgb(0, 162, 255) 100%);
-    border-radius: 5px;
-    border: 1px solid white;
-    width: 60%;
-    height: 60px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+    margin: auto;
     cursor: pointer;
-    font-family: 'Noto Serif', serif;
-    font-size: 100%;
+    border-radius: 5px;
+    background-color: rgb(0, 255, 234);
+    background: linear-gradient(100deg, rgb(0, 255, 234) 0%, rgb(0, 162, 255) 100%);
     text-shadow: 1px 1px black;
+    width: 80%;
+    height: 80px;
+    border: 1px solid white;
+    display: block;
+    font-family: 'Noto Serif', serif;
+    font-size: 30px;
+    color: white;
 }
 
 .sel {
@@ -53,25 +53,32 @@ h1, h2 {
     margin-right: auto;
     margin-bottom: 20px;
     border-radius: 5px;
-    height: 40px;
+    color: white;
+    font-size: 150%;
+    width: 80%;
+    height: 80px;
+    border: 1px solid white;
 }
 
 .inp {
     border: 1px solid white;
-    width: 60%;
     display: block;
     margin-left: auto;
     margin-right: auto;
     border-radius: 5px;
     margin-bottom: 30px;
-    height: 50px;
     resize: vertical;
-    font-size: 100%;
+    font-size: 150%;
+    color: white;
+    width: 80%;
+    height: 80px;
 }
 
 .label {
     text-align: center;
     margin-bottom: 5px;
+    color: white;
+    font-size: 150%;
 }
 
 
@@ -81,6 +88,8 @@ h1, h2 {
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 20px;
+    color: white;
+    width: 80%;
 }
 
 #errorlabel {

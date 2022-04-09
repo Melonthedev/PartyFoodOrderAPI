@@ -1,0 +1,28 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/uistyle.css">
+        <link rel="shortcut icon" type="image/png" href="./media/burger.png"/>
+        <title>Produkt hinzufügen</title>
+    </head>
+    <body>
+        <h1 style="text-decoration: underline; text-align: center; margin-top: 70px; margin-bottom: 60px;">Produkt Hinzufügen:</h1>
+        <form name="orderform" action="/api/FoodStock/AddProduct" method="POST" id="orderform">
+            <p class="label">Name:</p>
+            <input class="inp" type="text" id="name" placeholder="  Name" required>
+            <p class="label">Id:</p>
+            <input class="inp" type="text" id="id" placeholder="  Id" required>
+            <p class="label">Kategorie:</p>
+            <select class="sel" id="category" placeholder="Wähle eine Kategorie..." required>
+                <option value="1">Getränk</option>
+                <option value="2">Kuchen</option>
+                <option value="3">Anderes</option>
+            </select>
+            <button class="btn" type="submit">Produkt hinzufügen</button>
+        </form>
+        <p id="errorlabel"></p>
+        <script src="./script.js"></script>
+    </body>
+</html>

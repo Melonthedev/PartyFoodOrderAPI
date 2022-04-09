@@ -26,9 +26,10 @@ namespace PartyFoodOrderAPI.Controllers
         [HttpPost("AddFoodOrder")]
         public ActionResult<string> Post([FromBody] FoodOrderData data)
         {
-            Orders.AddFoodOrder(new FoodOrder(DateTimeOffset.UtcNow.ToUnixTimeSeconds(), Orders.GetFoodOrders().Count + 1, data.Product, data.Count, data.Name, data.Comment));
+            string comment = data.Comment.Replace("\n", "/nl/");
+            Orders.AddFoodOrder(new FoodOrder(DateTimeOffset.UtcNow.ToUnixTimeSeconds(), Orders.GetFoodOrders().Count + 1, data.Product, data.Count, data.Name, comment));
             _logger.Log(LogLevel.Information, $"Recived order: Name:  '{data.Name}', Product: '{data.Product}', Count: {data.Count}");
-            return Ok($"{{ \"title\" : \"You placed an order 😃\", \"name\" : \"{data.Name}\", \"product\" : \"{data.Product}\", \"count\" : {data.Count}, \"comment\" : \" {data.Comment} \", \"Mmessage\" : \"Vielen Dank für ihre Bestellung!\"}}");
+            return Ok($"{{ \"title\" : \"You placed an order 😃\", \"name\" : \"{data.Name}\", \"product\" : \"{data.Product}\", \"count\" : {data.Count}, \"comment\" : \" {comment} \", \"message\" : \"Vielen Dank für deine Bestellung!\"}}");
         }
 
         [HttpPost("MarkFoodOrderAsFinished")]
