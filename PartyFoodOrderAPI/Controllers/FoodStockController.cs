@@ -24,7 +24,7 @@ namespace PartyFoodOrderAPI.Controllers
         [HttpGet("GetAllProducts/{category}")]
         public ActionResult<List<Product>> GetAllProducts([Required][FromRoute] string category)
         {
-            int categoryId = Products.GetCategoryID(category);
+            int categoryId = Products.GetCategoryId(category);
             _logger.Log(LogLevel.Information, "Recived GET Request: Getting a list of all products in a category");
             IEnumerator<Product> enumerator = Products.AllProducts.Where(p => p.Category == categoryId).GetEnumerator();
             List<Product> products = new List<Product>();
@@ -39,7 +39,7 @@ namespace PartyFoodOrderAPI.Controllers
         public ActionResult<bool> GetIsProductInStock([FromRoute] int productId)
         {
             _logger.Log(LogLevel.Information, "Recived GET Request: Checking if product is in stock");
-            return Ok(Products.GetProductByID(productId).IsInStock);
+            return Ok(Products.GetProductById(productId).IsInStock);
         }
 
         [HttpPost("AddProduct")]
@@ -63,7 +63,7 @@ namespace PartyFoodOrderAPI.Controllers
         public ActionResult DeleteProduct([Required][FromQuery] int id)
         {
             _logger.Log(LogLevel.Information, "Recived DELETE Request: Deleting a product with id: {0}", id);
-            var prod = Products.GetProductByID(id);
+            var prod = Products.GetProductById(id);
             if (prod is null) return BadRequest("Product with this ID doesn't exist!");
             Products.RemoveProduct(prod);
             return Ok();

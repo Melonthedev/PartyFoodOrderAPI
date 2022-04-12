@@ -5,39 +5,39 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/uistyle.css">
         <link rel="shortcut icon" type="image/png" href="./media/burger.png"/>
-        <title>Produkt hinzufügen</title>
+        <title>Produkt bearbeiten</title>
     </head>
     <body>
         <img onclick="document.location = '/orders'" src="/orders/media/orders.png" width="40px" height="40px" id="homeicon">
         <h1 style="text-decoration: underline; text-align: center; margin-top: 70px; margin-bottom: 60px;">Produkt Bearbeiten:</h1>
         <form name="orderform" action="/api/FoodStock/AddProduct" method="POST" id="orderform">
             <p class="label">Zu bearbeitendes Produkt:</p>
-            <select class="sel" id="category" placeholder="Wähle eine Kategorie..." required>
-                <optgroup label="Getränke">
-                    <option value="1">Cola</option>
-                    <option value="1">Bier</option>
+            <select class="sel" id="selproduct" placeholder="Wähle ein Produkt..." required>
+                <optgroup label="Getränke" id="cat1">
+                    <!--<option value="1">Cola</option>
+                    <option value="1">Bier</option>-->
                 </optgroup>
-                <optgroup label="Kuchen">
-                    <option value="1">Erdbeerkuchen</option>
+                <optgroup label="Kuchen" id="cat2">
+                    <!--<option value="1">Erdbeerkuchen</option>-->
                 </optgroup>
-                <optgroup label="Anderes">
-                    <option value="1">Ananas</option>
+                <optgroup label="Anderes" id="cat3">
+                    <!--<option value="1">Ananas</option>-->
                 </optgroup>
             </select>
-            <button class="btn" style="margin-top: 20px; margin-bottom: 40px;">Auswählen</button>
+            <button class="btn" style="margin-top: 20px; margin-bottom: 40px;" id="selectproduct">Auswählen</button>
             <p class="label">Name:</p>
-            <input class="inp" type="text" id="name" placeholder="  Name" required>
+            <input class="inp" type="text" id="name" placeholder="Name" required disabled>
             <p class="label">Id:</p>
-            <input class="inp" type="text" id="id" placeholder="  Id" required>
+            <input class="inp" type="text" id="id" placeholder="Id" required disabled>
             <p class="label">Kategorie:</p>
-            <select class="sel" id="category" placeholder="Wähle eine Kategorie..." required>
+            <select class="sel" id="category" placeholder="Wähle eine Kategorie..." required disabled>
                 <option value="1">Getränk</option>
                 <option value="2">Kuchen</option>
                 <option value="3">Anderes</option>
             </select>
-            <input class="" type="checkbox" id="outofstock" placeholder="dd" required>
-            <button class="btn" type="submit">Produkt speichern</button>
-            <button class="deletebtn btn">Produkt löschen</button>
+            <input type="checkbox" id="outofstock" required disabled>
+            <button class="btn" type="submit" disabled>Produkt speichern</button>
+            <button class="deletebtn btn" id="delprod" disabled>Produkt löschen</button>
         </form>
         <p id="errorlabel"></p>
         <script src="./script.js"></script>

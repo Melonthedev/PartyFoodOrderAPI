@@ -66,6 +66,14 @@ h1, h2 {
     color: white;
 }
 
+.btn:disabled {
+    background-color: gray;
+    color: darkgray;
+    border-color: darkgray;
+    background: gray;
+    cursor: not-allowed;
+}
+
 .deletebtn {
     margin-top: 15px;
     background: rgb(185, 0, 0);
@@ -101,6 +109,14 @@ h1, h2 {
     height: 80px;
     padding-left: 15px;
     padding-right: 15px;
+}
+
+.inp:disabled {
+    color: darkgray;
+    border-color: darkgray;
+    background: #5b5f69;
+    background-color: #4d5058;
+    cursor: not-allowed;
 }
 
 .label {

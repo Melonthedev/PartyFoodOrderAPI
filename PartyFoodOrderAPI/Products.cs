@@ -5,6 +5,12 @@
 
         public static List<Product>? AllProducts { get; set; }
 
+
+        public Products()
+        {
+            AllProducts = new List<Product>();
+        }
+
         public static void AddProduct(Product product)
         {
             if (AllProducts == null) AllProducts = new List<Product>();
@@ -17,9 +23,9 @@
             AllProducts.Remove(product);
         }
 
-        public static Product GetProductByID(int id) 
+        public static Product? GetProductById(int id) 
         {
-            if (AllProducts == null) AllProducts = new List<Product>();
+            if (AllProducts is null) AllProducts = new List<Product>();
             var index = AllProducts.FindIndex(x => x.Id == id);
             try
             { 
@@ -31,34 +37,25 @@
             }
         }
 
-        public static string GetCategoryByID(int id)
+        public static string GetCategoryById(int id)
         {
-            switch (id)
+            return id switch
             {
-                case 1:
-                    return "Drink";
-                case 2:
-                    return "Cake";
-                case 3:
-                    return "Other";
-                default:
-                    return "Other";
-            }
+                1 => "Drink",
+                2 => "Cake",
+                3 => "Other",
+                _ => "Other",
+            };
         }
-        public static int GetCategoryID(string category)
+        public static int GetCategoryId(string category)
         {
-            category = category.ToLower();
-            switch (category)
+            return category.ToLower() switch
             {
-                case "drink":
-                    return 1;
-                case "cake":
-                    return 2;
-                case "other":
-                    return 3;
-                default:
-                    return 0;
-            }
+                "drink" => 1,
+                "cake" => 2,
+                "other" => 3,
+                _ => 0,
+            };
         }
     }
 }
