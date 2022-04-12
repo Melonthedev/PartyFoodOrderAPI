@@ -16,7 +16,7 @@
 
     <form name="orderform" action="/api/FoodOrder/AddFoodOrder" method="POST" id="orderform">
         <p class="label">Name:</p>
-        <input class="inp" type="text" id="name" placeholder="  Name" required>
+        <input class="inp" type="text" id="name" placeholder="Name" maxlength="20" required>
         <p class="label">Produkt:</p>
         <select class="sel" id="product" placeholder="Wähle ein Produkt..." required>
             <option value="kuchen">Kaffee</option>
@@ -25,8 +25,8 @@
         </select>
         <p class="label">Anzahl: <span id="countdisplay">1</span></p>
         <input class="rng" type="range" id="count" min="1" max="4" value="1">
-        <p class="label">Zusätzliche Wünsche:</p>
-        <textarea class="inp" id="comment" cols="1" placeholder=" Zusätzliche Wünsche"></textarea>
+        <p class="label">Zusätzliche Wünsche/Infos:</p>
+        <textarea class="inp" id="comment" cols="1" placeholder="Z.B. Mit Sahne/Eiswürfeln, Viel/Wenig Zucker, Heiß/Kalt etc." maxlength="100" style="padding-top: 5px;"></textarea>
         <button class="btn" type="submit">Bestellung abschicken</button>
     </form>
     <p id="errorlabel"></p>

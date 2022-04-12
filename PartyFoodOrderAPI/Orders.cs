@@ -20,6 +20,11 @@
             return _foodOrders;
         }
 
+        public static FoodOrder GetFoodOrderById(int id)
+        {
+            return _foodOrders.Find(x => x.OrderId == id);
+        }
+
         public static List<FoodOrder> GetBurgerOrders()
         {
             return _burgerOrders;

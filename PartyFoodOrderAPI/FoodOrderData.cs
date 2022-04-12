@@ -13,7 +13,7 @@ namespace PartyFoodOrderAPI
         [Range(1, 4)]
         public int Count { get; set; }
 
-        [MaxLength(100)]
+        [MaxLength(150)]
         public string? Comment { get; set; }
     }
 }

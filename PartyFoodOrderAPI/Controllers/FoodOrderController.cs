@@ -15,18 +15,21 @@ namespace PartyFoodOrderAPI.Controllers
         }
 
         [HttpGet("GetFoodOrder")]
-        public ActionResult<List<FoodOrderData>> Get([FromQuery(Name = "method")] string method = "all")
+        public ActionResult<List<FoodOrderData>> Get([FromQuery(Name = "method")] string method = "all", [FromQuery(Name = "id")] int id = 0)
         {
             _logger.Log(LogLevel.Information, "Recived GET Request with QueryMethod: " + method);
-            if (method != "all")
-                return BadRequest("No valid method query!");
-            return Ok(Orders.GetFoodOrders());
+            return method switch
+            {
+                "all" => Ok(Orders.GetFoodOrders()),
+                "id" => Ok(Orders.GetFoodOrderById(id)),
+                _ => BadRequest("Invalid QueryMethod"),
+            };
         }
 
         [HttpPost("AddFoodOrder")]
         public ActionResult<string> Post([FromBody] FoodOrderData data)
         {
-            string comment = data.Comment.Replace("\n", "/nl/");
+            var comment = data.Comment != null ?  data.Comment.Replace("\n", " ¬ ") : "";
             Orders.AddFoodOrder(new FoodOrder(DateTimeOffset.UtcNow.ToUnixTimeSeconds(), Orders.GetFoodOrders().Count + 1, data.Product, data.Count, data.Name, comment));
             _logger.Log(LogLevel.Information, $"Recived order: Name:  '{data.Name}', Product: '{data.Product}', Count: {data.Count}");
             return Ok($"{{ \"title\" : \"You placed an order 😃\", \"name\" : \"{data.Name}\", \"product\" : \"{data.Product}\", \"count\" : {data.Count}, \"comment\" : \" {comment} \", \"message\" : \"Vielen Dank für deine Bestellung!\"}}");

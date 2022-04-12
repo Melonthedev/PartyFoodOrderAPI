@@ -12,14 +12,14 @@
         <h1 style="text-decoration: underline; text-align: center; margin-top: 70px; margin-bottom: 60px;">Bestellung löschen</h1>
         <form name="orderform" action="/api/FoodStock/AddProduct" method="POST" id="orderform">
             <p class="label">Zu löschende Bestellung:</p>
-            <select class="sel" id="category" placeholder="Wähle eine Bestellung..." required>
-                <optgroup label="Björn">
+            <select class="sel" id="selorder" placeholder="Wähle eine Bestellung..." required>
+                <!--<optgroup label="Björn">
                     <option value="1">Cola 100x</option>
-                    <option value="1">Bier 2x</option>
+                    <option value="1">Bier 2x (Erledigt)</option>
                 </optgroup>
                 <optgroup label="Marlon">
                     <option value="1">Erdbeerkuchen 3x</option>
-                </optgroup>
+                </optgroup>-->
             </select>
             <button class="deletebtn btn" type="submit">Bestellung löschen</button>
             <i style="text-align: center; display: block; margin-top: 20px;">Damit der arme Besteller das nicht bekommt, das ist schon echt gemein aber ok!</i>
@@ -27,11 +27,4 @@
         <p id="errorlabel"></p>
         <script src="./script.js"></script>
     </body>
-    <style>
-        .deletebtn {
-            margin-top: 15px;
-            background: rgb(185, 0, 0);
-        }
-        </style>
-    </style>
 </html>
