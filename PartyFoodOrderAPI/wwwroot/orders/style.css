@@ -4,6 +4,21 @@ body {
     text-shadow: 2px 2px black;
     color-scheme: dark;
 }
+#homeicon {
+    padding: 5px;
+    margin: 5px;
+    top: 0;
+    left: 0;
+    cursor: pointer;   
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    background-color: transparent;
+}
+
+#homeicon:hover {
+    background: radial-gradient(ellipse at center,rgba(92, 92, 92, 0.411) 0%,rgba(92, 92, 92, 0.411) 0%,rgba(92, 92, 92, 0.411) 67%,rgba(0,0,0,0) 70%);
+}
 a {
     text-decoration: none;
     text-shadow: 0px 0px;

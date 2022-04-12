@@ -17,11 +17,18 @@
             AllProducts.Remove(product);
         }
 
-        public static Product GetProductByID(int id)
+        public static Product GetProductByID(int id) 
         {
             if (AllProducts == null) AllProducts = new List<Product>();
             var index = AllProducts.FindIndex(x => x.Id == id);
-            return AllProducts[index];
+            try
+            { 
+                return AllProducts[index];
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                return null;
+            }
         }
 
         public static string GetCategoryByID(int id)

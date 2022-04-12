@@ -63,7 +63,9 @@ namespace PartyFoodOrderAPI.Controllers
         public ActionResult DeleteProduct([Required][FromQuery] int id)
         {
             _logger.Log(LogLevel.Information, "Recived DELETE Request: Deleting a product with id: {0}", id);
-            Products.RemoveProduct(Products.GetProductByID(id));
+            var prod = Products.GetProductByID(id);
+            if (prod is null) return BadRequest("Product with this ID doesn't exist!");
+            Products.RemoveProduct(prod);
             return Ok();
         }
     }

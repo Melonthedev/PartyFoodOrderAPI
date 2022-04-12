@@ -1,8 +1,5 @@
-
 window.onload = () => {
-
     const selorder = document.getElementById('selorder');
-    
     const orders = [];
 
     fetch('/api/FoodOrder/GetFoodOrder?method=all', {
@@ -52,3 +49,7 @@ form.onsubmit = (event) => {
         console.log(error);
     });
 };
+
+document.onkeyup = (event) => {
+    if (event.key == "Escape") document.location = "/orders";
+}
