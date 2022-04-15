@@ -25,6 +25,11 @@
                 </optgroup>
             </select>
             <button class="btn" style="margin-top: 20px; margin-bottom: 40px;" id="selectproduct">Auswählen</button>
+
+            <button class="deletebtn btn" id="delprod" disabled>Produkt löschen</button>
+            <button class="btn">Produkt als 'Nicht auf Lager' makieren</button>
+
+            <h2 class="label">Erweitert:</h2>
             <p class="label">Name:</p>
             <input class="inp" type="text" id="name" placeholder="Name" required disabled>
             <p class="label">Id:</p>
@@ -35,29 +40,11 @@
                 <option value="2">Kuchen</option>
                 <option value="3">Anderes</option>
             </select>
-            <input type="checkbox" id="outofstock" required disabled>
+            <input type="checkbox" id="outofstock" class="outofstock" required disabled>
             <button class="btn" type="submit" disabled>Produkt speichern</button>
-            <button class="deletebtn btn" id="delprod" disabled>Produkt löschen</button>
         </form>
         <p id="errorlabel"></p>
         <script src="./script.js"></script>
     </body>
-    <style>
-        #outofstock {
-            margin-top: 20px;
-            margin-bottom: 40px;
-            width: 40px;
-            height: 40px;
-            margin-left: 10%;
-        }
-        #outofstock:before {
-            content: 'Nicht auf Lager';
-            white-space: nowrap;
-            margin-left: 50px;
-            margin-top: 6px;
-            display: inline-block;
-            font-size: 200%;
-        }
-        </style>
     </style>
 </html>

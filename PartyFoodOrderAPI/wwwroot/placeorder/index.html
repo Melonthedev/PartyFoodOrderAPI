@@ -19,9 +19,9 @@
         <input class="inp" type="text" id="name" placeholder="Name" maxlength="20" required>
         <p class="label">Produkt:</p>
         <select class="sel" id="product" placeholder="Wähle ein Produkt..." required>
-            <option value="kuchen">Kaffee</option>
-            <option value="kuchen">Kuchen</option>
-            <option value="kuchen" disabled><s>Bier</s> (Nicht auf Lager)</option>
+            <!-- <option value="1">Kaffee</option>
+            <option value="2">Kuchen</option>
+            <option value="3" disabled><s>Bier</s> (Nicht auf Lager)</option> -->
         </select>
         <p class="label">Anzahl: <span id="countdisplay">1</span></p>
         <input class="rng" type="range" id="count" min="1" max="4" value="1">
@@ -32,25 +32,6 @@
     <p id="errorlabel"></p>
 </body>
 <script>
-    window.onload = () => {
-        const queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
-        const type = urlParams.get('type')
-        const title = document.getElementById('title');
-        switch(type) {
-            case "drink":
-                title.innerText = "Getränk bestellen";
-                return;
-            case "cake":
-                title.innerText = "Kuchen bestellen";
-                return;
-            case "others":
-                title.innerText = "Sonstiges bestellen";
-                return;
-            default:
-                return;
-        }
-    }
     document.getElementById("count").addEventListener("input", function() {
         document.getElementById("countdisplay").innerHTML = this.value;
     });
@@ -109,4 +90,5 @@
                 }).catch(error => document.getElementById("errorlabel").innerText = "Der folgende Fehler ist während der Bearbeitung deiner Bestellung aufgetreten: " +  error);
     }
 </script>
+<script src="./script.js"></script>
 </html>

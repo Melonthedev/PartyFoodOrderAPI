@@ -2,37 +2,37 @@
 {
     public class Orders
     {
-        private static readonly List<FoodOrder> _foodOrders = new();
-        private static readonly List<FoodOrder> _burgerOrders = new();
+        private static readonly List<FoodOrder> FoodOrders = new();
+        private static readonly List<FoodOrder> BurgerOrders = new();
 
         public static void AddFoodOrder(FoodOrder foodOrder)
         {
-            _foodOrders.Add(foodOrder);
+            FoodOrders.Add(foodOrder);
         }
 
         public static void AddBurgerOrder(FoodOrder foodOrder)
         {
-            _burgerOrders.Add(foodOrder);
+            BurgerOrders.Add(foodOrder);
         }
 
         public static List<FoodOrder> GetFoodOrders()
         {
-            return _foodOrders;
+            return FoodOrders;
         }
 
-        public static FoodOrder GetFoodOrderById(int id)
+        public static FoodOrder? GetFoodOrderById(int id)
         {
-            return _foodOrders.Find(x => x.OrderId == id);
+            return FoodOrders.Find(x => x.OrderId == id);
         }
 
         public static List<FoodOrder> GetBurgerOrders()
         {
-            return _burgerOrders;
+            return BurgerOrders;
         }
 
         public static void DeleteFoodOrder(FoodOrder order)
         {
-            _foodOrders.Remove(order);
+            FoodOrders.Remove(order);
         }
     }
 }

@@ -13,9 +13,16 @@ window.onload = () => {
         for (let i = 0; i < data.length; i++) orders.push(data[i]);
         for (let i = 0; i < orders.length; i++) {
             const option = document.createElement('option');
+            var customerGroup = document.getElementById("group-" + orders[i].consumerName);
+            if (customerGroup == null) {
+                customerGroup = document.createElement('optgroup');
+                customerGroup.label = orders[i].consumerName;
+                customerGroup.id = "group-" + orders[i].consumerName;
+                selorder.appendChild(customerGroup);
+            }
             option.value = orders[i].orderId;
-            option.innerText = "(" + orders[i].orderId + ") " + orders[i].count + "x " + orders[i].orderedProduct + " - Kunde: " + orders[i].consumerName + (orders[i].markedAsFinished ? " (erledigt)" : "");
-            selorder.appendChild(option);
+            option.innerText = orders[i].count + "x " + orders[i].orderedProduct + " (ID: " + orders[i].orderId + ") " + (orders[i].markedAsFinished ? " (erledigt)" : "");
+            customerGroup.appendChild(option);
         }
     }).catch(error => {
         console.log(error);

@@ -6,8 +6,10 @@ namespace PartyFoodOrderAPI
     {
 
         [MaxLength(20)]
-        [Required] public string Name { get; set; }
-        [Required] public string Product { get; set; }
+        [Required] 
+        public string Name { get; set; }
+        [Required] 
+        public int Product { get; set; }
 
         [Required]
         [Range(1, 4)]

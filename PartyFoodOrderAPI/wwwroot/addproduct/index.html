@@ -4,7 +4,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/uistyle.css">
-        <link rel="shortcut icon" type="image/png" href="./media/burger.png"/>
+        <link rel="shortcut icon" type="image/png" href="/burger.png"/>
         <title>Produkt hinzufügen</title>
     </head>
     <body>
@@ -12,15 +12,20 @@
         <h1 style="text-decoration: underline; text-align: center; margin-top: 70px; margin-bottom: 60px;">Produkt Hinzufügen:</h1>
         <form name="orderform" action="/api/FoodStock/AddProduct" method="POST" id="orderform">
             <p class="label">Name:</p>
-            <input class="inp" type="text" id="name" placeholder="Name" required>
+            <input class="inp" type="text" id="name" placeholder="Name (max. 20 characters)" required maxlength="20">
             <p class="label">Id:</p>
-            <input class="inp" type="text" id="id" placeholder="Id" required>
+            <input class="inp" type="text" id="id" style="margin-bottom: 0; border-bottom-left-radius: 0; border-bottom-right-radius: 0; height: 60px" placeholder="Id (only positiv ints accepted)" required>
+            <button style="height: 30px; border-top-left-radius: 0; border-top-right-radius: 0; margin-top: -1px; background: linear-gradient(100deg, rgba(0, 255, 234, 0.836) 0%, rgba(0, 162, 255, 0.788) 100%); cursor: pointer; text-shadow: 1px 1px black;" class="inp">Generate</button>
+            
             <p class="label">Kategorie:</p>
             <select class="sel" id="category" placeholder="Wähle eine Kategorie..." required>
                 <option value="1">Getränk</option>
                 <option value="2">Kuchen</option>
                 <option value="3">Anderes</option>
             </select>
+            <p class="label">Unterkategorie:</p>
+            <input class="inp" type="text" id="secondcategory" placeholder="Unterkategorie (optional)" required maxlength="20">
+            <input type="checkbox" id="outofstock" class="outofstock">
             <button class="btn" type="submit">Produkt hinzufügen</button>
         </form>
         <p id="errorlabel"></p>

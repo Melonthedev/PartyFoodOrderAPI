@@ -3,35 +3,27 @@
     public class Products
     {
 
-        public static List<Product>? AllProducts { get; set; }
-
-
-        public Products()
-        {
-            AllProducts = new List<Product>();
-        }
+        public static List<Product> AllProducts { get; set; } = new();
 
         public static void AddProduct(Product product)
         {
-            if (AllProducts == null) AllProducts = new List<Product>();
             AllProducts.Add(product);
         }
 
-        public static void RemoveProduct(Product product)
+        public static bool RemoveProduct(Product product)
         {
-            if (AllProducts == null) AllProducts = new List<Product>();
             AllProducts.Remove(product);
+            return true;
         }
 
         public static Product? GetProductById(int id) 
         {
-            if (AllProducts is null) AllProducts = new List<Product>();
             var index = AllProducts.FindIndex(x => x.Id == id);
             try
             { 
                 return AllProducts[index];
             }
-            catch (ArgumentOutOfRangeException e)
+            catch (ArgumentOutOfRangeException)
             {
                 return null;
             }
@@ -56,6 +48,17 @@
                 "other" => 3,
                 _ => 0,
             };
+        }
+
+        public static bool UpdateProduct(int id, Product newProduct)
+        {
+            if (AllProducts.Any(x => x.Id == newProduct.Id) && id != newProduct.Id) return false;
+
+            var item = AllProducts.Find(x => x.Id == id);
+            if (item is null) return false;
+            AllProducts.Remove(item);
+            AllProducts.Add(newProduct);
+            return true;
         }
     }
 }

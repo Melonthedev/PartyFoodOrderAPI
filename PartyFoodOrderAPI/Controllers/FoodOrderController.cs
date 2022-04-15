@@ -15,9 +15,9 @@ namespace PartyFoodOrderAPI.Controllers
         }
 
         [HttpGet("GetFoodOrder")]
-        public ActionResult<List<FoodOrderData>> Get([FromQuery(Name = "method")] string method = "all", [FromQuery(Name = "id")] int id = 0)
+        public ActionResult<List<FoodOrderData>> Get([FromQuery] string method = "all", [FromQuery] int id = 0)
         {
-            _logger.Log(LogLevel.Information, "Recived GET Request with QueryMethod: " + method);
+            _logger.LogInformation($"Recived GET Request: Getting {(method == "all" ? "all FoodOrders" : "a FoodOrder with id " + id)}");
             return method switch
             {
                 "all" => Ok(Orders.GetFoodOrders()),
@@ -27,32 +27,37 @@ namespace PartyFoodOrderAPI.Controllers
         }
 
         [HttpPost("AddFoodOrder")]
-        public ActionResult<string> Post([FromBody] FoodOrderData data)
+        public ActionResult<string> Post([Required][FromBody] FoodOrderData data)
         {
+            _logger.LogInformation($"Recived GET Request: Adding a FoodOrder with data: name: {data.Name}, product: {data.Product}, count: {data.Count}, comment: {data.Comment}");
             var comment = data.Comment != null ?  data.Comment.Replace("\n", " ¬ ") : "";
-            Orders.AddFoodOrder(new FoodOrder(DateTimeOffset.UtcNow.ToUnixTimeSeconds(), Orders.GetFoodOrders().Count + 1, data.Product, data.Count, data.Name, comment));
-            _logger.Log(LogLevel.Information, $"Recived order: Name:  '{data.Name}', Product: '{data.Product}', Count: {data.Count}");
-            return Ok($"{{ \"title\" : \"You placed an order 😃\", \"name\" : \"{data.Name}\", \"product\" : \"{data.Product}\", \"count\" : {data.Count}, \"comment\" : \" {comment} \", \"message\" : \"Vielen Dank für deine Bestellung!\"}}");
+            var product = Products.GetProductById(data.Product);
+            var productName = product == null ? data.Product.ToString() : product.Name;
+            var order = new FoodOrder(DateTimeOffset.UtcNow.ToUnixTimeSeconds(), Orders.GetFoodOrders().Count + 1, productName, data.Count, data.Name, comment);
+            Orders.AddFoodOrder(order);
+            return Ok($"{{ \"title\" : \"You placed an order 😃\", \"name\" : \"{data.Name}\", \"productId\" : \"{data.Product}\", \"product\" : \"{productName}\", \"count\" : {data.Count}, \"comment\" : \" {comment} \", \"message\" : \"Vielen Dank für deine Bestellung!\"}}");
         }
 
         [HttpPost("MarkFoodOrderAsFinished")]
-        public ActionResult<string> MarkFoodOrderAsFinished([Required][FromQuery(Name = "orderId")] int orderId)
+        public ActionResult<string> MarkFoodOrderAsFinished([Required][FromQuery] int orderId)
         {
+            _logger.LogInformation($"Recived POST Request: Marking FoodOrder with id {orderId} as finished");
             var order = Orders.GetFoodOrders().FirstOrDefault(foodOrder => foodOrder.GetOrderId() == orderId);
             if (order is null)
-                return BadRequest("Bad Request - Found no order for orderId " + orderId);
+                return NotFound($"No order with id {orderId} found");
             order.SetMarkedAsFinished();
-            return Ok("Success - Updated MarkedAsFinishedStatus of orderId " + order.OrderId);
+            return Ok("Updated MarkedAsFinishedStatus of orderId " + order.OrderId);
         }
 
         [HttpDelete("DeleteFoodOrder")]
-        public ActionResult<string> Delete([Required][FromQuery(Name = "orderId")] int orderId)
+        public ActionResult<string> Delete([Required][FromQuery] int orderId)
         {
+            _logger.LogInformation($"Recived DELETE Request: Deleting FoodOrder with id {orderId}");
             var order = Orders.GetFoodOrders().FirstOrDefault(foodOrder => foodOrder.GetOrderId() == orderId);
             if (order is null)
-                return BadRequest("Bad Request - Found no order for orderId " + orderId);
+                return NotFound($"No order with id {orderId} found");
             Orders.DeleteFoodOrder(order);
-            return Ok("Success - Deleted FoodOrder with orderId " + order.OrderId);
+            return Ok("Deleted FoodOrder with id " + order.OrderId);
         }
 
     }
