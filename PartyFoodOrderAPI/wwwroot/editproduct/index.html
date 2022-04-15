@@ -10,9 +10,10 @@
     <body>
         <img onclick="document.location = '/orders'" src="/orders/media/orders.png" width="40px" height="40px" id="homeicon">
         <h1 style="text-decoration: underline; text-align: center; margin-top: 70px; margin-bottom: 60px;">Produkt Bearbeiten:</h1>
-        <form name="orderform" action="/api/FoodStock/AddProduct" method="POST" id="orderform">
+        <form name="orderform" method="POST" id="orderform">
             <p class="label">Zu bearbeitendes Produkt:</p>
             <select class="sel" id="selproduct" placeholder="Wähle ein Produkt..." required>
+                <option value selected hidden></option>
                 <optgroup label="Getränke" id="cat1">
                     <!--<option value="1">Cola</option>
                     <option value="1">Bier</option>-->
@@ -24,10 +25,8 @@
                     <!--<option value="1">Ananas</option>-->
                 </optgroup>
             </select>
-            <button class="btn" style="margin-top: 20px; margin-bottom: 40px;" id="selectproduct">Auswählen</button>
-
-            <button class="deletebtn btn" id="delprod" disabled>Produkt löschen</button>
-            <button class="btn">Produkt als 'Nicht auf Lager' makieren</button>
+            <button class="deletebtn btn" id="delprod" style="margin-bottom: 20px;" type="button" disabled>Produkt löschen</button>
+            <button class="btn markasoutofstockbutton" style="margin-bottom: 40px;" id="changestockbutton" type="button" disabled>Produkt als 'Nicht auf Lager' makieren</button>
 
             <h2 class="label">Erweitert:</h2>
             <p class="label">Name:</p>
@@ -41,7 +40,7 @@
                 <option value="3">Anderes</option>
             </select>
             <input type="checkbox" id="outofstock" class="outofstock" required disabled>
-            <button class="btn" type="submit" disabled>Produkt speichern</button>
+            <button class="btn" type="submit" id="savebutton" disabled>Produkt speichern</button>
         </form>
         <p id="errorlabel"></p>
         <script src="./script.js"></script>
