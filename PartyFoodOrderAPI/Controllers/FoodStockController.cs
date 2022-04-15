@@ -21,6 +21,13 @@ namespace PartyFoodOrderAPI.Controllers
             return Ok(Products.AllProducts);
         }
 
+        [HttpGet("GetProduct")]
+        public ActionResult<Product> GetProduct([Required][FromQuery] int id)
+        {
+            _logger.LogInformation("Recived GET Request: Getting product with id: " + id);
+            return Ok(Products.AllProducts.Find(p => p.Id == id));
+        }
+
         [HttpGet("GetAllProducts/{categoryId}")]
         public ActionResult<List<Product>> GetAllProducts([Required][FromRoute] int categoryId)
         {
