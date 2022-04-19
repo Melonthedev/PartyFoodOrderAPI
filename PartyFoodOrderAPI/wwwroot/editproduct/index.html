@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -10,7 +11,7 @@
     <body>
         <img onclick="document.location = '/orders'" src="/orders/media/orders.png" width="40px" height="40px" id="homeicon">
         <h1 style="text-decoration: underline; text-align: center; margin-top: 70px; margin-bottom: 60px;">Produkt Bearbeiten:</h1>
-        <form name="orderform" method="POST" id="orderform">
+        <form name="orderform" method="PATCH" id="orderform">
             <p class="label">Zu bearbeitendes Produkt:</p>
             <select class="sel" id="selproduct" placeholder="Wähle ein Produkt..." required>
                 <option value selected hidden></option>
@@ -39,7 +40,9 @@
                 <option value="2">Kuchen</option>
                 <option value="3">Anderes</option>
             </select>
-            <input type="checkbox" id="outofstock" class="outofstock" required disabled>
+            <p class="label">Unterkategorie:</p>
+            <input class="inp" type="text" id="subcategory" placeholder="Unterkategorie" disabled>
+            <input type="checkbox" id="outofstock" class="outofstock" disabled>
             <button class="btn" type="submit" id="savebutton" disabled>Produkt speichern</button>
         </form>
         <p id="errorlabel"></p>

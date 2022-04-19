@@ -29,6 +29,7 @@ const category = document.getElementById('category');
 const idfield = document.getElementById('id');
 const namefield = document.getElementById('name');
 const changestockbutton = document.getElementById('changestockbutton');
+const subcategoryfield = document.getElementById('subcategory');
 
 selectedproduct.onchange = () => {
     fetch('/api/FoodStock/GetProduct?id=' + selectedproduct.value, {
@@ -43,6 +44,7 @@ selectedproduct.onchange = () => {
         namefield.value = data.name;
         outofstockcheckbox.checked = !data.isInStock;
         category.value = data.category;
+        subcategoryfield.value = data.secondCategory;
     }).catch(error => {
         console.log(error);
     });
@@ -54,6 +56,7 @@ selectedproduct.onchange = () => {
     namefield.disabled = false;
     changestockbutton.disabled = false;
     idfield.disabled = false;
+    subcategoryfield.disabled = false;
 }
 
 
@@ -117,6 +120,37 @@ function changeStockStatus(instock) {
         console.log(error);
     });
 
+}
+
+
+document.getElementById('orderform').onsubmit = (e) => {
+    e.preventDefault();
+    fetch('/api/FoodStock/UpdateProduct?id=' + selectedproduct.value, {
+        method: 'PATCH',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            id: idfield.value,
+            name: namefield.value,
+            isInStock: !outofstockcheckbox.checked,
+            category: category.value,
+            secondcategory: subcategoryfield.value
+        })
+    }).then(data => {
+        if(data.status == 200) {
+            document.write(`<html lang="en">
+            <head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <link rel="stylesheet" href="/uistyle.css"><link rel="shortcut icon" type="image/png" href="./media/burger.png"/><title>Produkt gelöscht</title></head>
+            <body><img onclick="document.location = '/orders'" src="/orders/media/orders.png" width="40px" height="40px" id="homeicon">
+                <h1 style="text-decoration: underline; text-align: center; margin-top: 70px; margin-bottom: 60px;">Produkt erfolgreich geändert</h1>
+                <button class="btn" onclick="document.location='/orders'">Zurück</button></body>
+        </html>`);
+        }
+    }).catch(error => {
+        console.log(error);
+    });
 }
 
 
