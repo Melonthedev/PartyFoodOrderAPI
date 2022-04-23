@@ -1,7 +1,6 @@
 const table = document.getElementById("orders");
     const burgerTable = document.getElementById("burgerorders");
     const orders = [];
-    //window.addEventListener("load", event => {refreshFoodOrders(); refreshBurgerOrders(); setTimeout(refreshOrderStatus(), 500); runAutoRefreshTimer()});
     window.addEventListener("load", event => { runAutoRefreshTimer() });
 
     function runAutoRefreshTimer() {

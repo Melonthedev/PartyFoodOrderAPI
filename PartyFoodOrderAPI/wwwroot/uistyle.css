@@ -64,6 +64,8 @@ h1, h2 {
     font-family: 'Noto Serif', serif;
     font-size: 30px;
     color: white;
+    box-sizing: content-box
+    
 }
 
 .btn:disabled {
@@ -72,6 +74,7 @@ h1, h2 {
     border-color: darkgray;
     background: gray;
     cursor: not-allowed;
+    box-sizing: content-box;
 }
 
 .deletebtn {
@@ -94,6 +97,7 @@ h1, h2 {
     border: 1px solid white;
     padding-left: 15px;
     padding-right: 15px;
+    box-sizing: content-box
 }
 
 .inp {

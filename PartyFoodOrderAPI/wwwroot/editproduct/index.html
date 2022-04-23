@@ -26,14 +26,14 @@
                     <!--<option value="1">Ananas</option>-->
                 </optgroup>
             </select>
-            <button class="deletebtn btn" id="delprod" style="margin-bottom: 20px;" type="button" disabled>Produkt löschen</button>
-            <button class="btn markasoutofstockbutton" style="margin-bottom: 40px;" id="changestockbutton" type="button" disabled>Produkt als 'Nicht auf Lager' makieren</button>
+            <button class="deletebtn btn" id="delprod" style="margin-bottom: 20px;box-sizing: content-box" type="button" disabled>Produkt löschen</button>
+            <button class="btn markasoutofstockbutton" style="margin-bottom: 40px;box-sizing: content-box" id="changestockbutton" type="button" disabled>Produkt als 'Nicht auf Lager' makieren</button>
 
             <h2 class="label">Erweitert:</h2>
             <p class="label">Name:</p>
-            <input class="inp" type="text" id="name" placeholder="Name" required disabled>
+            <input class="inp" type="text" id="name" placeholder="Name" style="box-sizing: border-box" required disabled>
             <p class="label">Id:</p>
-            <input class="inp" type="text" id="id" placeholder="Id" required disabled>
+            <input class="inp" type="text" id="id" placeholder="Id" style="box-sizing: border-box" required disabled>
             <p class="label">Kategorie:</p>
             <select class="sel" id="category" placeholder="Wähle eine Kategorie..." required disabled>
                 <option value="1">Getränk</option>
@@ -41,7 +41,7 @@
                 <option value="3">Anderes</option>
             </select>
             <p class="label">Unterkategorie:</p>
-            <input class="inp" type="text" id="subcategory" placeholder="Unterkategorie" disabled>
+            <input class="inp" type="text" id="subcategory" placeholder="Unterkategorie" style="box-sizing: border-box" disabled>
             <input type="checkbox" id="outofstock" class="outofstock" disabled>
             <button class="btn" type="submit" id="savebutton" disabled>Produkt speichern</button>
         </form>
