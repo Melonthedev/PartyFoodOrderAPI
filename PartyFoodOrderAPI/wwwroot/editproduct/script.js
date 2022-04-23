@@ -72,8 +72,8 @@ delprod.onclick = () => {
             document.write(`
             <html lang="en">
                 <head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <link rel="stylesheet" href="/uistyle.css"><link rel="shortcut icon" type="image/png" href="./media/burger.png"/><title>Produkt gelöscht</title></head>
-                <body><img onclick="document.location = '/orders'" src="/orders/media/orders.png" width="40px" height="40px" id="homeicon">
+                    <link rel="stylesheet" href="/uistyle.css"><link rel="shortcut icon" type="image/png" href="/assets/burger.png"/><title>Produkt gelöscht</title></head>
+                <body><img onclick="document.location = '/orders'" src="/assets/ui/orders.png" width="40px" height="40px" id="homeicon">
                     <h1 style="text-decoration: underline; text-align: center; margin-top: 70px; margin-bottom: 60px;">Produkt erfolgreich gelöscht</h1>
                     <button class="btn" onclick="document.location='/orders'">Zurück</button></body>
             </html>`);
@@ -110,8 +110,8 @@ function changeStockStatus(instock) {
             document.write(`
             <html lang="en">
                 <head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <link rel="stylesheet" href="/uistyle.css"><link rel="shortcut icon" type="image/png" href="./media/burger.png"/><title>Produkt gelöscht</title></head>
-                <body><img onclick="document.location = '/orders'" src="/orders/media/orders.png" width="40px" height="40px" id="homeicon">
+                    <link rel="stylesheet" href="/uistyle.css"><link rel="shortcut icon" type="image/png" href="/assets/burger.png"/><title>Produkt gelöscht</title></head>
+                <body><img onclick="document.location = '/orders'" src="/assets/ui/orders.png" width="40px" height="40px" id="homeicon">
                     <h1 style="text-decoration: underline; text-align: center; margin-top: 70px; margin-bottom: 60px;">Produkt erfolgreich als 'Nicht auf Lager' makiert</h1>
                     <button class="btn" onclick="document.location='/orders'">Zurück</button></body>
             </html>`);
@@ -142,8 +142,8 @@ document.getElementById('orderform').onsubmit = (e) => {
         if(data.status == 200) {
             document.write(`<html lang="en">
             <head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <link rel="stylesheet" href="/uistyle.css"><link rel="shortcut icon" type="image/png" href="./media/burger.png"/><title>Produkt gelöscht</title></head>
-            <body><img onclick="document.location = '/orders'" src="/orders/media/orders.png" width="40px" height="40px" id="homeicon">
+                <link rel="stylesheet" href="/uistyle.css"><link rel="shortcut icon" type="image/png" href="/assets/burger.png"/><title>Produkt gelöscht</title></head>
+            <body><img onclick="document.location = '/orders'" src="/assets/ui/orders.png" width="40px" height="40px" id="homeicon">
                 <h1 style="text-decoration: underline; text-align: center; margin-top: 70px; margin-bottom: 60px;">Produkt erfolgreich geändert</h1>
                 <button class="btn" onclick="document.location='/orders'">Zurück</button></body>
         </html>`);

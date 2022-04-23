@@ -22,7 +22,7 @@ document.getElementById("orderform").onsubmit = (event) => {
             document.write(`
             <html lang="de">
                 <head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" type="text/css" href="/uistyle.css"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap" rel="stylesheet"><link rel="icon" href="/burger.png"><title>Erfolgreich</title></head>
-                <body><img onclick="document.location = '/orders'" src="/orders/media/orders.png" width="40px" height="40px" id="homeicon"><h1 style="margin-top: 70px; margin-bottom: 60px;">Erfolgreich hinzugefügt!</h1><p class="label" style="text-align: center; font-size: 150%">Dein Produkt wurde erfolgreich der Datenbank hinzugefügt.</p><p class="label" style="text-align: center; font-size: 150%"><a href="/orders" style="color: white;">Zurück zur Bestellübersicht</a></p></body>
+                <body><img onclick="document.location = '/orders'" src="/assets/ui/orders.png" width="40px" height="40px" id="homeicon"><h1 style="margin-top: 70px; margin-bottom: 60px;">Erfolgreich hinzugefügt!</h1><p class="label" style="text-align: center; font-size: 150%">Dein Produkt wurde erfolgreich der Datenbank hinzugefügt.</p><p class="label" style="text-align: center; font-size: 150%"><a href="/orders" style="color: white;">Zurück zur Bestellübersicht</a></p></body>
             </html>
             `);
         }
