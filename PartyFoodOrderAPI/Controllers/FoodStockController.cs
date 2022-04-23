@@ -35,6 +35,13 @@ namespace PartyFoodOrderAPI.Controllers
             return Ok(Products.AllProducts.Where(p => p.Category == categoryId).ToList());
         }
 
+        [HttpGet("GetNextId")]
+        public ActionResult<int> GetNextId()
+        {
+            return Ok(Products.AllProducts.Aggregate((agg, next) =>
+        next.Id >= agg.Id ? next : agg).Id + 1);
+        }
+
         [HttpGet("IsProductInStock/{productId}")]
         public ActionResult<bool> GetIsProductInStock([Required][FromRoute] int productId)
         {
