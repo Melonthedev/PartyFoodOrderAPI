@@ -15,11 +15,11 @@
             <p class="label">Name:</p>
             <input class="inp" type="text" id="name" placeholder="Name (max. 20 characters)" required maxlength="20">
             <p class="label">Id:</p>
-            <input class="inp" type="text" id="id" style="margin-bottom: 0; border-bottom-left-radius: 0; border-bottom-right-radius: 0; height: 60px" placeholder="Id (only positiv ints accepted)" required>
-            <button style="height: 30px; border-top-left-radius: 0; border-top-right-radius: 0; margin-top: -1px; background: linear-gradient(100deg, rgba(0, 255, 234, 0.836) 0%, rgba(0, 162, 255, 0.788) 100%); cursor: pointer; text-shadow: 1px 1px black;" class="inp">Generate</button>
+            <input class="inp" type="text" id="id" style="margin-bottom: 0; border-bottom-left-radius: 0; border-bottom-right-radius: 0; height: 60px;" placeholder="Id (only positiv ints accepted)" required>
+            <button id="generateid" type="button" style="height: 30px; border-top-left-radius: 0; border-top-right-radius: 0; margin-top: -1px; background: linear-gradient(100deg, rgba(0, 255, 234, 0.836) 0%, rgba(0, 162, 255, 0.788) 100%); cursor: pointer; text-shadow: 1px 1px black; box-sizing: content-box" class="inp">Generate</button>
             
             <p class="label">Kategorie:</p>
-            <select class="sel" id="category" placeholder="Wähle eine Kategorie..." required>
+            <select class="sel" id="category" placeholder="Wähle eine Kategorie..." style="box-sizing: content-box" required>
                 <option value="1">Getränk</option>
                 <option value="2">Kuchen</option>
                 <option value="3">Anderes</option>
@@ -27,7 +27,7 @@
             <p class="label">Unterkategorie:</p>
             <input class="inp" type="text" id="secondcategory" placeholder="Unterkategorie (optional)" maxlength="20">
             <input type="checkbox" id="outofstock" class="outofstock">
-            <button class="btn" type="submit">Produkt hinzufügen</button>
+            <button class="btn" type="submit" style="box-sizing: content-box">Produkt hinzufügen</button>
         </form>
         <p id="errorlabel"></p>
         <script src="./script.js"></script>

@@ -32,6 +32,22 @@ document.getElementById("orderform").onsubmit = (event) => {
     });
 }
 
+document.getElementById("generateid").onclick = () => {
+    console.log("Generating ID...");
+    fetch("/api/FoodStock/GetNextId", {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+    }).then(response => response.json()
+    ).then(data => {
+        document.getElementById("id").value = data;
+    }).catch(error => {
+        console.error(error);
+    });
+}
+
 document.onkeyup = (event) => {
     if (event.key == "Escape") document.location = "/orders";
 }
