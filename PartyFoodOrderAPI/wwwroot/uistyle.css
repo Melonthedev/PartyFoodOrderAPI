@@ -1,3 +1,5 @@
+/* General */
+
 * {
     padding: 0;
     margin: 0;
@@ -5,12 +7,16 @@
     color-scheme: dark;
 }
 
-h1, h2 {
+h1, h2, h3 {
     text-align: center;
     color: white;
     text-shadow: 2px 2px black;
     text-decoration: underline;
     font-family: 'Noto Serif', serif;
+}
+
+h3 {
+    text-decoration: none;
 }
 
 #homeicon {
@@ -97,7 +103,6 @@ h1, h2 {
     border: 1px solid white;
     padding-left: 15px;
     padding-right: 15px;
-    box-sizing: content-box
 }
 
 .inp {
@@ -131,7 +136,6 @@ h1, h2 {
     font-size: 150%;
 }
 
-
 .rng {
     width: 60%;
     display: block;
@@ -163,4 +167,42 @@ h1, h2 {
     margin-top: 6px;
     display: inline-block;
     font-size: 200%;
+}
+
+
+
+/* Menukarte */
+
+
+.menu-item {
+    display: table;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+    height: 100px;
+    background-color: #2f3136;
+    color: white;
+    font-family: 'Noto Serif', serif;
+    font-size: 140%;
+    text-shadow: 1px 1px black;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px aqua;
+}
+
+.menu-item h3, p {
+    background: transparent;
+    padding-top: 10px
+}
+
+.menuoverviewbtn {
+    width: 80%;
+    max-width: 400px;
+    height: 40px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
 }
