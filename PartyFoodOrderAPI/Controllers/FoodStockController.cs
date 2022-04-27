@@ -38,8 +38,15 @@ namespace PartyFoodOrderAPI.Controllers
         [HttpGet("GetNextId")]
         public ActionResult<int> GetNextId()
         {
-            return Ok(Products.AllProducts.Aggregate((agg, next) =>
-        next.Id >= agg.Id ? next : agg).Id + 1);
+            try
+            {
+                return Ok(Products.AllProducts.Aggregate((agg, next) =>
+                                next.Id >= agg.Id ? next : agg).Id + 1);
+            }
+            catch (InvalidOperationException)
+            {
+                return Ok(1);
+            }
         }
 
         [HttpGet("IsProductInStock/{productId}")]

@@ -17,15 +17,20 @@ namespace PartyFoodOrderAPI
         [Range(1, 3)]
         public int Category { get; set; }
 
-        public string? SecondCategory { get; set; }
+        public string? SubCategory { get; set; }
 
-        public Product(int id, string name, int category, string? secondCategory = null)
+        public string? Description { get; set; }
+
+        public string? ImageUrl { get; set; }
+
+        public Product(int id, string name, int category, string? subCategory = null, string? description = null, string? imageUrl = null)
         {
             Id = id;
             Name = name;
             Category = category;
-            SecondCategory = secondCategory;
+            SubCategory = subCategory;
+            Description = description;
+            ImageUrl = imageUrl;
         }
-
     }
 }
