@@ -30,6 +30,8 @@ const idfield = document.getElementById('id');
 const namefield = document.getElementById('name');
 const changestockbutton = document.getElementById('changestockbutton');
 const subcategoryfield = document.getElementById('subcategory');
+const imageurlfield = document.getElementById('imageurl');
+const descriptionfield = document.getElementById('description');
 
 selectedproduct.onchange = () => {
     fetch('/api/FoodStock/GetProduct?id=' + selectedproduct.value, {
@@ -45,6 +47,15 @@ selectedproduct.onchange = () => {
         outofstockcheckbox.checked = !data.isInStock;
         category.value = data.category;
         subcategoryfield.value = data.secondCategory;
+        imageurlfield.value = data.imageUrl;
+        descriptionfield.value = data.description;
+        if (!data.isInStock) {
+            changestockbutton.setAttribute('instock', 'false');
+            changestockbutton.innerText = "Markieren als 'Auf Lager'";
+        } else {
+            changestockbutton.setAttribute('instock', 'true');
+            changestockbutton.innerText = "Markieren als 'Nicht auf Lager'";
+        }
     }).catch(error => {
         console.log(error);
     });
@@ -57,6 +68,8 @@ selectedproduct.onchange = () => {
     changestockbutton.disabled = false;
     idfield.disabled = false;
     subcategoryfield.disabled = false;
+    imageurlfield.disabled = false;
+    descriptionfield.disabled = false;
 }
 
 
@@ -84,23 +97,21 @@ delprod.onclick = () => {
 };
 
 changestockbutton.onclick = () => {
-    if (changestockbutton.classList.contains("markasinstockbutton")) {
-        changestockbutton.classList.remove("markasinstockbutton");
-        changestockbutton.classList.add("markasoutofstockbutton");
+    if (changestockbutton.getAttribute('instock') == 'true') {
+        changestockbutton.setAttribute('instock', 'false');
         changestockbutton.innerText = "Markieren als 'Auf Lager'";
-        changeStockStatus(true);
-    } else if (changestockbutton.classList.contains("markasoutofstockbutton")) {
-        changestockbutton.classList.remove("markasoutofstockbutton");
-        changestockbutton.classList.add("markasinstockbutton");
-        changestockbutton.innerText = "Markieren als 'Nicht auf Lager'";
         changeStockStatus(false);
+    } else {
+        changestockbutton.setAttribute('instock', 'true');
+        changestockbutton.innerText = "Markieren als 'Nicht auf Lager'";
+        changeStockStatus(true);
     }
 }
 
 
 function changeStockStatus(instock) {
     fetch('/api/FoodStock/SetProductInStock/' + instock + '?productId=' + selectedproduct.value, {
-        method: 'DELETE',
+        method: 'POST',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -136,13 +147,15 @@ document.getElementById('orderform').onsubmit = (e) => {
             name: namefield.value,
             isInStock: !outofstockcheckbox.checked,
             category: category.value,
-            secondcategory: subcategoryfield.value
+            secondcategory: subcategoryfield.value,
+            imageUrl: imageurlfield.value,
+            description: descriptionfield.value
         })
     }).then(data => {
         if(data.status == 200) {
             document.write(`<html lang="en">
             <head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <link rel="stylesheet" href="/uistyle.css"><link rel="shortcut icon" type="image/png" href="/assets/burger.png"/><title>Produkt gelöscht</title></head>
+                <link rel="stylesheet" href="/uistyle.css"><link rel="shortcut icon" type="image/png" href="/assets/burger.png"/><title>Produkt erfolgreich geändert</title></head>
             <body><img onclick="document.location = '/orders'" src="/assets/ui/orders.png" width="40px" height="40px" id="homeicon">
                 <h1 style="text-decoration: underline; text-align: center; margin-top: 70px; margin-bottom: 60px;">Produkt erfolgreich geändert</h1>
                 <button class="btn" onclick="document.location='/orders'">Zurück</button></body>
@@ -151,6 +164,40 @@ document.getElementById('orderform').onsubmit = (e) => {
     }).catch(error => {
         console.log(error);
     });
+}
+
+
+
+function encodeImageFileAsURL(event) {
+    event.preventDefault();
+    var filesSelected = event.dataTransfer.files;
+    if (filesSelected.length > 0) {
+        var fileToLoad = filesSelected[0];
+        var fileReader = new FileReader();
+        fileReader.onload = function(fileLoadedEvent) {
+            var srcData = fileLoadedEvent.target.result;
+            document.getElementById("imageurl").value = srcData;
+            document.getElementById("imageurl").disabled = true;
+        }
+        fileReader.readAsDataURL(fileToLoad);
+    }
+}
+
+var dropZone = document.getElementById('imageurl');
+dropZone.addEventListener('dragover', handleDragOver, false);
+dropZone.addEventListener('drop', drop, false);
+
+function handleDragOver(evt) {
+    console.log("dragover");
+    evt.stopPropagation();
+    evt.preventDefault();
+    evt.dataTransfer.dropEffect = 'copy';
+}
+
+function drop(evt) {
+	evt.stopPropagation();
+	evt.preventDefault();
+	encodeImageFileAsURL(evt);
 }
 
 

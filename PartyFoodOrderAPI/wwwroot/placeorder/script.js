@@ -31,7 +31,6 @@ window.onload = () => {
     ).then(data => {
         for (let i = 0; i < data.length; i++) products.push(data[i]);
         for (let i = 0; i < products.length; i++) {
-            console.log(products[i]);
             const option = document.createElement('option');
             option.value = products[i].id;
             option.innerText = products[i].name;
@@ -53,6 +52,14 @@ window.onload = () => {
             selproduct.appendChild(option);
         }
         selproduct.value = product;
+        if (products.length == 0) {
+            const option = document.createElement('option');
+            option.value = "none";
+            option.disabled = true;
+            option.innerText = "Keine Produkte vorhanden";
+            selproduct.appendChild(option);
+            selproduct.value = "none";
+        }
     }).catch(error => {
         console.log(error);
     });

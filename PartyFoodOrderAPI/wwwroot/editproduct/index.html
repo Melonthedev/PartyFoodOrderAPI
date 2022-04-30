@@ -16,18 +16,14 @@
             <select class="sel" id="selproduct" placeholder="Wähle ein Produkt..." required>
                 <option value selected hidden></option>
                 <optgroup label="Getränke" id="cat1">
-                    <!--<option value="1">Cola</option>
-                    <option value="1">Bier</option>-->
                 </optgroup>
                 <optgroup label="Kuchen" id="cat2">
-                    <!--<option value="1">Erdbeerkuchen</option>-->
                 </optgroup>
                 <optgroup label="Anderes" id="cat3">
-                    <!--<option value="1">Ananas</option>-->
                 </optgroup>
             </select>
             <button class="deletebtn btn" id="delprod" style="margin-bottom: 20px;box-sizing: content-box" type="button" disabled>Produkt löschen</button>
-            <button class="btn markasoutofstockbutton" style="margin-bottom: 40px;box-sizing: content-box" id="changestockbutton" type="button" disabled>Produkt als 'Nicht auf Lager' makieren</button>
+            <button class="btn markasoutofstockbutton" style="margin-bottom: 40px;box-sizing: content-box; " id="changestockbutton" type="button" disabled>Markieren als 'Nicht auf Lager'</button>
 
             <h2 class="label">Erweitert:</h2>
             <p class="label">Name:</p>
@@ -42,6 +38,13 @@
             </select>
             <p class="label">Unterkategorie:</p>
             <input class="inp" type="text" id="subcategory" placeholder="Unterkategorie" style="box-sizing: border-box" disabled>
+
+            <p class="label">Beschreibung:</p>
+            <textarea class="inp" id="description" placeholder="Beschreibung (optional)" maxlength="200" style="padding-top: 10px; box-sizing: border-box;" cols="1"  disabled></textarea>
+
+            <p class="label">Bild oder Link:</p>
+            <input class="inp" type="text" id="imageurl" placeholder="Bild-Link (optional) oder Bild (drag 'n drop)" maxlength="200" dropzone="copy" style="box-sizing: border-box" disabled>
+
             <input type="checkbox" id="outofstock" class="outofstock" disabled>
             <button class="btn" type="submit" id="savebutton" disabled>Produkt speichern</button>
         </form>

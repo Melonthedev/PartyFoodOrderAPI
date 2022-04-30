@@ -65,7 +65,7 @@ function encodeImageFileAsURL(event) {
         var fileToLoad = filesSelected[0];
         var fileReader = new FileReader();
         fileReader.onload = function(fileLoadedEvent) {
-            var srcData = fileLoadedEvent.target.result; // <--- data: base64
+            var srcData = fileLoadedEvent.target.result;
             document.getElementById("imageurl").value = srcData;
             document.getElementById("imageurl").disabled = true;
         }
