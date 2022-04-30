@@ -12,6 +12,8 @@ document.getElementById("orderform").onsubmit = (event) => {
             'Category' : document.getElementById("category").value,
             'IsInStock' : !document.getElementById("outofstock").checked,
             'SecondCategory' : document.getElementById("secondcategory").value,
+            'Description' : document.getElementById("description").value,
+            'ImageUrl' : document.getElementById("imageurl").value,
         })
     }).then(data => {
         if (data.status != 200) {
@@ -50,4 +52,40 @@ document.getElementById("generateid").onclick = () => {
 
 document.onkeyup = (event) => {
     if (event.key == "Escape") document.location = "/orders";
+}
+
+
+
+
+
+function encodeImageFileAsURL(event) {
+    event.preventDefault();
+    var filesSelected = event.dataTransfer.files;
+    if (filesSelected.length > 0) {
+        var fileToLoad = filesSelected[0];
+        var fileReader = new FileReader();
+        fileReader.onload = function(fileLoadedEvent) {
+            var srcData = fileLoadedEvent.target.result; // <--- data: base64
+            document.getElementById("imageurl").value = srcData;
+            document.getElementById("imageurl").disabled = true;
+        }
+        fileReader.readAsDataURL(fileToLoad);
+    }
+}
+
+var dropZone = document.getElementById('imageurl');
+dropZone.addEventListener('dragover', handleDragOver, false);
+dropZone.addEventListener('drop', drop, false);
+
+function handleDragOver(evt) {
+    console.log("dragover");
+    evt.stopPropagation();
+    evt.preventDefault();
+    evt.dataTransfer.dropEffect = 'copy';
+}
+
+function drop(evt) {
+	evt.stopPropagation();
+	evt.preventDefault();
+	encodeImageFileAsURL(evt);
 }

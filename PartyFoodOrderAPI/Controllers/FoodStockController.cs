@@ -68,7 +68,7 @@ namespace PartyFoodOrderAPI.Controllers
         [HttpPost("AddProduct")]
         public ActionResult AddProduct([Required][FromBody] Product product)
         {
-            _logger.LogInformation($"Recived POST Request: Adding a new product with name: {product.Name} and category: {product.Category}");
+            _logger.LogInformation($"Recived POST Request: Adding a new product with name: {product.Name} and category: {product.Category} and description: \"{product.Description}\"");
             if (Products.AllProducts.Find(pr => pr.Id == product.Id) != null)
             {
                 return Conflict("Product with this ID already exists!");

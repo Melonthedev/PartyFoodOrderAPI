@@ -36,7 +36,7 @@ window.onload = () => {
             option.value = products[i].id;
             option.innerText = products[i].name;
             if (!products[i].isInStock) {
-                option.append(" (Nicht auf Lager)");
+                option.append(" (Momentan nicht auf Lager)");
                 option.disabled = true;
             }
             let secondCategory = document.getElementById("category-" + products[i].secondCategory);

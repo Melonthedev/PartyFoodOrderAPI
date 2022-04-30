@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.HttpOverrides;
 using PartyFoodOrderAPI;
 using Microsoft.EntityFrameworkCore;
-using PartyFoodOrderAPI.Data;
-using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -8,7 +8,7 @@
         <link rel="shortcut icon" type="image/png" href="/burger.png"/>
         <title>Produkt hinzufügen</title>
     </head>
-    <body>
+    <body id="body">
         <img onclick="document.location = '/orders'" src="/assets/ui/orders.png" width="40px" height="40px" id="homeicon">
         <h1 style="text-decoration: underline; text-align: center; margin-top: 70px; margin-bottom: 60px;">Produkt Hinzufügen:</h1>
         <form name="orderform" action="/api/FoodStock/AddProduct" method="POST" id="orderform">
@@ -26,6 +26,13 @@
             </select>
             <p class="label">Unterkategorie:</p>
             <input class="inp" type="text" id="secondcategory" placeholder="Unterkategorie (optional)" maxlength="20">
+
+            <p class="label">Beschreibung:</p>
+            <textarea class="inp" id="description" placeholder="Beschreibung (optional)" maxlength="200" style="padding-top: 10px;" cols="1"></textarea>
+
+            <p class="label">Bild oder Link:</p>
+            <input class="inp" type="text" id="imageurl" placeholder="Bild-Link (optional) oder Bild (drag 'n drop)" maxlength="200" dropzone="copy">
+
             <input type="checkbox" id="outofstock" class="outofstock">
             <button class="btn" type="submit" style="box-sizing: content-box">Produkt hinzufügen</button>
         </form>
