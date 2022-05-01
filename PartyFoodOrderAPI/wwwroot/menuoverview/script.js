@@ -1,5 +1,4 @@
 window.onload = () => {
-
     // Get Products from API
     fetch('/api/FoodStock/GetAllProducts', {
         method: 'GET',

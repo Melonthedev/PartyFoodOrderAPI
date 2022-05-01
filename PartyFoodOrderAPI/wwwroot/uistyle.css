@@ -169,6 +169,16 @@ h3 {
     font-size: 200%;
 }
 
+#generateid {
+    height: 30px; 
+    border-top-left-radius: 0; 
+    border-top-right-radius: 0; 
+    margin-top: -1px; 
+    background: linear-gradient(100deg, rgba(0, 255, 234, 0.836) 0%, rgba(0, 162, 255, 0.788) 100%); 
+    cursor: pointer; 
+    text-shadow: 1px 1px black; 
+    box-sizing: content-box;
+}
 
 
 /* Menukarte */
