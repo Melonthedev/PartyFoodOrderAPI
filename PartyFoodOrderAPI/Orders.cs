@@ -29,7 +29,7 @@
         {
             return BurgerOrders;
         }
-
+        
         public static void DeleteFoodOrder(FoodOrder order)
         {
             FoodOrders.Remove(order);

@@ -11,13 +11,11 @@ namespace PartyFoodOrderAPI
 
         public DbSet<FoodOrder> Orders { get; set; }
         public DbSet<Product> Products { get; set; }
-        public DbSet<BurgerOrder> BurgerOrders { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<FoodOrder>().ToTable("FoodOrder");
             modelBuilder.Entity<Product>().ToTable("Product");
-            modelBuilder.Entity<BurgerOrder>().ToTable("BurgerOrder");
         }
     }
 }
