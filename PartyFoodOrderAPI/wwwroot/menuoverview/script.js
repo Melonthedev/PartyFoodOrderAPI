@@ -26,8 +26,8 @@ window.onload = () => {
             image.style.width = "200px";
             image.style.marginTop = "15px";
             image.style.borderRadius = "10px";
-            orderbutton.classList.add('btn')
             orderbutton.classList.add('menuoverviewbtn')
+            orderbutton.classList.add('btn')
             orderbutton.innerText = 'Bestellen';
             orderbutton.onclick = () => {
                 document.location = '/placeorder?type=' + products[i].category + '&product=' + products[i].id;
@@ -44,7 +44,7 @@ window.onload = () => {
                 entry.appendChild(headding);
             }
             
-            if (products[i].imageUrl != null) {
+            if (products[i].imageUrl != null && products[i].imageUrl != "") {
                 entry.appendChild(image);
             }
             entry.appendChild(description);

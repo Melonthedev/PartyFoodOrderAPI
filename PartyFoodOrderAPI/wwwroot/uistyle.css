@@ -201,6 +201,7 @@ h3 {
     width: 80%;
     max-width: 400px;
     height: 40px;
+    min-height: 0;
     margin-top: 10px;
     margin-bottom: 20px;
     margin-left: auto;
