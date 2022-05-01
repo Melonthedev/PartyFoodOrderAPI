@@ -104,3 +104,14 @@ tbody:last-child tr:last-child td:last-child {
 tbody:last-child tr:first-child td:last-child {
     border-top-right-radius: 8px;
 }
+
+
+#footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 30px;
+    text-align: center;
+    background-color: #2f3136;
+}
