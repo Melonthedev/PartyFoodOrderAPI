@@ -38,12 +38,12 @@ window.onload = () => {
                 option.append(" (Momentan nicht auf Lager)");
                 option.disabled = true;
             }
-            let secondCategory = document.getElementById("category-" + products[i].secondCategory);
-            if (products[i].secondCategory != null) {
+            let secondCategory = document.getElementById("category-" + products[i].subCategory);
+            if (products[i].subCategory != null) {
                 if (secondCategory == null) {
                     secondCategory = document.createElement('optgroup');
-                    secondCategory.label = products[i].secondCategory;
-                    secondCategory.id = "category-" + products[i].secondCategory;
+                    secondCategory.label = products[i].subCategory;
+                    secondCategory.id = "category-" + products[i].subCategory;
                     selproduct.appendChild(secondCategory);
                 }
                 secondCategory.appendChild(option);

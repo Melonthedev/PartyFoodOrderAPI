@@ -11,7 +11,7 @@ document.getElementById("orderform").onsubmit = (event) => {
             'Id' : document.getElementById("id").value,
             'Category' : document.getElementById("category").value,
             'IsInStock' : !document.getElementById("outofstock").checked,
-            'SecondCategory' : document.getElementById("secondcategory").value,
+            'SubCategory' : document.getElementById("secondcategory").value,
             'Description' : document.getElementById("description").value,
             'ImageUrl' : document.getElementById("imageurl").value,
         })

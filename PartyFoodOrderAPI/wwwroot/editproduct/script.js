@@ -46,7 +46,7 @@ selectedproduct.onchange = () => {
         namefield.value = data.name;
         outofstockcheckbox.checked = !data.isInStock;
         category.value = data.category;
-        subcategoryfield.value = data.secondCategory;
+        subcategoryfield.value = data.subCategory;
         imageurlfield.value = data.imageUrl;
         descriptionfield.value = data.description;
         if (!data.isInStock) {
@@ -147,7 +147,7 @@ document.getElementById('orderform').onsubmit = (e) => {
             name: namefield.value,
             isInStock: !outofstockcheckbox.checked,
             category: category.value,
-            secondcategory: subcategoryfield.value,
+            subCategory: subcategoryfield.value,
             imageUrl: imageurlfield.value,
             description: descriptionfield.value
         })
