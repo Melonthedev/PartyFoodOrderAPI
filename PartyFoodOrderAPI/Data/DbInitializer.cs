@@ -32,8 +32,6 @@ namespace PartyFoodOrderAPI.Data
                 context.Products.Add(s);
             }
             context.SaveChanges();
-    
-        
         }
     }
 }

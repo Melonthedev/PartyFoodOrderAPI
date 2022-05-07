@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PartyFoodOrderAPI
 {
@@ -8,6 +9,7 @@ namespace PartyFoodOrderAPI
 
         [Required]
         [Range(1, int.MaxValue)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Required]
         [MaxLength(20)]
@@ -25,7 +27,7 @@ namespace PartyFoodOrderAPI
 
         public Product(int id, string name, int category, string? subCategory = null, string? description = null, string? imageUrl = null)
         {
-            Id = id;
+            Id = id; //TODO: cross out
             Name = name;
             Category = category;
             SubCategory = subCategory;

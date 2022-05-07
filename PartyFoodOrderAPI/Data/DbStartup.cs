@@ -6,11 +6,6 @@ namespace PartyFoodOrderAPI.Data
 {
     public class DbStartup
     {
-
-        public static void Main(string[] args)
-        {
-        }
-
         public static void CreateDbIfNotExists(IHost host)
         {
             using (var scope = host.Services.CreateScope())

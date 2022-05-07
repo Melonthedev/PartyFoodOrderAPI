@@ -22,7 +22,7 @@
 
         public static FoodOrder? GetFoodOrderById(int id)
         {
-            return FoodOrders.Find(x => x.OrderId == id);
+            return FoodOrders.Find(x => x.Id == id);
         }
 
         public static List<FoodOrder> GetBurgerOrders()

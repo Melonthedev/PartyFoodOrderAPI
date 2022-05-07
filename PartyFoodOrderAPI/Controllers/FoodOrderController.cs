@@ -46,7 +46,7 @@ namespace PartyFoodOrderAPI.Controllers
             if (order is null)
                 return NotFound($"No order with id {orderId} found");
             order.SetMarkedAsFinished();
-            return Ok("Updated MarkedAsFinishedStatus of orderId " + order.OrderId);
+            return Ok("Updated MarkedAsFinishedStatus of orderId " + order.Id);
         }
 
         [HttpDelete("DeleteFoodOrder")]
@@ -57,7 +57,7 @@ namespace PartyFoodOrderAPI.Controllers
             if (order is null)
                 return NotFound($"No order with id {orderId} found");
             Orders.DeleteFoodOrder(order);
-            return Ok("Deleted FoodOrder with id " + order.OrderId);
+            return Ok("Deleted FoodOrder with id " + order.Id);
         }
 
     }

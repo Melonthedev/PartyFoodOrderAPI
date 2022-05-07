@@ -1,10 +1,12 @@
-﻿namespace PartyFoodOrderAPI
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace PartyFoodOrderAPI
 {
     public class FoodOrder
     {
         public long Created { get; set; }
 
-        public int OrderId { get; set; }
+        public int Id { get; set; }
 
         public string? OrderedProduct { get; set; }
 
@@ -16,15 +18,15 @@
 
         public string? Comment { get; set; }
 
-        public FoodOrder(long created, int orderId, string orderedProduct, int count, string consumerName, string comment)
+        public FoodOrder(long created, int id, string orderedProduct, int count, string consumerName, string comment)
         {
             Created = created;
-            OrderId = orderId;
+            Id = id; //TODO: cross out
             OrderedProduct = orderedProduct;
             Count = count;
             ConsumerName = consumerName;
-            MarkedAsFinished = false;
             Comment = comment;
+            MarkedAsFinished = false;
         }
 
         public void SetMarkedAsFinished(bool flag = true)
@@ -34,7 +36,7 @@
 
         public int GetOrderId()
         {
-            return OrderId;
+            return Id;
         }
     }
 }
