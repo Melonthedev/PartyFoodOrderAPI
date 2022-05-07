@@ -8,7 +8,6 @@ document.getElementById("orderform").onsubmit = (event) => {
         },
         body: JSON.stringify({
             'Name' : document.getElementById("name").value,
-            'Id' : document.getElementById("id").value,
             'Category' : document.getElementById("category").value,
             'IsInStock' : !document.getElementById("outofstock").checked,
             'SubCategory' : document.getElementById("secondcategory").value,
@@ -34,28 +33,9 @@ document.getElementById("orderform").onsubmit = (event) => {
     });
 }
 
-document.getElementById("generateid").onclick = () => {
-    console.log("Generating ID...");
-    fetch("/api/FoodStock/GetNextId", {
-        method: 'GET',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        },
-    }).then(response => response.json()
-    ).then(data => {
-        document.getElementById("id").value = data;
-    }).catch(error => {
-        console.error(error);
-    });
-}
-
 document.onkeyup = (event) => {
     if (event.key == "Escape") document.location = "/orders";
 }
-
-
-
 
 
 function encodeImageFileAsURL(event) {

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
+using PartyFoodOrderAPI.Schemas;
 
 namespace PartyFoodOrderAPI.Controllers
 {
@@ -35,20 +36,6 @@ namespace PartyFoodOrderAPI.Controllers
             return Ok(Products.AllProducts.Where(p => p.Category == categoryId).ToList());
         }
 
-        [HttpGet("GetNextId")]
-        public ActionResult<int> GetNextId()
-        {
-            try
-            {
-                return Ok(Products.AllProducts.Aggregate((agg, next) =>
-                                next.Id >= agg.Id ? next : agg).Id + 1);
-            }
-            catch (InvalidOperationException)
-            {
-                return Ok(1);
-            }
-        }
-
         [HttpGet("IsProductInStock/{productId}")]
         public ActionResult<bool> GetIsProductInStock([Required][FromRoute] int productId)
         {
@@ -66,14 +53,10 @@ namespace PartyFoodOrderAPI.Controllers
         }
         
         [HttpPost("AddProduct")]
-        public ActionResult AddProduct([Required][FromBody] Product product)
+        public ActionResult AddProduct([Required][FromBody] ProductData product)
         {
             _logger.LogInformation($"Recived POST Request: Adding a new product with name: {product.Name} and category: {product.Category} and description: \"{product.Description}\"");
-            if (Products.AllProducts.Find(pr => pr.Id == product.Id) != null)
-            {
-                return Conflict("Product with this ID already exists!");
-            }
-            Products.AddProduct(product);
+            Products.AddProduct(new Product(Products.AllProducts.Count + 1, product.Name, product.Category, product.SubCategory, product.Description, product.ImageUrl));
             return Ok();
         }
 
@@ -86,13 +69,14 @@ namespace PartyFoodOrderAPI.Controllers
         }
 
         [HttpPatch("UpdateProduct")]
-        public ActionResult UpdateProduct([Required][FromQuery] int id, [Required][FromBody] Product newProduct)
+        public ActionResult UpdateProduct([Required][FromQuery] int id, [Required][FromBody] ProductData newProduct)
         {
             _logger.LogInformation($"Recived PATCH Request: Updating product with id: {id}");
             var oldProduct = Products.GetProductById(id);
             if (oldProduct is null) 
                 return NotFound($"No product with id {id} found");
-            return Products.UpdateProduct(id, newProduct) ? Ok() : Conflict("Product with new ID already exists!");
+            Products.UpdateProduct(id, newProduct);
+            return Ok();
         }
     }
 }

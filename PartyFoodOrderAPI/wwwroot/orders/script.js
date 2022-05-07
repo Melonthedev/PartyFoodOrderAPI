@@ -50,7 +50,7 @@ function refreshOrders(route, refresh) {
     .then(data => {
         for (i = 0; i < data.length; i++) { //Loop für jeden Eintrag in data                                                     
             let order = new FoodOrder( //FoodOrder object erstellen
-                        data[i].orderId,  
+                        data[i].id,  
                         data[i].consumerName, 
                         data[i].orderedProduct, 
                         data[i].count, 
@@ -84,9 +84,9 @@ function addOrder(order, refresh) {
     const commentElement = document.createElement('td');
     const erledigtElement = document.createElement('td');
     const buttonElement = document.createElement('button');
-    nrElement.textContent = order.getOrderId() !== " " ? order.getOrderId() : "?";
+    nrElement.textContent = order.getOrderId() !== " " && order.getOrderId() != null ? order.getOrderId() : "?";
     nameElement.textContent = order.getName() !== " " ? order.getName() : "Unknown";
-    productElement.textContent = order.getProduct() !== " " ? order.getProduct() : "Unknown";
+    productElement.textContent = order.getProduct() != null ? order.getProduct().name : "Unknown";
     countElement.textContent = order.getCount() != 0 ? order.getCount() : "?";
     commentElement.textContent = order.getComment() !== null && order.getComment() !== " " ? order.getComment() : "/";
     commentElement.style.whiteSpace = "nowrap";

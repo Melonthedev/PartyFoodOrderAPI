@@ -8,7 +8,7 @@ namespace PartyFoodOrderAPI
 
         public int Id { get; set; }
 
-        public string? OrderedProduct { get; set; }
+        public Product OrderedProduct { get; set; }
 
         public int Count { get; set; }
 
@@ -18,7 +18,7 @@ namespace PartyFoodOrderAPI
 
         public string? Comment { get; set; }
 
-        public FoodOrder(long created, int id, string orderedProduct, int count, string consumerName, string comment)
+        public FoodOrder(long created, int id, Product orderedProduct, int count, string consumerName, string comment)
         {
             Created = created;
             Id = id; //TODO: cross out

@@ -9,7 +9,7 @@ namespace PartyFoodOrderAPI
         [Required] 
         public string Name { get; set; }
         [Required] 
-        public int Product { get; set; }
+        public Product Product { get; set; }
 
         [Required]
         [Range(1, 4)]

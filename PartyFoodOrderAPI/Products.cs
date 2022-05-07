@@ -1,4 +1,6 @@
-﻿namespace PartyFoodOrderAPI
+﻿using PartyFoodOrderAPI.Schemas;
+
+namespace PartyFoodOrderAPI
 {
     public class Products
     {
@@ -50,14 +52,12 @@
             };
         }
 
-        public static bool UpdateProduct(int id, Product newProduct)
+        public static bool UpdateProduct(int id, ProductData newProduct)
         {
-            if (AllProducts.Any(x => x.Id == newProduct.Id) && id != newProduct.Id) return false;
-
             var item = AllProducts.Find(x => x.Id == id);
             if (item is null) return false;
             AllProducts.Remove(item);
-            AllProducts.Add(newProduct);
+            AllProducts.Add(new Product(id, newProduct.Name, newProduct.Category, newProduct.SubCategory, newProduct.Description, newProduct.ImageUrl));
             return true;
         }
     }
