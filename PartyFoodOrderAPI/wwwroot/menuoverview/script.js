@@ -1,6 +1,25 @@
 window.onload = () => {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    var type = urlParams.get('type')
+    var title = document.getElementById('title');
+    switch(type) {
+        case '1':
+            title.innerText = "Getränk bestellen";
+            break;
+        case '2':
+            title.innerText = "Kuchen bestellen";
+            break;
+        case '3':
+            title.innerText = "Sonstiges bestellen";
+            break;
+        default:
+            type = '';
+            break;
+    }
+
     // Get Products from API
-    fetch('/api/FoodStock/GetAllProducts', {
+    fetch('/api/FoodStock/GetAllProducts/' + type, {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
@@ -56,7 +75,7 @@ window.onload = () => {
             const description = document.createElement('p');
             entry.classList.add('menu-item');
             headding.innerText = "Keine Produkte vorhanden";
-            description.innerText = "Die verfügbare Produkte wurden wahrscheinlich noch nicht hinzugefügt.\n Bitte versuchen Sie es später noch einmal.";
+            description.innerText = "Die verfügbaren Produkte dieser Kategorie wurden wahrscheinlich noch nicht hinzugefügt.\n Bitte versuchen Sie es später noch einmal.";
             description.style.marginBottom = "10px";
             entry.appendChild(headding);
             entry.appendChild(description);

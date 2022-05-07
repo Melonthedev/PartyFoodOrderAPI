@@ -21,7 +21,7 @@ window.onload = () => {
     const selproduct = document.getElementById('product');
     const products = [];
 
-    fetch('/api/FoodStock/GetAllProducts/' + type, {
+    fetch('/api/FoodStock/GetProduct/?id=' + product, {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
@@ -29,37 +29,8 @@ window.onload = () => {
         },
     }).then(response => response.json()
     ).then(data => {
-        for (let i = 0; i < data.length; i++) products.push(data[i]);
-        for (let i = 0; i < products.length; i++) {
-            const option = document.createElement('option');
-            option.value = products[i].id;
-            option.innerText = products[i].name;
-            if (!products[i].isInStock) {
-                option.append(" (Momentan nicht auf Lager)");
-                option.disabled = true;
-            }
-            let secondCategory = document.getElementById("category-" + products[i].subCategory);
-            if (products[i].subCategory != null) {
-                if (secondCategory == null) {
-                    secondCategory = document.createElement('optgroup');
-                    secondCategory.label = products[i].subCategory;
-                    secondCategory.id = "category-" + products[i].subCategory;
-                    selproduct.appendChild(secondCategory);
-                }
-                secondCategory.appendChild(option);
-                continue;
-            }
-            selproduct.appendChild(option);
-        }
-        selproduct.value = product;
-        if (products.length == 0) {
-            const option = document.createElement('option');
-            option.value = "none";
-            option.disabled = true;
-            option.innerText = "Keine Produkte vorhanden";
-            selproduct.appendChild(option);
-            selproduct.value = "none";
-        }
+        selproduct.innerText = data.name;
+        selproduct.setAttribute('value', data.id);
     }).catch(error => {
         console.log(error);
     });
@@ -78,7 +49,7 @@ document.getElementById("orderform").onsubmit = (event) => {
                 },
                 body: JSON.stringify({
                     'name' : document.getElementById("name").value,
-                    'product' : document.getElementById("product").value,
+                    'product' : document.getElementById("product").getAttribute("productid"),
                     'count' : document.getElementById("count").value,
                     'comment' : document.getElementById("comment").value,
                 }),  
