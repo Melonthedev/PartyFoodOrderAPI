@@ -24,7 +24,7 @@ var app = builder.Build();
 
 //DbStartup.CreateDbIfNotExists(app);
 
-/*using (var scope = app.Services.CreateScope())
+using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
     try
@@ -38,7 +38,7 @@ var app = builder.Build();
         logger.LogError(ex, "An error occurred while seeding the database.");
     }
 }
-*/
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

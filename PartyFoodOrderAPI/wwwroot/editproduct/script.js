@@ -26,7 +26,6 @@ const delprod = document.getElementById('delprod');
 const savebutton = document.getElementById('savebutton');
 const outofstockcheckbox = document.getElementById('outofstock');
 const category = document.getElementById('category');
-const idfield = document.getElementById('id');
 const namefield = document.getElementById('name');
 const changestockbutton = document.getElementById('changestockbutton');
 const subcategoryfield = document.getElementById('subcategory');
@@ -42,7 +41,6 @@ selectedproduct.onchange = () => {
         },
     }).then(response => response.json()
     ).then(data => {
-        idfield.value = data.id;
         namefield.value = data.name;
         outofstockcheckbox.checked = !data.isInStock;
         category.value = data.category;
@@ -66,7 +64,6 @@ selectedproduct.onchange = () => {
     category.disabled = false;
     namefield.disabled = false;
     changestockbutton.disabled = false;
-    idfield.disabled = false;
     subcategoryfield.disabled = false;
     imageurlfield.disabled = false;
     descriptionfield.disabled = false;
@@ -75,7 +72,7 @@ selectedproduct.onchange = () => {
 
 delprod.onclick = () => {
     fetch('/api/FoodStock/DeleteProduct?productId=' + selectedproduct.value, {
-        method: 'POST',
+        method: 'DELETE',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -145,7 +142,6 @@ document.getElementById('orderform').onsubmit = (e) => {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            id: idfield.value,
             name: namefield.value,
             isInStock: !outofstockcheckbox.checked,
             category: category.value,

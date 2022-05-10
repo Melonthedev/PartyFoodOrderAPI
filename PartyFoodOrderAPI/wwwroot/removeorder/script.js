@@ -20,8 +20,8 @@ window.onload = () => {
                 customerGroup.id = "group-" + orders[i].consumerName;
                 selorder.appendChild(customerGroup);
             }
-            option.value = orders[i].orderId;
-            option.innerText = orders[i].count + "x " + orders[i].orderedProduct + " (ID: " + orders[i].orderId + ") " + (orders[i].markedAsFinished ? " (erledigt)" : "");
+            option.value = orders[i].id;
+            option.innerText = orders[i].count + "x " + orders[i].orderedProduct.name + " (ID: " + orders[i].id + ") " + (orders[i].markedAsFinished ? " (erledigt)" : "");
             customerGroup.appendChild(option);
         }
     }).catch(error => {

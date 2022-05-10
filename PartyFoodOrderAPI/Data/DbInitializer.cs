@@ -9,23 +9,22 @@ namespace PartyFoodOrderAPI.Data
         public static void Initialize(FoodOrderDbContext context)
         {
             context.Database.EnsureCreated();
-
-            // Look for any students.
+            
             if (context.Orders.Any())
             {
-                return;   // DB has been seeded
+                return; // DB has been seeded
             }
 
             var products = new Product[]
             {
-            new Product(1, "Cola", 1, "SoftDrink"),
-            new Product(2, "Fanta", 1, "SoftDrink"),
-            new Product(3, "Sprite", 1, "SoftDrink"),
-            new Product(4, "Erdbeerkuchen", 2),
-            new Product(5, "Pfannkuchen", 2),
-            new Product(6, "Ananas", 3, "Frucht"),
-            new Product(7, "Kaffee", 1, "Heißgetränk"),
-            new Product(8, "Oreo", 3, "Kekse"),
+            /*new Product("Cola", 1, "SoftDrink"),
+            new Product("Fanta", 1, "SoftDrink"),
+            new Product("Sprite", 1, "SoftDrink"),
+            new Product("Erdbeerkuchen", 2),
+            new Product("Pfannkuchen", 2),
+            new Product("Ananas", 3, "Frucht"),
+            new Product("Kaffee", 1, "Heißgetränk"),
+            new Product("Oreo", 3, "Kekse"),*/
             };
             foreach (Product s in products)
             {

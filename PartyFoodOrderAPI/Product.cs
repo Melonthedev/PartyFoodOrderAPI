@@ -8,7 +8,6 @@ namespace PartyFoodOrderAPI
     {
         [Required]
         [Range(1, int.MaxValue)]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Required]
         [MaxLength(20)]
@@ -24,10 +23,9 @@ namespace PartyFoodOrderAPI
 
         public string? ImageUrl { get; set; }
 
-        public Product(int id, string name, int category, string? subCategory = null, string? description = null, string? imageUrl = null, bool isInStock = true)
+        public Product(string name, int category, string? subCategory = null, string? description = null, string? imageUrl = null, bool isInStock = true)
         {
-
-            Id = id; //TODO: cross out
+            //Id = id;
             Name = name;
             Category = category;
             SubCategory = subCategory;

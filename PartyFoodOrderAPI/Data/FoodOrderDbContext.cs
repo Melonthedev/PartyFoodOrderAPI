@@ -15,8 +15,13 @@ namespace PartyFoodOrderAPI
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<FoodOrder>().ToTable("FoodOrder");
-            modelBuilder.Entity<Product>().ToTable("Product");
+            modelBuilder.Entity<FoodOrder>().ToTable("FoodOrder").HasKey(c => c.Id);
+            modelBuilder.Entity<Product>().ToTable("Product").HasKey(c => c.Id);
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.EnableSensitiveDataLogging();
         }
     }
 }

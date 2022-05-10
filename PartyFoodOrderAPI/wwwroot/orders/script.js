@@ -17,7 +17,7 @@ function refreshOrderStatus() {
                 finishOrder(order);
                 return;
             }
-            let difference = Math.floor(new Date() / 1000) - order.getCreated();
+            let difference = new Date().getTime() / 1000 - new Date(order.getCreatedAt()).getTime() / 1000;
             if (order.getDOMElement() == null) return;
             if (difference >= 900) {
                 order.getDOMElement().classList.add("waitinglong");
@@ -46,29 +46,29 @@ function refreshOrders(route, refresh) {
             'Content-Type': 'application/json'
         }
     })
-    .then(response => response.json()) //Response wird zu JSON umgewandelt
+    .then(response => response.json()) //Response to JSON
     .then(data => {
-        for (i = 0; i < data.length; i++) { //Loop für jeden Eintrag in data                                                     
-            let order = new FoodOrder( //FoodOrder object erstellen
+        for (i = 0; i < data.length; i++) { //Loop for every entry in data                                                     
+            let order = new FoodOrder( //create FoodOrder object 
                         data[i].id,  
                         data[i].consumerName, 
                         data[i].orderedProduct, 
                         data[i].count, 
-                        data[i].created, 
+                        data[i].createdAt, 
                         data[i].markedAsFinished,
                         data[i].comment
                     );
-            let orderAlreadyListed = false; //Ist die Order schon gelistet
-            for (y = 0; y < orders.length; y++) {   //Loop für jede gelistete order                        
-                if (orders[y].getOrderId() == order.getOrderId()) {//Abgleichen der beiden ID's      
+            let orderAlreadyListed = false; //is already listed flag
+            for (y = 0; y < orders.length; y++) {   //Loop for every listed order                      
+                if (orders[y].getOrderId() == order.getOrderId()) {//check id's      
                     orderAlreadyListed = true;
-                    if (order.isFinished()) finishOrder(orders[y]); //Wenn bestellungdata fertig ist, bestellung finished anzeigen lassen    
+                    if (order.isFinished()) finishOrder(orders[y]); //if orderdata fertig is true, show bestellung as finished    
                 }
             }
             if (orderAlreadyListed) 
-                continue; //Wenn schon gelistet, zum nächsten data eintrag springen
-            addOrder(order, refresh); //Ansonsten order den gelisteten orders hinzufügen
-            if (order.isFinished()) finishOrder(order); //Wenn bestellungdata fertig ist, bestellung finished anzeigen lassen
+                continue; //if already listed, skip
+            addOrder(order, refresh); //else add order to list
+            if (order.isFinished()) finishOrder(order); //if orderdata fertig is true, show bestellung as finished
         }
     })
     .catch(error => console.log(error));
@@ -151,7 +151,7 @@ class FoodOrder {
     getName() { return this.name; }
     getProduct() { return this.product; }
     getCount() { return this.count; }
-    getCreated() { return this.created; }
+    getCreatedAt() { return this.created; }
     getDOMElement() { return this.DOMElement; }
     isFinished() { return this.finished; }
     getFinishButtonElement() { return this.finishButtonElement; }

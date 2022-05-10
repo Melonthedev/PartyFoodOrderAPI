@@ -57,7 +57,7 @@ namespace PartyFoodOrderAPI
             var item = AllProducts.Find(x => x.Id == id);
             if (item is null) return false;
             AllProducts.Remove(item);
-            AllProducts.Add(new Product(id, newProduct.Name, newProduct.Category, newProduct.SubCategory, newProduct.Description, newProduct.ImageUrl));
+            AllProducts.Add(new Product(newProduct.Name, newProduct.Category, newProduct.SubCategory, newProduct.Description, newProduct.ImageUrl));
             return true;
         }
     }

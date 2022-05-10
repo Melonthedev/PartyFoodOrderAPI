@@ -31,9 +31,9 @@ namespace PartyFoodOrderAPI.Controllers
         {
             _logger.LogInformation($"Recived GET Request: Adding a FoodOrder with data: name: {data.Name}, product: {data.Product}, count: {data.Count}, comment: {data.Comment}");
             var comment = data.Comment != null ?  data.Comment.Replace("\n", " ¬ ") : "";
-            var order = new FoodOrder(DateTimeOffset.UtcNow.ToUnixTimeSeconds(), Orders.GetFoodOrders().Count + 1, data.Product, data.Count, data.Name, comment);
+            var order = new FoodOrder(DateTime.UtcNow, Orders.GetFoodOrders().Count + 1, data.Product, data.Count, data.Name, comment);
             Orders.AddFoodOrder(order);
-            return Ok($"{{ \"title\" : \"You placed an order 😃\", \"name\" : \"{data.Name}\", \"productId\" : \"{data.Product}\", \"product\" : \"{data.Product.Name}\", \"count\" : {data.Count}, \"comment\" : \" {comment} \", \"message\" : \"Vielen Dank für deine Bestellung!\"}}");
+            return Ok($"{{ \"title\" : \"You placed an order 😃\", \"name\" : \"{data.Name}\", \"productId\" : \"{data.Product.Id}\", \"product\" : \"{data.Product.Name}\", \"count\" : {data.Count}, \"comment\" : \" {comment} \", \"message\" : \"Vielen Dank für deine Bestellung!\"}}");
         }
 
         [HttpPost("MarkFoodOrderAsFinished")]
