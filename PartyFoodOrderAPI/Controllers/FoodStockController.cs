@@ -55,7 +55,7 @@ namespace PartyFoodOrderAPI.Controllers
             if (product is null)
                 return NotFound($"No product with id {productId} found");
             product.IsInStock = flag;
-            _context.Update(product);
+            await _context.SaveChangesAsync();
             return Ok();
         }
         
@@ -93,7 +93,7 @@ namespace PartyFoodOrderAPI.Controllers
             product.Description = newProduct.Description;
             product.ImageUrl = newProduct.ImageUrl;
             product.IsInStock = newProduct.IsInStock;
-            _context.Update(product);
+            await _context.SaveChangesAsync();
             return Ok();
         }
     }
