@@ -1,45 +1,41 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using PartyFoodOrderAPI.Controllers;
+using System.ComponentModel.DataAnnotations;
 
 namespace PartyFoodOrderAPI
 {
     public class FoodOrder
     {
-        public DateTimeOffset CreatedAt { get; set; }
-
-        public int Id { get; set; }
+        [Required]
+        [Range(1, int.MaxValue)]
+        public int Id { get; init; }
 
         public Product OrderedProduct { get; set; }
 
+        public int OrderedProductId { get; set; }
+
+        public DateTimeOffset CreatedAt { get; set; }
+
         public int Count { get; set; }
-        
+
         public string? ConsumerName { get; set; }
 
         public bool MarkedAsFinished { get; set; }
         
         public string? Comment { get; set; }
         
-        public FoodOrder(DateTimeOffset createdAt, int id, Product orderedProduct, int count, string consumerName, string comment)
+        public FoodOrder(DateTimeOffset createdAt, int orderedProductId, int count, string consumerName, string comment)
         {
             CreatedAt = createdAt;
-            Id = id; 
-            OrderedProduct = orderedProduct;
+            OrderedProductId = orderedProductId;
             Count = count;
             ConsumerName = consumerName;
             Comment = comment;
             MarkedAsFinished = false;
         }
 
-        public FoodOrder() { }
-
         public void SetMarkedAsFinished(bool flag = true)
         {
             MarkedAsFinished = flag;
-        }
-
-        public int GetOrderId()
-        {
-            return Id;
         }
     }
 }

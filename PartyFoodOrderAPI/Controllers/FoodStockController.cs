@@ -54,7 +54,7 @@ namespace PartyFoodOrderAPI.Controllers
             var product = await _context.Products.FindAsync(productId);
             if (product is null)
                 return NotFound($"No product with id {productId} found");
-            product.IsInStock = flag;
+            product.SetInStock(flag);
             await _context.SaveChangesAsync();
             return Ok();
         }
@@ -63,7 +63,7 @@ namespace PartyFoodOrderAPI.Controllers
         public async Task<ActionResult> AddProduct([Required][FromBody] ProductData product)
         {
             _logger.LogInformation($"Recived POST Request: Adding a new product with name: {product.Name} and category: {product.Category} and description: \"{product.Description}\"");
-            _context.Products.Add(new Product(product.Name, product.Category, product.SubCategory, product.Description, product.ImageUrl));
+            _context.Products.Add(new Product(product.Name, product.Category, product.SubCategory, product.Description, product.ImageUrl, product.IsInStock));
             await _context.SaveChangesAsync();
             return Ok();
         }
@@ -87,12 +87,7 @@ namespace PartyFoodOrderAPI.Controllers
             var product = await _context.Products.FindAsync(id);
             if (product is null) 
                 return NotFound($"No product with id {id} found");
-            product.Name = newProduct.Name;
-            product.Category = newProduct.Category;
-            product.SubCategory = newProduct.SubCategory;
-            product.Description = newProduct.Description;
-            product.ImageUrl = newProduct.ImageUrl;
-            product.IsInStock = newProduct.IsInStock;
+            product.Update(newProduct.Name, newProduct.Category, newProduct.SubCategory, newProduct.Description, newProduct.ImageUrl, newProduct.IsInStock);
             await _context.SaveChangesAsync();
             return Ok();
         }

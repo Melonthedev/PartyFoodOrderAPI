@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace PartyFoodOrderAPI.Controllers
 {
@@ -9,52 +10,57 @@ namespace PartyFoodOrderAPI.Controllers
     public class FoodOrderController : Controller
     {
         private readonly ILogger<FoodOrderController> _logger;
-        public FoodOrderController(ILogger<FoodOrderController> logger)
+        private readonly FoodOrderDbContext _context;
+        public FoodOrderController(ILogger<FoodOrderController> logger, FoodOrderDbContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         [HttpGet("GetFoodOrder")]
-        public ActionResult<List<FoodOrderData>> Get([FromQuery] string method = "all", [FromQuery] int id = 0)
+        public async Task<ActionResult<IEnumerable<FoodOrder>>> Get([FromQuery] string method = "all", [FromQuery] int id = 0)
         {
             _logger.LogInformation($"Recived GET Request: Getting {(method == "all" ? "all FoodOrders" : "a FoodOrder with id " + id)}");
             return method switch
             {
-                "all" => Ok(Orders.GetFoodOrders()),
-                "id" => Ok(Orders.GetFoodOrderById(id)),
+                "all" => Ok(await _context.Orders.Include(o => o.OrderedProduct).ToListAsync()),
+                "id" => Ok(await _context.Orders.Include(o => o.OrderedProduct).FirstOrDefaultAsync(x => x.Id == id)),
                 _ => BadRequest("Invalid QueryMethod"),
             };
         }
 
         [HttpPost("AddFoodOrder")]
-        public ActionResult<string> Post([Required][FromBody] FoodOrderData data)
+        public async Task<ActionResult<string>> Post([Required][FromBody] FoodOrderData data)
         {
             _logger.LogInformation($"Recived GET Request: Adding a FoodOrder with data: name: {data.Name}, product: {data.Product}, count: {data.Count}, comment: {data.Comment}");
             var comment = data.Comment != null ?  data.Comment.Replace("\n", " ¬ ") : "";
-            var order = new FoodOrder(DateTime.UtcNow, Orders.GetFoodOrders().Count + 1, data.Product, data.Count, data.Name, comment);
-            Orders.AddFoodOrder(order);
-            return Ok($"{{ \"title\" : \"You placed an order 😃\", \"name\" : \"{data.Name}\", \"productId\" : \"{data.Product.Id}\", \"product\" : \"{data.Product.Name}\", \"count\" : {data.Count}, \"comment\" : \" {comment} \", \"message\" : \"Vielen Dank für deine Bestellung!\"}}");
+            var order = new FoodOrder(DateTime.UtcNow, data.Product, data.Count, data.Name, comment);
+            _context.Orders.Add(order);
+            await _context.SaveChangesAsync();
+            return Ok($"{{ \"title\" : \"You placed an order 😃\", \"name\" : \"{data.Name}\", \"productId\" : \"{data.Product}\", \"product\" : \"{data.Product}\", \"count\" : {data.Count}, \"comment\" : \" {comment} \", \"message\" : \"Vielen Dank für deine Bestellung!\"}}");
         }
 
         [HttpPost("MarkFoodOrderAsFinished")]
-        public ActionResult<string> MarkFoodOrderAsFinished([Required][FromQuery] int orderId)
+        public async Task<ActionResult<string>> MarkFoodOrderAsFinished([Required][FromQuery] int orderId)
         {
             _logger.LogInformation($"Recived POST Request: Marking FoodOrder with id {orderId} as finished");
-            var order = Orders.GetFoodOrders().FirstOrDefault(foodOrder => foodOrder.GetOrderId() == orderId);
+            var order = await _context.Orders.FindAsync(orderId);
             if (order is null)
                 return NotFound($"No order with id {orderId} found");
             order.SetMarkedAsFinished();
+            await _context.SaveChangesAsync();
             return Ok("Updated MarkedAsFinishedStatus of orderId " + order.Id);
         }
 
         [HttpDelete("DeleteFoodOrder")]
-        public ActionResult<string> Delete([Required][FromQuery] int orderId)
+        public async Task<ActionResult<string>> Delete([Required][FromQuery] int orderId)
         {
             _logger.LogInformation($"Recived DELETE Request: Deleting FoodOrder with id {orderId}");
-            var order = Orders.GetFoodOrders().FirstOrDefault(foodOrder => foodOrder.GetOrderId() == orderId);
+            var order = await _context.Orders.FindAsync(orderId);
             if (order is null)
                 return NotFound($"No order with id {orderId} found");
-            Orders.DeleteFoodOrder(order);
+            _context.Orders.Remove(order);
+            await _context.SaveChangesAsync();
             return Ok("Deleted FoodOrder with id " + order.Id);
         }
 

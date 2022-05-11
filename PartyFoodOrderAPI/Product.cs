@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PartyFoodOrderAPI
 {
@@ -8,24 +7,43 @@ namespace PartyFoodOrderAPI
     {
         [Required]
         [Range(1, int.MaxValue)]
-        public int Id { get; set; }
+        public int Id { get; private set; }
+
         [Required]
         [MaxLength(20)]
-        public string Name { get; set; }
-        public bool IsInStock { get; set; }
+        public string Name { get; private set; }
+        
         [Required]
         [Range(1, 3)]
-        public int Category { get; set; }
+        public int Category { get; private set; }
 
-        public string? SubCategory { get; set; }
+        public bool IsInStock { get; private set; }
 
-        public string? Description { get; set; }
+        public string? SubCategory { get; private set; }
 
-        public string? ImageUrl { get; set; }
+        public string? Description { get; private set; }
+
+        public string? ImageUrl { get; private set; }
+
+        public List<FoodOrder> FoodOrders { get; private set; }
 
         public Product(string name, int category, string? subCategory = null, string? description = null, string? imageUrl = null, bool isInStock = true)
         {
-            //Id = id;
+            Name = name;
+            Category = category;
+            SubCategory = subCategory;
+            Description = description;
+            ImageUrl = imageUrl;
+            IsInStock = isInStock;
+        }
+
+        public void SetInStock(bool flag = true)
+        {
+            IsInStock = flag;
+        }
+        
+        public void Update(string name, int category, string? subCategory, string? description, string? imageUrl, bool isInStock)
+        {
             Name = name;
             Category = category;
             SubCategory = subCategory;

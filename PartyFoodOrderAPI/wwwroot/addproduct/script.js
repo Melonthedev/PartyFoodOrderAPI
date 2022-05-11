@@ -58,7 +58,6 @@ dropZone.addEventListener('dragover', handleDragOver, false);
 dropZone.addEventListener('drop', drop, false);
 
 function handleDragOver(evt) {
-    console.log("dragover");
     evt.stopPropagation();
     evt.preventDefault();
     evt.dataTransfer.dropEffect = 'copy';

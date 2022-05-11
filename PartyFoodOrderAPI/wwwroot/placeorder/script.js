@@ -49,7 +49,7 @@ document.getElementById("orderform").onsubmit = (event) => {
                 },
                 body: JSON.stringify({
                     'name' : document.getElementById("name").value,
-                    'product' : productinstance,
+                    'product' : productinstance.id,
                     'count' : document.getElementById("count").value,
                     'comment' : document.getElementById("comment").value,
                 }),  
@@ -62,7 +62,6 @@ document.getElementById("orderform").onsubmit = (event) => {
                     document.getElementById("errorlabel").innerText = "";
                     jsondata = JSON.parse(data);
                     var commentelement = '';
-                    console.log(jsondata.comment);
                     if (jsondata.comment != null && jsondata.comment != "  ") {
                         commentelement = '<p class="label" style="font-size: 150%">Kommentar: ' + jsondata.comment + '</p>';
                     }

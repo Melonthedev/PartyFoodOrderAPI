@@ -12,11 +12,35 @@ namespace PartyFoodOrderAPI
 
         public DbSet<FoodOrder> Orders { get; set; }
         public DbSet<Product> Products { get; set; }
-
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<FoodOrder>().ToTable("FoodOrder").HasKey(c => c.Id);
-            modelBuilder.Entity<Product>().ToTable("Product").HasKey(c => c.Id);
+            modelBuilder.Entity<FoodOrder>(b =>
+            {
+                b.ToTable("FoodOrder");
+                b.Property(x => x.Id).ValueGeneratedOnAdd();
+                b.Property(x => x.OrderedProductId).IsRequired();
+                b.Property(x => x.MarkedAsFinished).IsRequired();
+                b.Property(x => x.Comment).IsRequired();
+                b.Property(x => x.CreatedAt).IsRequired();
+                b.Property(x => x.ConsumerName).IsRequired();
+                b.Property(x => x.Count).IsRequired();
+
+            });
+            modelBuilder.Entity<Product>(b =>
+            {
+                b.ToTable("Product");
+                b.Property(p => p.Id).ValueGeneratedOnAdd();
+                b.Property(p => p.Name).IsRequired();
+                b.Property(p => p.Description).IsRequired();
+                b.Property(p => p.ImageUrl).IsRequired();
+                b.Property(p => p.Category).IsRequired();
+                b.Property(p => p.SubCategory).IsRequired();
+                b.Property(p => p.IsInStock).IsRequired();
+                b.HasMany(p => p.FoodOrders)
+                    .WithOne(o => o.OrderedProduct)
+                    .HasForeignKey(o => o.OrderedProductId);
+            });
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

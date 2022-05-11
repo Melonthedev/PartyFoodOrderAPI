@@ -116,7 +116,6 @@ function changeStockStatus(instock) {
     }).then(data => {
         if(data.status == 200) {
             var query = instock == true ? "Auf Lager" : "Nicht auf Lager";
-            console.log(instock);
             document.write(`
             <html lang="en">
                 <head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -186,7 +185,6 @@ dropZone.addEventListener('dragover', handleDragOver, false);
 dropZone.addEventListener('drop', drop, false);
 
 function handleDragOver(evt) {
-    console.log("dragover");
     evt.stopPropagation();
     evt.preventDefault();
     evt.dataTransfer.dropEffect = 'copy';

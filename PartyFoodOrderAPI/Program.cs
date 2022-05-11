@@ -1,20 +1,17 @@
 using Microsoft.AspNetCore.HttpOverrides;
 using PartyFoodOrderAPI;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Sqlite;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
-using PartyFoodOrderAPI.Data;
+using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 
 var builder = WebApplication.CreateBuilder(args);
-
-
 
 builder.Services.AddDbContext<FoodOrderDbContext>(options =>
                 options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 // Add services to the container.
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddNewtonsoftJson(options =>
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -30,7 +27,8 @@ using (var scope = app.Services.CreateScope())
     try
     {
         var context = services.GetRequiredService<FoodOrderDbContext>();
-        DbInitializer.Initialize(context);
+        await context.Database.MigrateAsync();
+        //DbInitializer.Initialize(context);
     }
     catch (Exception ex)
     {
@@ -38,7 +36,6 @@ using (var scope = app.Services.CreateScope())
         logger.LogError(ex, "An error occurred while seeding the database.");
     }
 }
-
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

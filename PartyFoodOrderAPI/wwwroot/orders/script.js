@@ -75,6 +75,22 @@ function refreshOrders(route, refresh) {
     refreshOrderStatus();
 }
 
+function getProductName(id) {
+    let prod =
+    fetch("/api/FoodStock/GetProduct/?id=" + id, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json()) //Response to JSON
+    .then(data => {
+        return data[0].name;    
+    })
+    .catch(error => console.log(error));
+}
+
 function addOrder(order, refresh) {
     const trElement = document.createElement('tr');
     const nrElement = document.createElement('td');
@@ -86,7 +102,7 @@ function addOrder(order, refresh) {
     const buttonElement = document.createElement('button');
     nrElement.textContent = order.getOrderId() !== " " && order.getOrderId() != null ? order.getOrderId() : "?";
     nameElement.textContent = order.getName() !== " " ? order.getName() : "Unknown";
-    productElement.textContent = order.getProduct() != null ? order.getProduct().name : "Unknown";
+    productElement.textContent = order.getProduct().name;
     countElement.textContent = order.getCount() != 0 ? order.getCount() : "?";
     commentElement.textContent = order.getComment() !== null && order.getComment() !== " " ? order.getComment() : "/";
     commentElement.style.whiteSpace = "nowrap";

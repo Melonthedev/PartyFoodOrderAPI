@@ -33,7 +33,6 @@ const form = document.getElementById('orderform');
 form.onsubmit = (event) => {
     event.preventDefault();
     const selorderid = document.getElementById('selorder').value;
-    console.log(selorderid);
     fetch('/api/FoodOrder/DeleteFoodOrder?orderId=' + selorderid, {
         method: 'DELETE',
         headers: {
