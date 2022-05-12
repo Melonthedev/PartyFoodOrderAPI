@@ -35,6 +35,7 @@ window.onload = () => {
             const image = document.createElement('img');
             const description = document.createElement('p');
             const orderbutton = document.createElement('button');
+            const orderbuttonreplacement = document.createElement('p');
             entry.classList.add('menu-item');
             headding.innerText = products[i].name;
             description.innerText = products[i].description;
@@ -47,6 +48,10 @@ window.onload = () => {
             orderbutton.classList.add('menuoverviewbtn')
             orderbutton.classList.add('btn')
             orderbutton.innerText = 'Bestellen';
+            orderbuttonreplacement.style.fontStyle = "italic";
+            orderbuttonreplacement.style.color = "aqua";
+            orderbuttonreplacement.style.marginBottom = "10px";
+            orderbuttonreplacement.innerText = 'Nur Selbstbedienung';
             orderbutton.onclick = () => {
                 document.location = '/placeorder?type=' + products[i].category + '&product=' + products[i].id;
             }
@@ -66,7 +71,9 @@ window.onload = () => {
                 entry.appendChild(image);
             }
             entry.appendChild(description);
-            entry.appendChild(orderbutton);
+            if (products[i].isSelfService) entry.appendChild(orderbuttonreplacement);  
+            else entry.appendChild(orderbutton);
+            console.log(products[i]);
             document.getElementById('body').appendChild(entry);
         }
         if (products.length == 0) {

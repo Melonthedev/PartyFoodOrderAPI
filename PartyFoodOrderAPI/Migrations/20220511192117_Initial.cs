@@ -20,7 +20,8 @@ namespace PartyFoodOrderAPI.Migrations
                     IsInStock = table.Column<bool>(type: "INTEGER", nullable: false),
                     SubCategory = table.Column<string>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: false),
-                    ImageUrl = table.Column<string>(type: "TEXT", nullable: false)
+                    ImageUrl = table.Column<string>(type: "TEXT", nullable: false),
+                    IsSelfService = table.Column<bool>(type: "INTEGER", nullable: false),   
                 },
                 constraints: table =>
                 {

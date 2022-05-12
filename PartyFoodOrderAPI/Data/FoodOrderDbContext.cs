@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace PartyFoodOrderAPI
 {
@@ -37,6 +36,7 @@ namespace PartyFoodOrderAPI
                 b.Property(p => p.Category).IsRequired();
                 b.Property(p => p.SubCategory).IsRequired();
                 b.Property(p => p.IsInStock).IsRequired();
+                b.Property(p => p.IsSelfService).IsRequired();
                 b.HasMany(p => p.FoodOrders)
                     .WithOne(o => o.OrderedProduct)
                     .HasForeignKey(o => o.OrderedProductId);

@@ -63,7 +63,7 @@ namespace PartyFoodOrderAPI.Controllers
         public async Task<ActionResult> AddProduct([Required][FromBody] ProductData product)
         {
             _logger.LogInformation($"Recived POST Request: Adding a new product with name: {product.Name} and category: {product.Category} and description: \"{product.Description}\"");
-            _context.Products.Add(new Product(product.Name, product.Category, product.SubCategory, product.Description, product.ImageUrl, product.IsInStock));
+            _context.Products.Add(new Product(product.Name, product.Category, product.SubCategory, product.Description, product.ImageUrl, product.IsInStock, product.IsSelfService));
             await _context.SaveChangesAsync();
             return Ok();
         }
@@ -87,7 +87,7 @@ namespace PartyFoodOrderAPI.Controllers
             var product = await _context.Products.FindAsync(id);
             if (product is null) 
                 return NotFound($"No product with id {id} found");
-            product.Update(newProduct.Name, newProduct.Category, newProduct.SubCategory, newProduct.Description, newProduct.ImageUrl, newProduct.IsInStock);
+            product.Update(newProduct.Name, newProduct.Category, newProduct.SubCategory, newProduct.Description, newProduct.ImageUrl, newProduct.IsInStock, newProduct.IsSelfService);
             await _context.SaveChangesAsync();
             return Ok();
         }

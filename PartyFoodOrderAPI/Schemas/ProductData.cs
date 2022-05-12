@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PartyFoodOrderAPI.Schemas
 {
@@ -19,5 +18,6 @@ namespace PartyFoodOrderAPI.Schemas
 
         public string? ImageUrl { get; set; }
 
+        public bool IsSelfService { get; set; }
     }
 }

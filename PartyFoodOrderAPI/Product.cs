@@ -25,9 +25,11 @@ namespace PartyFoodOrderAPI
 
         public string? ImageUrl { get; private set; }
 
+        public bool IsSelfService { get; private set; }
+
         public List<FoodOrder> FoodOrders { get; private set; }
 
-        public Product(string name, int category, string? subCategory = null, string? description = null, string? imageUrl = null, bool isInStock = true)
+        public Product(string name, int category, string? subCategory = null, string? description = null, string? imageUrl = null, bool isInStock = true, bool isSelfService = false)
         {
             Name = name;
             Category = category;
@@ -35,6 +37,7 @@ namespace PartyFoodOrderAPI
             Description = description;
             ImageUrl = imageUrl;
             IsInStock = isInStock;
+            IsSelfService = isSelfService;
         }
 
         public void SetInStock(bool flag = true)
@@ -42,7 +45,7 @@ namespace PartyFoodOrderAPI
             IsInStock = flag;
         }
         
-        public void Update(string name, int category, string? subCategory, string? description, string? imageUrl, bool isInStock)
+        public void Update(string name, int category, string? subCategory, string? description, string? imageUrl, bool isInStock, bool isSelfService)
         {
             Name = name;
             Category = category;
@@ -50,6 +53,7 @@ namespace PartyFoodOrderAPI
             Description = description;
             ImageUrl = imageUrl;
             IsInStock = isInStock;
+            IsSelfService = isSelfService;
         }
     }
 }

@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.HttpOverrides;
 using PartyFoodOrderAPI;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,8 +18,6 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-//DbStartup.CreateDbIfNotExists(app);
-
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
@@ -28,7 +25,6 @@ using (var scope = app.Services.CreateScope())
     {
         var context = services.GetRequiredService<FoodOrderDbContext>();
         await context.Database.MigrateAsync();
-        //DbInitializer.Initialize(context);
     }
     catch (Exception ex)
     {

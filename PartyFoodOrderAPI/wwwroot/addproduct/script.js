@@ -13,6 +13,7 @@ document.getElementById("orderform").onsubmit = (event) => {
             'SubCategory' : document.getElementById("secondcategory").value,
             'Description' : document.getElementById("description").value,
             'ImageUrl' : document.getElementById("imageurl").value,
+            'IsSelfService' : document.getElementById("isselfservice").checked,
         })
     }).then(data => {
         if (data.status != 200) {

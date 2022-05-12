@@ -1,5 +1,4 @@
-﻿using PartyFoodOrderAPI.Controllers;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace PartyFoodOrderAPI
 {

@@ -154,7 +154,7 @@ h3 {
     text-align: center;
 }
 
-.outofstock {
+.checkbox {
     margin-top: 20px;
     margin-bottom: 40px;
     width: 40px;
@@ -181,6 +181,14 @@ h3 {
     box-sizing: content-box;
 }
 
+
+.checkboxlabel {
+    margin-left: 20px;
+    margin-top: 20px;
+    display: inline-block;
+    font-size: 200%;
+    vertical-align: top;
+}
 
 /* Menukarte */
 
