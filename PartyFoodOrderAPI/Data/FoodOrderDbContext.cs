@@ -11,7 +11,8 @@ namespace PartyFoodOrderAPI
 
         public DbSet<FoodOrder> Orders { get; set; }
         public DbSet<Product> Products { get; set; }
-        
+        public DbSet<BurgerExtras> BurgerExtras { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<FoodOrder>(b =>
