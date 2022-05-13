@@ -43,7 +43,8 @@
             <p class="label">Bild oder Link:</p>
             <input class="inp" type="text" id="imageurl" placeholder="Bild-Link (optional) oder Bild (drag 'n drop)" maxlength="200" dropzone="copy" style="box-sizing: border-box" disabled>
 
-            <input type="checkbox" id="outofstock" class="outofstock checkbox" disabled>
+            <input type="checkbox" id="outofstock" class="checkbox" disabled><label for="outofstock" class="checkboxlabel">Nicht auf Lager</label><br>
+            <input type="checkbox" id="isselfservice" class="checkbox" disabled><label for="isselfservice" class="checkboxlabel">Selbstbedienung</label><br>
             <button class="btn" type="submit" id="savebutton" disabled>Produkt speichern</button>
         </form>
         <p id="errorlabel"></p>

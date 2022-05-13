@@ -25,6 +25,7 @@ const selectedproduct = document.getElementById('selproduct');
 const delprod = document.getElementById('delprod');
 const savebutton = document.getElementById('savebutton');
 const outofstockcheckbox = document.getElementById('outofstock');
+const selfservicecheckbox = document.getElementById('isselfservice');
 const category = document.getElementById('category');
 const namefield = document.getElementById('name');
 const changestockbutton = document.getElementById('changestockbutton');
@@ -43,6 +44,7 @@ selectedproduct.onchange = () => {
     ).then(data => {
         namefield.value = data.name;
         outofstockcheckbox.checked = !data.isInStock;
+        selfservicecheckbox.checked = data.isSelfService;
         category.value = data.category;
         subcategoryfield.value = data.subCategory;
         imageurlfield.value = data.imageUrl;
@@ -61,6 +63,7 @@ selectedproduct.onchange = () => {
     delprod.disabled = false;
     savebutton.disabled = false;
     outofstockcheckbox.disabled = false;
+    selfservicecheckbox.disabled = false;
     category.disabled = false;
     namefield.disabled = false;
     changestockbutton.disabled = false;
@@ -143,6 +146,7 @@ document.getElementById('orderform').onsubmit = (e) => {
         body: JSON.stringify({
             name: namefield.value,
             isInStock: !outofstockcheckbox.checked,
+            isSelfService: selfservicecheckbox.checked,
             category: category.value,
             subCategory: subcategoryfield.value,
             imageUrl: imageurlfield.value,
