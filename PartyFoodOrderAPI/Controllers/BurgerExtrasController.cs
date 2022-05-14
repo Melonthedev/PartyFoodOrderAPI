@@ -40,15 +40,27 @@ namespace PartyFoodOrderAPI.Controllers
         }
         
         [HttpDelete("Delete")]
-        public async Task<ActionResult> Delete([Required][FromQuery] string consumerName)
+        public async Task<ActionResult> Delete([Required][FromQuery] int id)
         {
-            var extras = await _context.BurgerExtras.FirstOrDefaultAsync(x => x.ConsumerName == consumerName);
+            //var extras = await _context.BurgerExtras.FirstOrDefaultAsync(x => x.ConsumerName == consumerName);
+            var extras = await _context.BurgerExtras.FindAsync(id);
             if (extras == null)
                 return NotFound();
             _context.BurgerExtras.Remove(extras);
             await _context.SaveChangesAsync();
             return Ok();
         }
-
+        [HttpDelete("DeleteAll")]
+        public async Task<ActionResult> DeleteAll()
+        {
+            //var extras = await _context.BurgerExtras.FirstOrDefaultAsync(x => x.ConsumerName == consumerName);
+            var extras = await _context.BurgerExtras.ToListAsync();
+            foreach (var item in extras)
+            {
+                _context.BurgerExtras.Remove(item);
+            }
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
     }
 }

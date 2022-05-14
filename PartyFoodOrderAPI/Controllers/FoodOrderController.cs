@@ -37,7 +37,9 @@ namespace PartyFoodOrderAPI.Controllers
             var order = new FoodOrder(DateTime.UtcNow, data.Product, data.Count, data.Name, comment);
             _context.Orders.Add(order);
             await _context.SaveChangesAsync();
-            return Ok($"{{ \"title\" : \"You placed an order 😃\", \"name\" : \"{data.Name}\", \"productId\" : \"{data.Product}\", \"product\" : \"{data.Product}\", \"count\" : {data.Count}, \"comment\" : \" {comment} \", \"message\" : \"Vielen Dank für deine Bestellung!\"}}");
+            var prod =  await _context.Products.FindAsync(order.OrderedProductId);
+            SMSHelper.SendSMS("+4915238730463", $"Bestellung von {order.ConsumerName} erhalten - Produkt: {order.Count}x {prod.Name}, Kommentar: {order.Comment}");
+            return Ok($"{{ \"title\" : \"You placed an order 😃\", \"name\" : \"{data.Name}\", \"productId\" : \"{data.Product}\", \"product\" : \"{prod.Name}\", \"count\" : {data.Count}, \"comment\" : \" {comment} \", \"message\" : \"Vielen Dank für deine Bestellung!\"}}");
         }
 
         [HttpPost("MarkFoodOrderAsFinished")]

@@ -5,17 +5,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/uistyle.css">
         <link rel="shortcut icon" type="image/png" href="/assets/burger.png"/>
-        <title>Bestellung löschen</title>
+        <title>Burgerextras zurücksetzen</title>
     </head>
     <body>
         <img onclick="document.location = '/orders'" src="/assets/ui/orders.png" width="40px" height="40px" id="homeicon">
-        <h1 style="text-decoration: underline; text-align: center; margin-top: 70px; margin-bottom: 60px;">Bestellung löschen</h1>
+        <h1 style="text-decoration: underline; text-align: center; margin-top: 70px; margin-bottom: 60px;">Burgerextras zurücksetzen</h1>
         <form name="orderform" action="/api/FoodStock/AddProduct" method="POST" id="orderform">
-            <p class="label">Zu löschende Bestellung:</p>
-            <select class="sel" id="selorder" placeholder="Wähle eine Bestellung..." required>
+            <input type="checkbox" class="checkbox" id="selectall" style="margin-top: 0"><label style="margin-top: 0" class="checkboxlabel" for="selectall">Alle auswählen</label>
+            <p class="label">Zurückzusetzende Burgerextras:</p>
+            <select class="sel" id="selextra" placeholder="Wähle eine Person..." required>
             </select>
-            <button class="deletebtn btn" type="submit">Bestellung löschen</button>
-            <i style="text-align: center; display: block; margin-top: 20px;">Damit der arme Besteller das nicht bekommt, das ist schon echt gemein aber ok!</i>
+            <button class="deletebtn btn" type="submit">Burgerextras zurücksetzen</button>
         </form>
         <p id="errorlabel"></p>
         <script src="./script.js"></script>

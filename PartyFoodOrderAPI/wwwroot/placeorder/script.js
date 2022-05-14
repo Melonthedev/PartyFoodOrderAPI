@@ -41,6 +41,9 @@ document.getElementById("count").addEventListener("input", function() {
 });
 document.getElementById("orderform").onsubmit = (event) => {
     event.preventDefault();
+}
+document.getElementById("submit").onclick = (event) => {
+    event.preventDefault();
     fetch("/api/FoodOrder/AddFoodOrder", {
                 method: 'POST',
                 headers: {

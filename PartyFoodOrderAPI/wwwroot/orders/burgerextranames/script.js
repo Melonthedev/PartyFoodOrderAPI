@@ -38,3 +38,6 @@ function load() {
         console.log(error);
     });
 }
+document.onkeyup = (event) => {
+    if (event.key == "Escape") document.location = "/orders";
+}
