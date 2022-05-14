@@ -15,16 +15,22 @@ namespace PartyFoodOrderAPI
             var accountSid = "AC230c1f13850c9a9a845baef0e88efe14";
             var authToken = "a4b78fbb1b6c2918a4eb216d93eee0ea";
 
-            TwilioClient.Init(accountSid, authToken);
+            try
+            {
+                TwilioClient.Init(accountSid, authToken);
 
-            var to = new PhoneNumber(phoneNumber);
-            var messageToSend = MessageResource.Create(
-                to,
-                from: new PhoneNumber("+18433511298"),
-                body: message);
+                var to = new PhoneNumber(phoneNumber);
+                var messageToSend = MessageResource.Create(
+                    to,
+                    from: new PhoneNumber("+18433511298"),
+                    body: message);
             
-            Console.WriteLine(messageToSend.Sid);
-            
+                Console.WriteLine(messageToSend.Sid);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }
