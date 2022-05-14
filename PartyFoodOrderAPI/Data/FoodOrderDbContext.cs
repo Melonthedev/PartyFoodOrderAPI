@@ -21,7 +21,7 @@ namespace PartyFoodOrderAPI
                 b.Property(x => x.Id).ValueGeneratedOnAdd();
                 b.Property(x => x.OrderedProductId).IsRequired();
                 b.Property(x => x.MarkedAsFinished).IsRequired();
-                b.Property(x => x.Comment).IsRequired();
+                b.Property(x => x.Comment);
                 b.Property(x => x.CreatedAt).IsRequired();
                 b.Property(x => x.ConsumerName).IsRequired();
                 b.Property(x => x.Count).IsRequired();
@@ -32,8 +32,8 @@ namespace PartyFoodOrderAPI
                 b.ToTable("Product");
                 b.Property(p => p.Id).ValueGeneratedOnAdd();
                 b.Property(p => p.Name).IsRequired();
-                b.Property(p => p.Description).IsRequired();
-                b.Property(p => p.ImageUrl).IsRequired();
+                b.Property(p => p.Description);
+                b.Property(p => p.ImageUrl);
                 b.Property(p => p.Category).IsRequired();
                 b.Property(p => p.SubCategory).IsRequired();
                 b.Property(p => p.IsInStock).IsRequired();

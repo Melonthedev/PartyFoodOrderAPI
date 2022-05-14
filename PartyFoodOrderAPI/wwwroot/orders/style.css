@@ -106,6 +106,25 @@ tbody:last-child tr:first-child td:last-child {
 }
 
 
+.burgerextracount {
+    font-size: 300%;
+    margin-right: 15px;
+}
+.burgerextracountdiv {
+    border: 1px solid aqua;
+    border-radius: 10px;
+    width: fit-content;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.extras {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 #footer {
     position: fixed;
     left: 0;
@@ -115,3 +134,4 @@ tbody:last-child tr:first-child td:last-child {
     text-align: center;
     background-color: #2f3136;
 }
+

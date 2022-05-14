@@ -18,7 +18,9 @@ namespace PartyFoodOrderAPI.Controllers
         [HttpGet("Get")]
         public async Task<ActionResult<BurgerExtras>> Get([Required][FromQuery] string consumerName)
         {
-            BurgerExtras extras = await _context.BurgerExtras.FirstOrDefaultAsync(x => x.ConsumerName == consumerName);
+            var extras = await _context.BurgerExtras.FirstOrDefaultAsync(x => x.ConsumerName == consumerName);
+            if (extras == null)
+                return NotFound();
             return Ok(extras);
         }
 
@@ -36,5 +38,17 @@ namespace PartyFoodOrderAPI.Controllers
             await _context.SaveChangesAsync();
             return Ok();
         }
+        
+        [HttpDelete("Delete")]
+        public async Task<ActionResult> Delete([Required][FromQuery] string consumerName)
+        {
+            var extras = await _context.BurgerExtras.FirstOrDefaultAsync(x => x.ConsumerName == consumerName);
+            if (extras == null)
+                return NotFound();
+            _context.BurgerExtras.Remove(extras);
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
+
     }
 }

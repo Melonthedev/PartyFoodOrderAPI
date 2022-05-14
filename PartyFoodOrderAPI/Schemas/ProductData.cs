@@ -6,7 +6,7 @@ namespace PartyFoodOrderAPI.Schemas
     {
         [Required]
         [MaxLength(20)]
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public bool IsInStock { get; set; }
         [Required]
         [Range(1, 3)]

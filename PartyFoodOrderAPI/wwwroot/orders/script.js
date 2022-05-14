@@ -1,6 +1,5 @@
 const table = document.getElementById("orders");
 const orders = [];
-window.addEventListener("load", event => { runAutoRefreshTimer() });
 
 function runAutoRefreshTimer() {
     refreshFoodOrders(false);
@@ -176,4 +175,34 @@ class FoodOrder {
     setDOMElement(DOMElement) { this.DOMElement = DOMElement; }
     setFinished(finished) { this.finished = finished; }
     setFinishButtonElement(finishButtonElement) { this.finishButtonElement = finishButtonElement; }
+}
+
+window.onload = () => {
+    runAutoRefreshTimer();
+    let baconcount = 0;
+    let eggcount = 0;
+    let baconcountspan = document.getElementById('baconcount');
+    let eggcountspan = document.getElementById('eggcount');
+    fetch('/api/BurgerExtras/GetAll', {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+    }).then(response => {
+        if (response.status == 200) {
+            response.json().then(data => {
+                for (let i = 0; i < data.length; i++) {
+                    if (data[i].bacon == true) 
+                        baconcount++;
+                    if (data[i].egg == true)
+                        eggcount++;
+                }
+                baconcountspan.innerText = baconcount;
+                eggcountspan.innerText = eggcount;
+            });
+        } else console.log(response);
+    }).catch(error => {
+        console.log(error);
+    });
 }

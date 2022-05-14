@@ -8,7 +8,7 @@ namespace PartyFoodOrderAPI
         [Range(1, int.MaxValue)]
         public int Id { get; init; }
 
-        public Product OrderedProduct { get; set; }
+        public Product? OrderedProduct { get; set; }
 
         public int OrderedProductId { get; set; }
 
