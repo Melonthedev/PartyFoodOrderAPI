@@ -41,9 +41,14 @@ document.onkeyup = (event) => {
 
 function encodeImageFileAsURL(event) {
     event.preventDefault();
-    var filesSelected = event.dataTransfer.files;
-    if (filesSelected.length > 0) {
-        var fileToLoad = filesSelected[0];
+    var fileSelected;
+    if (event.dataTransfer == null) {
+        fileSelected = event.target.files;
+    } else {
+        fileSelected = event.dataTransfer.files;
+    }
+    if (fileSelected.length > 0) {
+        var fileToLoad = fileSelected[0];
         var fileReader = new FileReader();
         fileReader.onload = function(fileLoadedEvent) {
             var srcData = fileLoadedEvent.target.result;
@@ -68,4 +73,8 @@ function drop(evt) {
 	evt.stopPropagation();
 	evt.preventDefault();
 	encodeImageFileAsURL(evt);
+}
+
+document.getElementById('imageFile').onchange = (event) => {
+    encodeImageFileAsURL(event);
 }

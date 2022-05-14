@@ -27,10 +27,9 @@ document.getElementById('submit').onclick = () => {
         },
     }).then(response => response.json()).then(data => {
         if (data.status != 404) {
-            document.write('<head><title>Schon Ausgewählt</title><link rel="icon" href="/burger.png"><link rel="stylesheet" type="text/css" href="/uistyle.css"></head><body><h1 style="margin-top: 40px">Du hast bereits deine Burgerextras ausgewählt</h1><button style="margin-top: 40px" class="btn" onclick="document.location = `/`">Zurück</button></body>');
+            document.write('<head><title>Schon Ausgewählt</title><link rel="icon" href="/burger.png"><link rel="stylesheet" type="text/css" href="/uistyle.css"></head><body><h1 style="margin-top: 40px">Du hast bereits deine Burgerextras ausgewählt</h1><p class="label">Wenn du noch einen weiteren Burger möchtest, schau gleich nochmal vorbei oder frag nach.</p><button style="margin-top: 40px" class="btn" onclick="document.location = `/`">Zurück</button></body>');
             return;
         }
-        console.log("FETCH");
         fetch('/api/BurgerExtras/Choose', {
             method: 'POST',
             headers: {

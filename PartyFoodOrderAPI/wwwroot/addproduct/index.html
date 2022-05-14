@@ -27,7 +27,9 @@
             <textarea class="inp" id="description" placeholder="Beschreibung (optional)" maxlength="200" style="padding-top: 10px;" cols="1"></textarea>
 
             <p class="label">Bild oder Link:</p>
-            <input class="inp" type="text" id="imageurl" placeholder="Bild-Link (optional) oder Bild (drag 'n drop)" maxlength="200" dropzone="copy">
+            <input class="inp" type="text" id="imageurl" placeholder="Bild-Link (optional) oder Bild (drag 'n drop)" maxlength="200" dropzone="copy" style="margin-bottom: 0">
+            <p class="label" >ODER</p>
+            <input class="inp" type="file" id="imageFile" capture="user"  accept="image/*" style="height: fit-content; resize: none; padding: 10px;">
 
             <input type="checkbox" id="outofstock" class="checkbox"><label for="outofstock" class="checkboxlabel">Nicht auf Lager</label><br>
             <input type="checkbox" id="isselfservice" class="checkbox"><label for="isselfservice" class="checkboxlabel">Selbstbedienung</label><br>

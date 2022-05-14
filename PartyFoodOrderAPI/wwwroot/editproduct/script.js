@@ -31,6 +31,7 @@ const namefield = document.getElementById('name');
 const changestockbutton = document.getElementById('changestockbutton');
 const subcategoryfield = document.getElementById('subcategory');
 const imageurlfield = document.getElementById('imageurl');
+const imagefilefield = document.getElementById('imageFile');
 const descriptionfield = document.getElementById('description');
 
 selectedproduct.onchange = () => {
@@ -69,6 +70,7 @@ selectedproduct.onchange = () => {
     changestockbutton.disabled = false;
     subcategoryfield.disabled = false;
     imageurlfield.disabled = false;
+    imagefilefield.disabled = false;
     descriptionfield.disabled = false;
 }
 
@@ -171,7 +173,12 @@ document.getElementById('orderform').onsubmit = (e) => {
 
 function encodeImageFileAsURL(event) {
     event.preventDefault();
-    var filesSelected = event.dataTransfer.files;
+    var filesSelected;
+    if (event.dataTransfer == null) {
+        filesSelected = event.target.files;
+    } else {
+        filesSelected = event.dataTransfer.files;
+    }
     if (filesSelected.length > 0) {
         var fileToLoad = filesSelected[0];
         var fileReader = new FileReader();
@@ -198,6 +205,10 @@ function drop(evt) {
 	evt.stopPropagation();
 	evt.preventDefault();
 	encodeImageFileAsURL(evt);
+}
+
+document.getElementById('imageFile').onchange = (event) => {
+    encodeImageFileAsURL(event);
 }
 
 

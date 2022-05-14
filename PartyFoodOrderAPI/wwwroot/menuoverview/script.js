@@ -73,7 +73,6 @@ window.onload = () => {
             entry.appendChild(description);
             if (products[i].isSelfService) entry.appendChild(orderbuttonreplacement);  
             else entry.appendChild(orderbutton);
-            console.log(products[i]);
             document.getElementById('body').appendChild(entry);
         }
         if (products.length == 0) {
