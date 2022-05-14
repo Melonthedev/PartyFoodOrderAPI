@@ -42,6 +42,14 @@ namespace PartyFoodOrderAPI
                     .WithOne(o => o.OrderedProduct)
                     .HasForeignKey(o => o.OrderedProductId);
             });
+            modelBuilder.Entity<BurgerExtras>(b =>
+            {
+                b.ToTable("BurgerExtras");
+                b.Property(p => p.Id).ValueGeneratedOnAdd();
+                b.Property(p => p.ConsumerName).IsRequired();
+                b.Property(p => p.Egg).IsRequired();
+                b.Property(p => p.Bacon).IsRequired();
+            });
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

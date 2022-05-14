@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace PartyFoodOrderAPI.Controllers
 {
@@ -8,32 +8,33 @@ namespace PartyFoodOrderAPI.Controllers
     [ApiController]
     public class BurgerExtrasController : ControllerBase
     {
-
-        private Logger<BurgerExtrasController> _logger;
         private FoodOrderDbContext _context;
 
-        public BurgerExtrasController(Logger<BurgerExtrasController> logger, FoodOrderDbContext context)
+        public BurgerExtrasController(FoodOrderDbContext context)
         {
-            _logger = logger;
             _context = context;
         }
 
-        // GET: api/<BurgerExtrasController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        [HttpGet("Get")]
+        public async Task<ActionResult<BurgerExtras>> Get([Required][FromQuery] string consumerName)
         {
-            return new string[] { "Egg", "Bacon" };
+            BurgerExtras extras = await _context.BurgerExtras.FirstOrDefaultAsync(x => x.ConsumerName == consumerName);
+            return Ok(extras);
         }
 
-        // POST api/<BurgerExtrasController>
-        [HttpPost]
-        public async Task<ActionResult> Post([FromBody] BurgerExtras extras)
+        [HttpGet("GetAll")]
+        public async Task<ActionResult<List<BurgerExtras>>> GetAll()
+        {
+            List<BurgerExtras> extras = await _context.BurgerExtras.ToListAsync();
+            return Ok(extras);
+        }
+
+        [HttpPost("Choose")]
+        public async Task<ActionResult> Post([Required][FromBody] BurgerExtras extras)
         {
             _context.BurgerExtras.Add(extras);
             await _context.SaveChangesAsync();
             return Ok();
         }
-
-
     }
 }

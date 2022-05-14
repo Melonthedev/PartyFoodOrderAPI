@@ -52,6 +52,22 @@ namespace PartyFoodOrderAPI.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "BurgerExtras",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ConsumerName = table.Column<string>(type: "TEXT", nullable: false),
+                    Egg = table.Column<bool>(type: "INTEGER", nullable: false),
+                    Bacon = table.Column<bool>(type: "INTEGER", nullable: false)
+
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FoodOrder", x => x.Id);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_FoodOrder_OrderedProductId",
                 table: "FoodOrder",
@@ -65,6 +81,9 @@ namespace PartyFoodOrderAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "Product");
+            
+            migrationBuilder.DropTable(
+                name: "BurgerExtras");
         }
     }
 }

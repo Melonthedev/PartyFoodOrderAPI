@@ -5,6 +5,8 @@ namespace PartyFoodOrderAPI
     public class BurgerExtras
     {
 
+        public int Id { get; init; }
+
         [Required]
         [MaxLength(20)]
         public string ConsumerName { get; init; }
