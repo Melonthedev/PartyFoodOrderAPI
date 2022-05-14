@@ -1,3 +1,5 @@
+let subcategories = []; // Array of subcategories
+
 window.onload = () => {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
@@ -73,7 +75,12 @@ window.onload = () => {
             entry.appendChild(description);
             if (products[i].isSelfService) entry.appendChild(orderbuttonreplacement);  
             else entry.appendChild(orderbutton);
-            document.getElementById('body').appendChild(entry);
+            if (products[i].subCategory != null && products[i].subCategory != "") {
+                const subcategory = createSubCategory(products[i].subCategory);
+                subcategory.appendChild(entry);
+                continue;
+            }
+            document.getElementById('body').prepend(entry);
         }
         if (products.length == 0) {
             const entry = document.createElement('div');
@@ -92,3 +99,30 @@ window.onload = () => {
     });
 
 };
+
+function createSubCategory(name) {
+    if (subCategoryExists(name)) return getSubCategory(name);   
+    let element = document.createElement('div');
+    let heading = document.createElement('h2');
+    heading.innerText = name;
+    heading.classList.add("label");
+    element.value = "subcategory-" + name;
+    element.appendChild(heading);
+    document.getElementById('body').appendChild(element);
+    subcategories.push(element);
+    return element;
+}
+
+function subCategoryExists(name) {
+    for (let i = 0; i < subcategories.length; i++) {
+        if (subcategories[i].value == "subcategory-" + name) return true;
+    }
+    return false;
+}
+
+function getSubCategory(name) {
+    for (let i = 0; i < subcategories.length; i++) {
+        if (subcategories[i].value == "subcategory-" + name) return subcategories[i];
+    }
+    return null;
+}
