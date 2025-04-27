@@ -1,5 +1,14 @@
 document.getElementById("orderform").onsubmit = (event) => {
     event.preventDefault();
+
+    if (document.getElementById('imageFile').files.length > 0) {
+        const formData = new FormData();
+        formData.append('imageFile', document.getElementById('imageFile').files[0]);
+        //uploadImage(formData);
+        uploadImage(document.getElementById('imageFile').files[0]);
+    }
+
+
     fetch("/api/FoodStock/AddProduct", {
         method: 'POST',
         headers: {
@@ -76,5 +85,28 @@ function drop(evt) {
 }
 
 document.getElementById('imageFile').onchange = (event) => {
-    encodeImageFileAsURL(event);
+    //encodeImageFileAsURL(event);
+    if (event.target.files.length <= 0) {
+        document.getElementById("imageurl").value = "";
+        document.getElementById("imageurl").disabled = false;
+    } else {
+        document.getElementById("imageurl").value = "";
+        document.getElementById("imageurl").disabled = true;
+    }
+}
+
+function uploadImage(image) {
+    fetch("/api/ProductImage/UploadImage", {
+        method: 'POST',
+        headers: {
+            'Accept': 'multipart/form-data',
+            'Content-Type': 'multipart/form-data',
+        },
+        body: image
+    }).then(data => {
+        console.log(data);
+        console.log("success");
+    }).catch(error => {
+        console.error(error);
+    });
 }

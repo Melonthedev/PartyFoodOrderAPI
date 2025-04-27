@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PartyFoodOrderAPI.Schemas;
+using PartyFoodOrderAPI.Services;
+using static PartyFoodOrderAPI.Services.ImageProcessingService;
 
 namespace PartyFoodOrderAPI.Controllers
 {
@@ -11,11 +13,13 @@ namespace PartyFoodOrderAPI.Controllers
     {
         private readonly ILogger<FoodStockController> _logger;
         private readonly FoodOrderDbContext _context;
+        private readonly UploadService _uploadService;
 
-        public FoodStockController(ILogger<FoodStockController> logger, FoodOrderDbContext context)
+        public FoodStockController(ILogger<FoodStockController> logger, FoodOrderDbContext context, UploadService uploadService)
         {
             _logger = logger;
             _context = context;
+            _uploadService = uploadService;
         }
 
         [HttpGet("GetAllProducts")]
@@ -62,12 +66,34 @@ namespace PartyFoodOrderAPI.Controllers
         [HttpPost("AddProduct")]
         public async Task<ActionResult> AddProduct([Required][FromBody] ProductData product)
         {
-            _logger.LogInformation($"Recived POST Request: Adding a new product with name: {product.Name} and category: {product.Category} and description: \"{product.Description}\"");
-            _context.Products.Add(new Product(product.Name, product.Category, product.SubCategory, product.Description, product.ImageUrl, product.IsInStock, product.IsSelfService));
+            //(Status, byte[], string) result = await ImageProcessingService.ProcessImageStreamAsync(product);
+            //if (result.Item1 != Status.Success) return BadRequest();
+
+            string imageUrl;
+
+            if (product.ImageUrl is not null) {
+                imageUrl = product.ImageUrl;
+            } else {
+                ValidationResult result = product.Validate(new ValidationContext(product)).First();
+                if (result != ValidationResult.Success) {
+                    return BadRequest(result.ErrorMessage);
+                }
+                imageUrl = await _uploadService.UploadFile(product.Image);
+            }
+            
+
+            _context.Products.Add(new Product(
+                                    product.Name, 
+                                    product.Category, 
+                                    product.SubCategory, 
+                                    product.Description, 
+                                    product.IsInStock, 
+                                    product.IsSelfService,
+                                    imageUrl));
             await _context.SaveChangesAsync();
             return Ok();
         }
-
+        
         [HttpDelete("DeleteProduct")]
         public async Task<ActionResult> DeleteProduct([Required][FromQuery] int productId)
         {
@@ -87,7 +113,16 @@ namespace PartyFoodOrderAPI.Controllers
             var product = await _context.Products.FindAsync(id);
             if (product is null) 
                 return NotFound($"No product with id {id} found");
-            product.Update(newProduct.Name, newProduct.Category, newProduct.SubCategory, newProduct.Description, newProduct.ImageUrl, newProduct.IsInStock, newProduct.IsSelfService);
+            (Status, byte[], string) result = await ImageProcessingService.ProcessImageStreamAsync(newProduct);
+            if (result.Item1 != Status.Success) return BadRequest();
+            product.Update(
+                newProduct.Name, 
+                newProduct.Category, 
+                newProduct.SubCategory, 
+                newProduct.Description, 
+                newProduct.IsInStock, 
+                newProduct.IsSelfService, 
+                result.Item2);
             await _context.SaveChangesAsync();
             return Ok();
         }

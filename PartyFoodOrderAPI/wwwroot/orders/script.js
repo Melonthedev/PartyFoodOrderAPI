@@ -3,7 +3,7 @@ const orders = [];
 
 function runAutoRefreshTimer() {
     refreshFoodOrders(false);
-    setTimeout(refreshFoodOrders(true), 500);
+    setTimeout(refreshFoodOrders(false), 500);
     setInterval(() => {
         refreshFoodOrders(true); 
         refreshOrderStatus();
@@ -75,7 +75,6 @@ function refreshOrders(route, refresh) {
 }
 
 function getProductName(id) {
-    let prod =
     fetch("/api/FoodStock/GetProduct/?id=" + id, {
         method: 'GET',
         headers: {
@@ -122,8 +121,13 @@ function addOrder(order, refresh) {
         buttonElement.style.backgroundColor = "gray";
         buttonElement.removeEventListener("click", handler);
     }
-    if(refresh == true) 
+    if(refresh == true) {
         trElement.classList.add("new");
+        const notify = new Notification('Neue Bestellung!', {
+            body: 'Neue Bestellung von ' + order.getName() + ': ' + order.getCount() + 'x ' + order.getProduct().name + '\n' + order.getComment(),
+            icon: '/assets/burger.png'
+        });
+    }
     trElement.appendChild(nrElement);
     trElement.appendChild(nameElement);
     trElement.appendChild(productElement);
@@ -134,6 +138,7 @@ function addOrder(order, refresh) {
     order.setFinishButtonElement(buttonElement);
     table.children[0].children[0].insertAdjacentElement("afterEnd", trElement);
     orders.push(order);
+    
 }
 
 function removeOrder(order) {
@@ -177,7 +182,8 @@ class FoodOrder {
     setFinishButtonElement(finishButtonElement) { this.finishButtonElement = finishButtonElement; }
 }
 
-window.onload = () => {
+window.onload = async function() {
+    let permission = await Notification.requestPermission();
     runAutoRefreshTimer();
     let baconcount = 0;
     let eggcount = 0;

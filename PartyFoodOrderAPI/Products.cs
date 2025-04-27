@@ -1,4 +1,5 @@
 ﻿using PartyFoodOrderAPI.Schemas;
+using static PartyFoodOrderAPI.Services.ImageProcessingService;
 
 namespace PartyFoodOrderAPI
 {
@@ -50,15 +51,6 @@ namespace PartyFoodOrderAPI
                 "other" => 3,
                 _ => 0,
             };
-        }
-
-        public static bool UpdateProduct(int id, ProductData newProduct)
-        {
-            var item = AllProducts.Find(x => x.Id == id);
-            if (item is null) return false;
-            AllProducts.Remove(item);
-            AllProducts.Add(new Product(newProduct.Name, newProduct.Category, newProduct.SubCategory, newProduct.Description, newProduct.ImageUrl, newProduct.IsSelfService));
-            return true;
         }
     }
 }

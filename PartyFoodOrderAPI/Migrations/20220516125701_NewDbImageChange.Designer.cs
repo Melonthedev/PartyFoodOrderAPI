@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PartyFoodOrderAPI;
 
@@ -10,9 +11,10 @@ using PartyFoodOrderAPI;
 namespace PartyFoodOrderAPI.Migrations
 {
     [DbContext(typeof(FoodOrderDbContext))]
-    partial class FoodOrderDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220516125701_NewDbImageChange")]
+    partial class NewDbImageChange
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.4");
@@ -86,10 +88,6 @@ namespace PartyFoodOrderAPI.Migrations
 
                     b.Property<byte[]>("Image")
                         .HasColumnType("BLOB");
-
-                    b.Property<string>("ImageHeader")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
 
                     b.Property<bool>("IsInStock")
                         .HasColumnType("INTEGER");
