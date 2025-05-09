@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PartyFoodOrderAPI.Schemas;
 using PartyFoodOrderAPI.Services;
-using static PartyFoodOrderAPI.Services.ImageProcessingService;
 
 namespace PartyFoodOrderAPI.Controllers
 {
@@ -64,23 +63,14 @@ namespace PartyFoodOrderAPI.Controllers
         }
         
         [HttpPost("AddProduct")]
-        public async Task<ActionResult> AddProduct([Required][FromBody] ProductData product)
+        public async Task<ActionResult> AddProduct([Required][FromForm] ProductData product)
         {
-            //(Status, byte[], string) result = await ImageProcessingService.ProcessImageStreamAsync(product);
-            //if (result.Item1 != Status.Success) return BadRequest();
-
-            string imageUrl;
-
+            string? imageUrl = null;
             if (product.ImageUrl is not null) {
                 imageUrl = product.ImageUrl;
-            } else {
-                ValidationResult result = product.Validate(new ValidationContext(product)).First();
-                if (result != ValidationResult.Success) {
-                    return BadRequest(result.ErrorMessage);
-                }
+            } else if (product.Image is not null) {
                 imageUrl = await _uploadService.UploadFile(product.Image);
             }
-            
 
             _context.Products.Add(new Product(
                                     product.Name, 
@@ -107,14 +97,20 @@ namespace PartyFoodOrderAPI.Controllers
         }
 
         [HttpPatch("UpdateProduct")]
-        public async Task<ActionResult> UpdateProduct([Required][FromQuery] int id, [Required][FromBody] ProductData newProduct)
+        public async Task<ActionResult> UpdateProduct([Required][FromQuery] int id, [Required][FromForm] ProductData newProduct)
         {
             _logger.LogInformation($"Recived PATCH Request: Updating product with id: {id}");
             var product = await _context.Products.FindAsync(id);
             if (product is null) 
                 return NotFound($"No product with id {id} found");
-            (Status, byte[], string) result = await ImageProcessingService.ProcessImageStreamAsync(newProduct);
-            if (result.Item1 != Status.Success) return BadRequest();
+
+            string? imageUrl = null;
+            if (newProduct.ImageUrl is not null) {
+                imageUrl = newProduct.ImageUrl;
+            } else if (newProduct.Image is not null) {
+                imageUrl = await _uploadService.UploadFile(newProduct.Image);
+            }
+
             product.Update(
                 newProduct.Name, 
                 newProduct.Category, 
@@ -122,7 +118,7 @@ namespace PartyFoodOrderAPI.Controllers
                 newProduct.Description, 
                 newProduct.IsInStock, 
                 newProduct.IsSelfService, 
-                result.Item2);
+                imageUrl);
             await _context.SaveChangesAsync();
             return Ok();
         }

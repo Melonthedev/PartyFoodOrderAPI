@@ -33,8 +33,7 @@ namespace PartyFoodOrderAPI
                 b.Property(p => p.Id).ValueGeneratedOnAdd();
                 b.Property(p => p.Name).IsRequired();
                 b.Property(p => p.Description);
-                b.Property(p => p.Image);
-                b.Property(p => p.ImageHeader);
+                b.Property(p => p.ImageUrl);
                 b.Property(p => p.SubCategory);
                 b.Property(p => p.Category).IsRequired();
                 b.Property(p => p.IsInStock).IsRequired();

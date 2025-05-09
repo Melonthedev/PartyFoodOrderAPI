@@ -1,34 +1,33 @@
 document.getElementById("orderform").onsubmit = (event) => {
     event.preventDefault();
 
-    if (document.getElementById('imageFile').files.length > 0) {
-        const formData = new FormData();
-        formData.append('imageFile', document.getElementById('imageFile').files[0]);
-        //uploadImage(formData);
-        uploadImage(document.getElementById('imageFile').files[0]);
-    }
+    const formData = new FormData();
+    formData.append("Name", document.getElementById("name").value);
+    formData.append("Category", document.getElementById("category").value);
+    formData.append("IsInStock", !document.getElementById("outofstock").checked);
+    formData.append("SubCategory", document.getElementById("secondcategory").value);
+    formData.append("Description", document.getElementById("description").value);
+    formData.append("IsSelfService", document.getElementById("isselfservice").checked);
 
+    if (document.getElementById('imageFile').files.length > 0) {
+        formData.append('Image', document.getElementById('imageFile').files[0]);
+    } else {
+        formData.append("ImageUrl", document.getElementById("imageurl").value);
+    }
 
     fetch("/api/FoodStock/AddProduct", {
         method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            'Name' : document.getElementById("name").value,
-            'Category' : document.getElementById("category").value,
-            'IsInStock' : !document.getElementById("outofstock").checked,
-            'SubCategory' : document.getElementById("secondcategory").value,
-            'Description' : document.getElementById("description").value,
-            'ImageUrl' : document.getElementById("imageurl").value,
-            'IsSelfService' : document.getElementById("isselfservice").checked,
-        })
-    }).then(data => {
-        if (data.status != 200) {
-            console.log(data)
-            document.getElementById("errorlabel").innerHTML = "Folgender Fehler ist während der Bearbeitung deiner Anfrage aufgetreten: <br><strong><u>" + data + "</u></strong><br>Bitte vergewissere dich, dass die ID deines Produktes noch nicht existiert.";
-        } else {
+        body: formData
+    }).then(response => {
+        console.log(response);
+        if (response.status != 200) response.text().then(async data => {
+            console.log(data);
+            var errors = JSON.parse(data).errors;
+            var errorMessage = Object.values(errors)[0];
+            console.log(errorMessage);
+            document.getElementById("errorlabel").innerHTML = "Folgender Fehler ist während der Bearbeitung deiner Anfrage aufgetreten: <br><strong><u>" + errorMessage + "</u></strong><br>Bitte vergewissere dich, dass die ID deines Produktes noch nicht existiert.";
+        });
+        else {
             document.getElementById("errorlabel").innerText = "";
             document.write(`
             <html lang="de">
@@ -47,45 +46,7 @@ document.onkeyup = (event) => {
     if (event.key == "Escape") document.location = "/orders";
 }
 
-
-function encodeImageFileAsURL(event) {
-    event.preventDefault();
-    var fileSelected;
-    if (event.dataTransfer == null) {
-        fileSelected = event.target.files;
-    } else {
-        fileSelected = event.dataTransfer.files;
-    }
-    if (fileSelected.length > 0) {
-        var fileToLoad = fileSelected[0];
-        var fileReader = new FileReader();
-        fileReader.onload = function(fileLoadedEvent) {
-            var srcData = fileLoadedEvent.target.result;
-            document.getElementById("imageurl").value = srcData;
-            document.getElementById("imageurl").disabled = true;
-        }
-        fileReader.readAsDataURL(fileToLoad);
-    }
-}
-
-var dropZone = document.getElementById('imageurl');
-dropZone.addEventListener('dragover', handleDragOver, false);
-dropZone.addEventListener('drop', drop, false);
-
-function handleDragOver(evt) {
-    evt.stopPropagation();
-    evt.preventDefault();
-    evt.dataTransfer.dropEffect = 'copy';
-}
-
-function drop(evt) {
-	evt.stopPropagation();
-	evt.preventDefault();
-	encodeImageFileAsURL(evt);
-}
-
 document.getElementById('imageFile').onchange = (event) => {
-    //encodeImageFileAsURL(event);
     if (event.target.files.length <= 0) {
         document.getElementById("imageurl").value = "";
         document.getElementById("imageurl").disabled = false;
@@ -93,20 +54,4 @@ document.getElementById('imageFile').onchange = (event) => {
         document.getElementById("imageurl").value = "";
         document.getElementById("imageurl").disabled = true;
     }
-}
-
-function uploadImage(image) {
-    fetch("/api/ProductImage/UploadImage", {
-        method: 'POST',
-        headers: {
-            'Accept': 'multipart/form-data',
-            'Content-Type': 'multipart/form-data',
-        },
-        body: image
-    }).then(data => {
-        console.log(data);
-        console.log("success");
-    }).catch(error => {
-        console.error(error);
-    });
 }

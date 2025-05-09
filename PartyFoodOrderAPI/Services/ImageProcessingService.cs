@@ -23,7 +23,7 @@ namespace PartyFoodOrderAPI.Services
         public record Result(Status Status);
 
         
-        public static async Task<(Status, byte[], string)> ProcessImageStreamAsync(ProductData data)
+        /*public static async Task<(Status, byte[], string)> ProcessImageStreamAsync(ProductData data)
         {
             if (data.Image is not null)
             {
@@ -52,7 +52,7 @@ namespace PartyFoodOrderAPI.Services
             (Status, byte[]) bytes = await GetBytes(stream);
             return (bytes.Item1, bytes.Item2, $"data:image/{data.ImageFormat};base64,");
         }
-
+        */
         public static async Task<(Status, byte[])> GetBytes(Stream stream)
         {
             byte[] buffer = new byte[512];

@@ -1,6 +1,4 @@
-﻿using PartyFoodOrderAPI.Schemas;
-using static PartyFoodOrderAPI.Services.ImageProcessingService;
-
+﻿
 namespace PartyFoodOrderAPI
 {
     public class Products

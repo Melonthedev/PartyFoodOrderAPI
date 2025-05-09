@@ -120,7 +120,7 @@ function changeStockStatus(instock) {
         }
     }).then(data => {
         if(data.status == 200) {
-            var query = instock == true ? "Auf Lager" : "Nicht auf Lager";
+            var query = instock ? "Auf Lager" : "Nicht auf Lager";
             document.write(`
             <html lang="en">
                 <head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -139,76 +139,47 @@ function changeStockStatus(instock) {
 
 document.getElementById('orderform').onsubmit = (e) => {
     e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("Name", namefield.value);
+    formData.append("Category", category.value);
+    formData.append("IsInStock", !outofstockcheckbox.checked);
+    formData.append("SubCategory", subcategoryfield.value);
+    formData.append("Description", descriptionfield.value);
+    formData.append("IsSelfService", selfservicecheckbox.checked);
+
+    if (document.getElementById('imageFile').files.length > 0) {
+        formData.append('Image', document.getElementById('imageFile').files[0]);
+    } else {
+        formData.append("ImageUrl", imageurlfield.value);
+    }
+
+
     fetch('/api/FoodStock/UpdateProduct?id=' + selectedproduct.value, {
         method: 'PATCH',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            name: namefield.value,
-            isInStock: !outofstockcheckbox.checked,
-            isSelfService: selfservicecheckbox.checked,
-            category: category.value,
-            subCategory: subcategoryfield.value,
-            imageUrl: imageurlfield.value,
-            description: descriptionfield.value
-        })
-    }).then(data => {
-        if(data.status == 200) {
-            document.write(`<html lang="en">
-            <head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <link rel="stylesheet" href="/uistyle.css"><link rel="shortcut icon" type="image/png" href="/assets/burger.png"/><title>Produkt erfolgreich geändert</title></head>
-            <body><img onclick="document.location = '/orders'" src="/assets/ui/orders.png" width="40px" height="40px" id="homeicon">
-                <h1 style="text-decoration: underline; text-align: center; margin-top: 70px; margin-bottom: 60px;">Produkt erfolgreich geändert</h1>
-                <button class="btn" onclick="document.location='/orders'">Zurück</button></body>
-        </html>`);
+        body: formData
+    }).then(response => {
+        console.log(response);
+        if (response.status != 200) response.text().then(async data => {
+            console.log(data);
+            var errors = JSON.parse(data).errors;
+            var errorMessage = Object.values(errors)[0];
+            console.log(errorMessage);
+            document.getElementById("errorlabel").innerHTML = "Folgender Fehler ist während der Bearbeitung deiner Anfrage aufgetreten: <br><strong><u>" + errorMessage + "</u></strong><br>Bitte vergewissere dich, dass die ID deines Produktes noch nicht existiert.";
+        });
+        else {
+            document.getElementById("errorlabel").innerText = "";
+            document.write(`
+            <html lang="de">
+                <head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" type="text/css" href="/uistyle.css"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap" rel="stylesheet"><link rel="icon" href="/burger.png"><title>Erfolgreich</title></head>
+                <body><img onclick="document.location = '/orders'" src="/assets/ui/orders.png" width="40px" height="40px" id="homeicon"><h1 style="margin-top: 70px; margin-bottom: 60px;">Erfolgreich geändert!</h1><p class="label" style="text-align: center; font-size: 150%">Produkt wurde erfolgreich bearbeitet.</p><p class="label" style="text-align: center; font-size: 150%"><a href="/orders" style="color: white;">Zurück zur Bestellübersicht</a></p></body>
+            </html>
+            `);
         }
     }).catch(error => {
-        console.log(error);
+        document.getElementById("errorlabel").innerText = "Der folgende Fehler ist während der Bearbeitung deiner Anfrage aufgetreten: " + error + "\nBitte vergewissere dich, dass die ID deines Produktes noch nicht existiert.";
+        console.error(error);
     });
-}
-
-
-
-function encodeImageFileAsURL(event) {
-    event.preventDefault();
-    var filesSelected;
-    if (event.dataTransfer == null) {
-        filesSelected = event.target.files;
-    } else {
-        filesSelected = event.dataTransfer.files;
-    }
-    if (filesSelected.length > 0) {
-        var fileToLoad = filesSelected[0];
-        var fileReader = new FileReader();
-        fileReader.onload = function(fileLoadedEvent) {
-            var srcData = fileLoadedEvent.target.result;
-            document.getElementById("imageurl").value = srcData;
-            document.getElementById("imageurl").disabled = true;
-        }
-        fileReader.readAsDataURL(fileToLoad);
-    }
-}
-
-var dropZone = document.getElementById('imageurl');
-dropZone.addEventListener('dragover', handleDragOver, false);
-dropZone.addEventListener('drop', drop, false);
-
-function handleDragOver(evt) {
-    evt.stopPropagation();
-    evt.preventDefault();
-    evt.dataTransfer.dropEffect = 'copy';
-}
-
-function drop(evt) {
-	evt.stopPropagation();
-	evt.preventDefault();
-	encodeImageFileAsURL(evt);
-}
-
-document.getElementById('imageFile').onchange = (event) => {
-    encodeImageFileAsURL(event);
 }
 
 

@@ -6,7 +6,7 @@ namespace PartyFoodOrderAPI.Schemas
     {
         [Required]
         [MaxLength(20)]
-        public string? Name { get; set; }
+        public string Name { get; set; }
         public bool IsInStock { get; set; }
         [Required]
         [Range(1, 3)]
@@ -20,21 +20,14 @@ namespace PartyFoodOrderAPI.Schemas
 
         public IFormFile? Image { get; set; }
 
-        [Required]
-        public string ImageFormat { get; set; }
-
         public bool IsSelfService { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (ImageFormat is null)
-            {
-                yield return new ValidationResult("Image format is required");
-            }
-            if (ImageUrl is null && Image is null)
+            /*if (ImageUrl is null && Image is null)
             {
                 yield return new ValidationResult("ImageUrl or Image is required");
-            }
+            }*/
             if (ImageUrl is not null && Image is not null)
             {
                 yield return new ValidationResult("ImageUrl or Image is required, not both");

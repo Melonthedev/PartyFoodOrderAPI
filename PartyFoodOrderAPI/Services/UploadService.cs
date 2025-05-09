@@ -2,12 +2,6 @@
 
 public class UploadService
 {
-    private readonly IConfiguration _configuration;
-
-    public UploadService(IConfiguration configuration)
-    {
-        _configuration = configuration;
-    }
 
     /// <summary>
     /// Uploads an IFile to the "uploads" folder in the wwwroot
@@ -17,19 +11,14 @@ public class UploadService
     /// <returns>the relative http path to the file</returns>
     public async Task<string> UploadFile(IFormFile file)
     {
-        var fileName = Guid.NewGuid() + System.IO.Path.GetExtension(file.Name);
+        var fileName = Guid.NewGuid() + Path.GetExtension(file.FileName);
         var relativeFilePath = "uploads/";
-        var rootPath = System.IO.Path.Combine(Environment.CurrentDirectory, "wwwroot");
-        var filePath = System.IO.Path.Combine(rootPath, relativeFilePath, fileName);
-        if (!Directory.Exists(System.IO.Path.Combine(rootPath, relativeFilePath)))
-            Directory.CreateDirectory(System.IO.Path.Combine(rootPath, relativeFilePath));
+        var rootPath = Path.Combine(Environment.CurrentDirectory, "wwwroot");
+        var filePath = Path.Combine(rootPath, relativeFilePath, fileName);
+        if (!Directory.Exists(Path.Combine(rootPath, relativeFilePath)))
+            Directory.CreateDirectory(Path.Combine(rootPath, relativeFilePath));
         await using var stream = File.Create(filePath);
         await file.CopyToAsync(stream);
-        return relativeFilePath + fileName;
-    }
-
-    public string GetUrlFromUploadPath(string uploadPath)
-    {
-        return _configuration.GetValue<string>("Host:url") + uploadPath;
+        return "/" + relativeFilePath + fileName;
     }
 }
