@@ -3,7 +3,7 @@
 * {
     padding: 0;
     margin: 0;
-    background-color: #2f3136;
+    background-color: #1d1d1f;
     color-scheme: dark;
 }
 
@@ -132,7 +132,8 @@ h3 {
 
 .label {
     text-align: center;
-    margin-bottom: 5px;
+    margin-top: 50px;
+    margin-bottom: 20px;
     color: white;
     font-size: 150%;
 }
@@ -202,7 +203,6 @@ h3 {
     margin-right: auto;
     width: 90%;
     height: 100px;
-    background-color: #2f3136;
     color: white;
     font-family: 'Noto Serif', serif;
     font-size: 140%;
@@ -225,4 +225,86 @@ h3 {
     margin-bottom: 20px;
     margin-left: auto;
     margin-right: auto;
+}
+
+
+
+.imgbtn {
+    border-radius: 10px;
+    padding: 3.5rem 0;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: #fff;
+    position: relative;
+    display: inline-block;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    overflow: hidden;
+
+    /* box-shadow: inset 0 0 0 1000px rgba(0,0,0,.6); */
+    text-shadow: 0 2px 2px rgba(33, 33, 33, 0.2), 0 3px 10px rgba(33, 33, 33, 0.2), 0 3px 20px rgba(33, 33, 33, 0.4);
+    color: #f8f8ff;
+    background: none;
+}
+
+.imgbtn p {
+    text-shadow: 1px 2px 2px rgb(0, 0, 0);
+    font-size: 1.75rem;
+    text-decoration: none;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    color: #f8f8ff;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+    font-family: 'Noto Serif', serif;
+    z-index: 1;
+    position: relative;
+}
+.imgbtn:hover {
+    box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.15);
+    text-decoration: none;
+}
+
+
+.text-grow {
+    transition: all .3s ease-in-out;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    text-align: center;
+    width: 70%;
+    max-width: 700px;
+}
+
+.text-grow:hover {
+    transform: scale(1.15);
+}
+
+.btnbg {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    filter: blur(3px);
+    transition: all 0.3s ease-in-out;
+}
+
+
+.imgbtn:hover .btnbg {
+    filter: none;
+}
+
+
+.mainbtncontainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }

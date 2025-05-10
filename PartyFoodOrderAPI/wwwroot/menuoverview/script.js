@@ -105,6 +105,7 @@ function createSubCategory(name) {
     let element = document.createElement('div');
     let heading = document.createElement('h2');
     heading.innerText = name;
+    heading.id = name;
     heading.classList.add("label");
     element.value = "subcategory-" + name;
     element.appendChild(heading);
