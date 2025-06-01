@@ -10,11 +10,11 @@ namespace PartyFoodOrderAPI
         public int Id { get; private set; }
 
         [Required]
-        [MaxLength(20)]
+        [MaxLength(30)]
         public string Name { get; private set; }
 
         [Required]
-        [Range(1, 3)]
+        [Range(1, 10)]
         public int Category { get; private set; }
 
         [Required]

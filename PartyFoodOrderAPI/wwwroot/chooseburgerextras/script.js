@@ -43,7 +43,7 @@ document.getElementById('submit').onclick = () => {
             }),
         }).then(data => {
             if (data.status == 200) {
-                document.write('<head><title>Auswahl Erfolgreich</title><link rel="icon" href="/burger.png"><link rel="stylesheet" type="text/css" href="/uistyle.css"></head><body><h1 style="margin-top: 40px">Deine Burgerextras wurden erfolgreich ausgewählt</h1><button style="margin-top: 40px" class="btn" onclick="document.location = `/`">Zurück</button></body>');
+                document.write('<head><title>Das wars schon!</title><link rel="icon" href="/burger.png"><link rel="stylesheet" type="text/css" href="/uistyle.css"></head><body><h1 style="margin-top: 40px">Deine Burgerextras wurden erfolgreich ausgewählt und werden vorbereitet, sodass für dich Spiegelei/Bacon bereit stehen wenn die Burger fertig sind!</h1><button style="margin-top: 40px" class="btn" onclick="document.location = `/`">Zurück</button></body>');
             }
         }).catch(error => {
             console.log(error);

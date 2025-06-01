@@ -7,12 +7,16 @@ window.onload = () => {
     var title = document.getElementById('title');
     switch(type) {
         case '1':
-            title.innerText = "Getränk bestellen";
+            title.innerText = "Cocktail bestellen";
+            document.querySelector("#information").innerText = "Viele Cocktails können wir auch alkoholfrei machen\n\n Mischverhältnis, etc. einfach im Feld 'Extra Wünsche' beim bestellen ergänzen"
             break;
         case '2':
-            title.innerText = "Kuchen bestellen";
+            title.innerText = "Getränk bestellen";
             break;
         case '3':
+            title.innerText = "Kuchen bestellen";
+            break;
+        case '4':
             title.innerText = "Sonstiges bestellen";
             break;
         default:

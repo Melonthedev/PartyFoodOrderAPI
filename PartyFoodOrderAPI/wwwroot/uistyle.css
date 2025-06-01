@@ -273,9 +273,9 @@ h3 {
 .text-grow {
     transition: all .3s ease-in-out;
     margin-top: 50px;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
     text-align: center;
-    width: 70%;
+    width: 85%;
     max-width: 700px;
 }
 

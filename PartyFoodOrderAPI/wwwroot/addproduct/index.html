@@ -13,12 +13,13 @@
         <h1 style="text-decoration: underline; text-align: center; margin-top: 70px; margin-bottom: 60px;">Produkt Hinzufügen:</h1>
         <form name="orderform" action="/api/FoodStock/AddProduct" method="POST" id="orderform">
             <p class="label">Name:</p>
-            <input class="inp" type="text" id="name" placeholder="Name (max. 20 characters)" required maxlength="20">
+            <input class="inp" type="text" id="name" placeholder="Name (max. 30 characters)" required maxlength="30">
             <p class="label">Kategorie:</p>
             <select class="sel" id="category" placeholder="Wähle eine Kategorie..." style="box-sizing: content-box" required>
-                <option value="1">Getränk</option>
-                <option value="2">Kuchen</option>
-                <option value="3">Anderes</option>
+                <option value="1">Cocktail</option>
+                <option value="2">Getränk</option>
+                <option value="3">Kuchen</option>
+                <option value="4">Anderes</option>
             </select>
             <p class="label">Unterkategorie:</p>
             <input class="inp" type="text" id="secondcategory" placeholder="Unterkategorie (optional)" maxlength="20">
@@ -29,7 +30,7 @@
             <p class="label">Bild oder Link:</p>
             <input class="inp" type="text" id="imageurl" placeholder="Bild-Link (optional) oder Bild (drag 'n drop)" maxlength="200" dropzone="copy" style="margin-bottom: 0">
             <p class="label" >ODER</p>
-            <input class="inp" type="file" id="imageFile" capture="user"  accept="image/*" style="height: fit-content; resize: none; padding: 10px;">
+            <input class="inp" type="file" id="imageFile"  accept="image/*" style="height: fit-content; resize: none; padding: 10px;">
 
             <input type="checkbox" id="outofstock" class="checkbox"><label for="outofstock" class="checkboxlabel">Nicht auf Lager</label><br>
             <input type="checkbox" id="isselfservice" class="checkbox"><label for="isselfservice" class="checkboxlabel">Selbstbedienung</label><br>

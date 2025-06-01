@@ -34,9 +34,10 @@ namespace PartyFoodOrderAPI
         {
             return id switch
             {
-                1 => "Drink",
-                2 => "Cake",
-                3 => "Other",
+                1 => "Cocktail",
+                2 => "Drink",
+                3 => "Cake",
+                4 => "Other",
                 _ => "Other",
             };
         }

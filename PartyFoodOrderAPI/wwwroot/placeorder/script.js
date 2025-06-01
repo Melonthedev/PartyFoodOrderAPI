@@ -6,14 +6,17 @@ window.onload = () => {
     const type = urlParams.get('type')
     const product = urlParams.get('product')
     const title = document.getElementById('title');
-    switch(type) {
+    switch (type) {
         case '1':
-            title.innerText = "Getränk bestellen";
+            title.innerText = "Cocktail bestellen";
             break;
         case '2':
-            title.innerText = "Kuchen bestellen";
+            title.innerText = "Getränk bestellen";
             break;
         case '3':
+            title.innerText = "Kuchen bestellen";
+            break;
+        case '4':
             title.innerText = "Sonstiges bestellen";
             break;
         default:

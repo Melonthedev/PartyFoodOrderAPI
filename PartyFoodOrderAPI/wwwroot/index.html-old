@@ -1,4 +1,4 @@
-﻿<html lang="de">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -30,35 +30,10 @@
     <title>Essen bestellen</title>
 </head>
 <body>
-    <h1 style="margin-top: 60px;margin-bottom: 40px;" oncontextmenu="document.location='/orders'">Herzlich Wilkommen zu Sarahs Konfirmation</h1>
-    <h3 style="margin-top: 60px;margin-bottom: 40px;" oncontextmenu="document.location='/orders'">Hier findest du eine Übersicht von allen Getränken und Kuchen, die wir heute haben.</h3>
-
-    <div class="mainbtncontainer">
-        <div class="text-grow">
-            <a href="/menuoverview?type=1#Cocktails" class="imgbtn">
-                <div class="btnbg" style="background-image: url('https://www.cooldowndrink.ch/wp-content/uploads/2023/02/Cocktails.jpg')"></div>
-                <p>Cocktails Erkunden</p>
-            </a>
-        </div>
-        <div class="text-grow">
-            <a href="/menuoverview?type=2" class="imgbtn">
-                <div class="btnbg" style="background-image: url('https://www.alicesvintagepantry.co.uk/wp-content/uploads/2014/01/VintageCake-Table.jpg')"></div>
-                <p>Kuchen Erkunden</p>
-            </a>
-        </div>
-        <div class="text-grow">
-            <a href="/chooseburgerextras" class="imgbtn">
-                <div class="btnbg" style="background-image: url('https://www.dieneudorfer.de/wp-content/uploads/2021/07/winterburger-rezept_dieneudorfer.jpg')"></div>
-                <p>Burger Konfigurieren</p>
-            </a>
-        </div>
-        <div class="text-grow">
-            <a href="/menuoverview?type=1" class="imgbtn">
-                <div class="btnbg" style="background-image: url('https://t4.ftcdn.net/jpg/02/79/69/21/360_F_279692163_4O1mMxIe4KdK3GZYl8gDY02zBFn65Gj0.jpg')"></div>
-                <p>Weitere Getränke</p>
-            </a>
-        </div>
-    </div>
-    
+    <h1 style="margin-top: 60px;margin-bottom: 40px;" oncontextmenu="document.location='/orders'">Bestelle dein Essen!</h1>
+    <button class="mainbtn" onclick="document.location = '/menuoverview?type=1'">Getränk bestellen</button>
+    <button class="mainbtn" onclick="document.location = '/menuoverview?type=2'">Kuchen bestellen</button>
+    <button class="mainbtn" onclick="document.location = '/menuoverview?type=3'">Etwas anderes bestellen</button>
+    <button class="mainbtn" onclick="document.location = '/chooseburgerextras'">Burgerextras wählen</button>
 </body>
 </html>

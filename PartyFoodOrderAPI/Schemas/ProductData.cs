@@ -5,11 +5,11 @@ namespace PartyFoodOrderAPI.Schemas
     public class ProductData : IValidatableObject
     {
         [Required]
-        [MaxLength(20)]
+        [MaxLength(30)]
         public string Name { get; set; }
         public bool IsInStock { get; set; }
         [Required]
-        [Range(1, 3)]
+        [Range(1, 10)]
         public int Category { get; set; }
 
         public string? SubCategory { get; set; }
